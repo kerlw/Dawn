@@ -45,17 +45,17 @@ bool sTileMap::operator<(const sTileMap& tile1) const
 std::string getID( std::string filename );
 
 CZone::CZone()
-	: groundLoot( Globals::getPlayer() ),
-	  mapLoaded( false )
+  : groundLoot( Globals::getPlayer() ),
+    mapLoaded( false )
 {
 }
 
 CZone::~CZone()
 {
-	for(size_t i=0;i<MagicMap.size();++i)
-	{
-		delete MagicMap[i];
-	}
+  for(size_t i=0;i<MagicMap.size();++i)
+  {
+    delete MagicMap[i];
+  }
 }
 
 void CZone::DrawZone()
@@ -63,6 +63,11 @@ void CZone::DrawZone()
 	DrawTiles(); // draw the tiles (ground) first.
 	DrawEnvironment(); // then the environment.. cliffs, trees, stones, water ... you name it.
 //	DrawShadows(); // then draw the shadows (not shadows from environment objects but, cloudy areas, darker places etc).
+}
+
+void CZone::DrawZoneAbove()
+{
+  DrawTilesAbove();
 }
 
 extern bool initPhase;
@@ -107,9 +112,15 @@ bool CZone::zoneDataLoaded() const
 
 void CZone::DrawTiles()
 {
-	for (unsigned int x=0 ; x < TileMap.size() ; x++) {
-		TileMap[x].tile->texture->DrawTexture(TileMap[x].x_pos,TileMap[x].y_pos,0);
-	}
+  for( unsigned int x=0;x<TileMap.size();x++ )
+  {
+    TileMap[x].tile->texture->DrawTexture(TileMap[x].x_pos,TileMap[x].y_pos,0);
+  }
+}
+
+void CZone::DrawTilesAbove()
+{
+  //yeah
 }
 
 void CZone::DrawEnvironment()

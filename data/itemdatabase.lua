@@ -233,3 +233,10 @@ itemDatabase["sylphirantidote"]=DawnInterface.createNewItem( "Sylphir antidote",
 curItem = itemDatabase["sylphirantidote"];
 curItem:setMaxStackSize( 1 );
 curItem:setDescription( "Brewed by Jemma the Wicked." );
+
+itemDatabase["windstone"]=DawnInterface.createNewItem( "Wind Stone", 1, 1, "data/items/windstone.tga", ItemQuality.NORMAL, EquipPosition.NONE, ItemType.SCROLL, ArmorType.NO_ARMOR, WeaponType.NO_WEAPON );
+curItem = itemDatabase["windstone"];
+curItem:setRequiredLevel( 1 );
+curItem:setSpell( spellDatabase["windtravel"] );
+curItem:setValue( 100 );
+curItem:setMaxStackSize( 1 );
