@@ -161,102 +161,104 @@ extern std::auto_ptr<ActionBar> actionBar;
 
 void OptionsWindow::clicked( int mouseX, int mouseY, uint8_t mouseState )
 {
-	// check for quit and the other options
-	if( !isMouseOnFrame( mouseX, mouseY ) )
-	{
-		return;
-	}
+  // check for quit and the other options
+  if( !isMouseOnFrame( mouseX, mouseY ) )
+  {
+    return;
+  }
 
-	int selectedEntry = -1;
-	if ( mouseX < posX + 64 || mouseX > posX + frameWidth  - 64 || posY + frameHeight - 64 < mouseY) {
-		selectedEntry = -1;
-	} else {
-		selectedEntry = (posY + frameHeight - 64 - mouseY) / static_cast<int>(font->getHeight()*1.5);
-		if ( (posY + frameHeight - 64 - mouseY) % static_cast<int>(font->getHeight()*1.5) > static_cast<int>(font->getHeight()) ) {
-			selectedEntry = -1;
-		}
-	}
+  int selectedEntry = -1;
+  if ( mouseX < posX + 64 || mouseX > posX + frameWidth  - 64 || posY + frameHeight - 64 < mouseY) {
+    selectedEntry = -1;
+  } else {
+    selectedEntry = (posY + frameHeight - 64 - mouseY) / static_cast<int>(font->getHeight()*1.5);
+    if ( (posY + frameHeight - 64 - mouseY) % static_cast<int>(font->getHeight()*1.5) > static_cast<int>(font->getHeight()) ) {
+      selectedEntry = -1;
+    }
+  }
 
-	if( selectedEntry == 0 )
-	{
-		setQuitGame();
-	}
-	else if( selectedEntry == 1 && utils::file_exists( "savegame.lua" ) == true )
-	{
-		// Load Game
+  if( selectedEntry == 0 )
+  {
+    setQuitGame();
+  }
+  else if( selectedEntry == 1 && utils::file_exists( "savegame.lua" ) == true )
+  {
+    // Load Game
 
-		// clear current game data
-		Globals::getCurrentZone()->purgeInteractionList();
-		Globals::getCurrentZone()->purgeInteractionRegionList();
-		questWindow->removeAllQuests();
-		for ( std::map< std::string, CZone* >::iterator it = Globals::allZones.begin(); it != Globals::allZones.end(); ++it ) {
-			delete it->second;
-			it->second = NULL;
-		}
-		Globals::allZones.clear();
+    // clear current game data
+    Globals::getCurrentZone()->purgeInteractionList();
+    Globals::getCurrentZone()->purgeInteractionRegionList();
+    questWindow->removeAllQuests();
+    for ( std::map< std::string, CZone* >::iterator it = Globals::allZones.begin(); it != Globals::allZones.end(); ++it )
+    {
+      delete it->second;
+      it->second = NULL;
+    }
+    Globals::allZones.clear();
 
-		Globals::getPlayer()->clearInventory();
-		// clear shop data
-		shopWindow = std::auto_ptr<Shop>( new Shop( Globals::getPlayer(), NULL ) );
-		// clear spellbook
-		spellbook->clear();
-		// clear action bar
-		actionBar->clear();
-		// clear cooldowns
-		Globals::getPlayer()->clearCooldownSpells();
-		// clear buffs
-		Globals::getPlayer()->clearActiveSpells();
+    Globals::getPlayer()->clearInventory();
+    // clear shop data
+    shopWindow = std::auto_ptr<Shop>( new Shop( Globals::getPlayer(), NULL ) );
+    // clear spellbook
+    spellbook->clear();
+    // clear action bar
+    actionBar->clear();
+    // clear cooldowns
+    Globals::getPlayer()->clearCooldownSpells();
+    // clear buffs
+    Globals::getPlayer()->clearActiveSpells();
 
-		// reenter map
-		// 1. Load all zones
-		// TODO: Load all zones
-		// 2. Restore lua variables
-		LuaFunctions::executeLuaScript( "loadGame( 'savegame' )" );
-		//CZone *newZone = Globals::allZones["data/zone1"];
-		//newZone->LoadZone("data/zone1");
-		LuaFunctions::executeLuaFile( "data/quests_wood.lua" );
-		DawnInterface::clearLogWindow();
-	}
-	else if( selectedEntry == 2 )
-	{
-		if( Globals::isSavingAllowed() )
-		{
-			// save Game
-			LuaFunctions::executeLuaScript( "saveGame( 'savegame' )" );
-			GLfloat yellow[] = { 1.0f, 1.0f, 0.0f };
-			DawnInterface::addTextToLogWindow( yellow, "Game saved.");
-		}
-	}
-	else if( selectedEntry == 3 )
-	{
-		toggle(); // close the window
-	}
-	else if( selectedEntry == 4 )
-	{
-		GLfloat yellow[] = { 1.0f, 1.0f, 0.0f };
-		if( Globals::isPaused() )
-		{
-			Globals::setPaused( false );
-			DawnInterface::addTextToLogWindow( yellow, "Game unpaused." );
-		}
-		else
-		{
-			Globals::setPaused( true );
-			DawnInterface::addTextToLogWindow( yellow, "Game paused." );
-		}
-	}
+    // reenter map
+    // 1. Load all zones
+    // TODO: Load all zones
+    // 2. Restore lua variables
+    LuaFunctions::executeLuaScript( "loadGame( 'savegame' )" );
+    //CZone *newZone = Globals::allZones["data/zone1"];
+    //newZone->LoadZone("data/zone1");
+    LuaFunctions::executeLuaFile( "data/quests_wood.lua" );
+    DawnInterface::clearLogWindow();
+  }
+  else if( selectedEntry == 2 )
+  {
+    if( Globals::isSavingAllowed() )
+    {
+      // save Game
+      LuaFunctions::executeLuaScript( "saveGame( 'savegame' )" );
+      GLfloat yellow[] = { 1.0f, 1.0f, 0.0f };
+      DawnInterface::addTextToLogWindow( yellow, "Game saved.");
+    }
+  }
+  else if( selectedEntry == 3 )
+  {
+    toggle(); // close the window
+  }
+  else if( selectedEntry == 4 )
+  {
+    GLfloat yellow[] = { 1.0f, 1.0f, 0.0f };
+    if( Globals::isPaused() )
+    {
+      Globals::setPaused( false );
+      DawnInterface::addTextToLogWindow( yellow, "Game unpaused." );
+    }
+    else
+    {
+      Globals::setPaused( true );
+      DawnInterface::addTextToLogWindow( yellow, "Game paused." );
+    }
+  }
 }
 
-ChooseClassScreen::ChooseClassScreen() : FramesBase( 0, 0, 279, 313, 20, 19 )
+ChooseClassScreen::ChooseClassScreen()
+  : FramesBase( 0, 0, 279, 313, 20, 19 )
 {
-	visible = true;
-	done = false;
-	font = NULL;
-	backgroundTexture = NULL;
+  visible = true;
+  done = false;
+  font = NULL;
+  backgroundTexture = NULL;
 
-	font = FontCache::getFontFromCache("data/verdana.ttf", 20);
-	backgroundTexture = new CTexture();
-	backgroundTexture->LoadIMG( "data/interface/OptionsScreen/classScreen.tga", 0 );
+  font = FontCache::getFontFromCache("data/verdana.ttf", 20);
+  backgroundTexture = new CTexture();
+  backgroundTexture->LoadIMG( "data/interface/OptionsScreen/classScreen.tga", 0 );
 }
 
 ChooseClassScreen::~ChooseClassScreen()
@@ -333,29 +335,39 @@ void ChooseClassScreen::draw( int mouseX, int mouseY )
 
 void ChooseClassScreen::clicked( int mouseX, int mouseY, uint8_t mouseState )
 {
-    // check for quit and the other options
-	if ( ! isMouseOnFrame( mouseX, mouseY ) ) {
-        return;
+  // check for quit and the other options
+  if( !isMouseOnFrame( mouseX, mouseY ) )
+  {
+    return;
+  }
+
+  int selectedEntry = -1;
+  if( mouseX < posX + 64 || mouseX > posX + frameWidth  - 64 || posY + frameHeight - 128 < mouseY)
+  {
+    selectedEntry = -1;
+  }
+  else
+  {
+    selectedEntry = (posY + frameHeight - 128 - mouseY) / static_cast<int>(font->getHeight()*1.5);
+    if ( (posY + frameHeight - 128 - mouseY) % static_cast<int>(font->getHeight()*1.5) > static_cast<int>(font->getHeight()) )
+    {
+      selectedEntry = -1;
     }
+  }
 
-	int selectedEntry = -1;
-	if ( mouseX < posX + 64 || mouseX > posX + frameWidth  - 64 || posY + frameHeight - 128 < mouseY) {
-		selectedEntry = -1;
-	} else {
-		selectedEntry = (posY + frameHeight - 128 - mouseY) / static_cast<int>(font->getHeight()*1.5);
-		if ( (posY + frameHeight - 128 - mouseY) % static_cast<int>(font->getHeight()*1.5) > static_cast<int>(font->getHeight()) ) {
-			selectedEntry = -1;
-        }
-	}
-
-	if ( selectedEntry == 0 ) { // we choose liche
-		Globals::getPlayer()->setClass( CharacterClass::Liche );
-		done = true;
-	} else if ( selectedEntry == 1 ) { // we choose ranger
-	    Globals::getPlayer()->setClass( CharacterClass::Ranger );
-		done = true;
-    } else { // we choose warrior
-        Globals::getPlayer()->setClass( CharacterClass::Warrior );
-		done = true;
-	}
+  if( selectedEntry == 0 ) // we choose liche
+  {
+    Globals::getPlayer()->setClass( CharacterClass::Liche );
+    done = true;
+  }
+  else if( selectedEntry == 1 ) // we choose ranger
+  {
+    Globals::getPlayer()->setClass( CharacterClass::Ranger );
+    done = true;
+  }
+  else // we choose warrior
+  {
+    Globals::getPlayer()->setClass( CharacterClass::Warrior );
+    done = true;
+  }
 }

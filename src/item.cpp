@@ -35,7 +35,7 @@ namespace DawnInterface
 		      ArmorType::ArmorType armorType,
 		      WeaponType::WeaponType weaponType )
   {
-    Item *newItem = new Item( name, sizeX, sizeY, symbolFile, itemQuality, equipPos, itemType, armorType, weaponType );
+    Item* newItem = new Item( name, sizeX, sizeY, symbolFile, itemQuality, equipPos, itemType, armorType, weaponType );
     allItems.push_back( newItem );
     return newItem;
   }
@@ -141,11 +141,12 @@ Item::Item( std::string name_, size_t sizeX_, size_t sizeY_, std::string symbolF
     symbolTexture.LoadIMG( symbolFile, 0 );
   }
 
-  if( itemType == ItemType::DRINK ||
-      itemType == ItemType::FOOD ||
-      itemType == ItemType::POTION ||
+  if( itemType == ItemType::DRINK    ||
+      itemType == ItemType::FOOD     ||
+      itemType == ItemType::POTION   ||
       itemType == ItemType::NEWSPELL ||
-      itemType == ItemType::SCROLL )
+      itemType == ItemType::SCROLL   ||
+      itemType == ItemType::STONE )
   {
     useableItem = true;
   }
@@ -408,6 +409,11 @@ std::string Item::getUseableDescription() const
       return std::string("Read: ").append(getSpell()->getInfo() );
     }
     break;
+  case ItemType::STONE:
+    if( getSpell() != NULL )
+    {
+      return std::string( "Activate: " ).append( getSpell()->getInfo() );
+    }
   default:
     break;
   }
@@ -420,7 +426,7 @@ bool Item::isUseable() const
 }
 
 GoldHeap::GoldHeap( size_t coins_ )
-  :  Item( "Coins", 1, 1, "data/items/coins.tga",
+  : Item( "Coins", 1, 1, "data/items/coins.tga",
            ItemQuality::NORMAL,
 	   EquipPosition::NONE,
 	   ItemType::MISCELLANEOUS,

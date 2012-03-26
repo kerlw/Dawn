@@ -426,6 +426,9 @@ void itemTooltip::getParentText()
         case ItemType::NEWSPELL:
             // nothing here so far...
         break;
+    case ItemType::STONE:
+      addTooltipText( white, 12, "Stone" );
+      break;
         case ItemType::COUNT:
             dawn_debug_fatal("ItemType::COUNT found in getParentText(). This should not be.");
             abort();

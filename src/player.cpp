@@ -33,33 +33,33 @@ const uint16_t NON_NULLABLE_ATTRIBUTE_MIN = 1;
 
 namespace DawnInterface
 {
-	void addTextToLogWindow( GLfloat color[], const char* text, ... );
+  void addTextToLogWindow( GLfloat color[], const char* text, ... );
 
-	void giveItemToPlayer( Item* item )
-	{
-		Inventory* playerInventory = Globals::getPlayer()->getInventory();
-		bool wasInserted = playerInventory->insertItem( item );
-		if ( !wasInserted )
-		{
-			Player* player = Globals::getPlayer();
-			Globals::getCurrentZone()->getGroundLoot()->addItem( player->getXPos(), player->getYPos(), item );
-		}
-		else
-		{
-			GLfloat blue[] = { 0.4f, 0.4f, 0.8f };
-			DawnInterface::addTextToLogWindow( blue, "You receive %s.", item->getName().c_str() );
-		}
-	}
+  void giveItemToPlayer( Item* item )
+  {
+    Inventory* playerInventory = Globals::getPlayer()->getInventory();
+    bool wasInserted = playerInventory->insertItem( item );
+    if ( !wasInserted )
+    {
+      Player* player = Globals::getPlayer();
+      Globals::getCurrentZone()->getGroundLoot()->addItem( player->getXPos(), player->getYPos(), item );
+    }
+    else
+    {
+      GLfloat blue[] = { 0.4f, 0.4f, 0.8f };
+      DawnInterface::addTextToLogWindow( blue, "You receive %s.", item->getName().c_str() );
+    }
+  }
 
-	void giveExpToPlayer( uint16_t experience )
-	{
-		Player *player = Globals::getPlayer();
-		player->gainExperience( experience );
-	}
+  void giveExpToPlayer( uint16_t experience )
+  {
+    Player *player = Globals::getPlayer();
+    player->gainExperience( experience );
+  }
 }
 
 Player::Player()
-	:	inventory( Inventory( 10, 4, this ) )
+  : inventory( Inventory( 10, 4, this ) )
 {
 	setName("Enylyn");
 	movementSpeed = 1;

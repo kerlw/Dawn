@@ -2,84 +2,85 @@ $#include "luainterface.h"
 
 namespace Configuration
 {
-    void setResolution( int screenWidth, int screenHeight );
-    void setBpp( int bpp );
-    void useFullscreen( bool fullscreenEnabled );
-    void useSound( bool soundEnabled );
-    void showDebugStdout( bool debug_stdout );
-    void showDebugFileout( bool debug_fileout );
-    void showInfoMessages( bool show_info_messages );
-    void showWarningMessages( bool show_warn_messages );
+  void setResolution( int screenWidth, int screenHeight );
+  void setBpp( int bpp );
+  void useFullscreen( bool fullscreenEnabled );
+  void useSound( bool soundEnabled );
+  void showDebugStdout( bool debug_stdout );
+  void showDebugFileout( bool debug_fileout );
+  void showInfoMessages( bool show_info_messages );
+  void showWarningMessages( bool show_warn_messages );
 };
 
 enum Direction
 {
-    STOP = 0,
-    N    = 1,
-    NE   = 2,
-    E    = 3,
-    SE   = 4,
-    S    = 5,
-    SW   = 6,
-    W    = 7,
-    NW   = 8
+  STOP = 0,
+  N    = 1,
+  NE   = 2,
+  E    = 3,
+  SE   = 4,
+  S    = 5,
+  SW   = 6,
+  W    = 7,
+  NW   = 8
 };
 
 namespace ActivityType
 {
-	enum ActivityType
-	{
-		Walking,
-		Casting,
-		Attacking,
-		Shooting,
-		Dying,
-		Count
-	};
+  enum ActivityType
+  {
+    Walking,
+    Casting,
+    Attacking,
+    Shooting,
+    Dying,
+    Count
+  };
 }
 
 namespace Attitude
 {
-	enum Attitude
-	{
-		FRIENDLY,
-		NEUTRAL,
-		HOSTILE
-	};
+  enum Attitude
+  {
+    FRIENDLY,
+    NEUTRAL,
+    HOSTILE
+  };
 }
 
 namespace CharacterClass
 {
-	enum CharacterClass
-	{
-		NOCLASS,
-		ANYCLASS,
-		Liche,
-		Ranger,
-		Warrior
-	};
+  enum CharacterClass
+  {
+    NOCLASS,
+    ANYCLASS,
+    Liche,
+    Ranger,
+    Warrior
+  };
 }
 
 namespace CharacterStates
 {
-    enum CharacterStates
-    {
-        Channeling,
-        Charmed,
-        Confused,
-        Feared,
-        Invisible,
-	Mesmerized,
-        Movementspeed,
-	SeeInvisible,
-	SeeSneaking,
-        Sneaking,
-        Stunned,
-	NOEFFECT
-    };
+  enum CharacterStates
+  {
+    Channeling,
+    Charmed,
+    Confused,
+    Feared,
+    Invisible,
+    Mesmerized,
+    Movementspeed,
+    SeeInvisible,
+    SeeSneaking,
+    Sneaking,
+    Stunned,
+    NOEFFECT
+  };
 }
 
-class CCharacter {
+class CCharacter
+{
   void baseOnType( std::string otherType );
 
   void setStrength( int newStrength );
@@ -145,15 +146,15 @@ class CCharacter {
   void setEvadeModifierPoints( int newEvadeModifierPoints );
   void setParryModifierPoints( int newParryModifierPoitns );
   void setBlockModifierPoints( int newBlockModifierPoints );
-	void setMeleeCriticalModifierPoints( int newMeleeCriticalModifierPoints );
-	void setResistElementModifierPoints( ElementType::ElementType elementType, int newResistElementModifierPoints );
-	void setResistAllModifierPoints( int newResistAllModifierPoints );
-	void setSpellEffectElementModifierPoints( ElementType::ElementType elementType, int newSpellEffectElementModifierPoints );
-	void setSpellEffectAllModifierPoints( int newSpellEffectAllModifierPoints );
-	void setSpellCriticalModifierPoints( int newSpellCriticalModifierPoints );
-	void setHealthRegen( int newHealthRegen );
-	void setManaRegen( int newManaRegen );
-	void setFatigueRegen( int newFatigueRegen );
+  void setMeleeCriticalModifierPoints( int newMeleeCriticalModifierPoints );
+  void setResistElementModifierPoints( ElementType::ElementType elementType, int newResistElementModifierPoints );
+  void setResistAllModifierPoints( int newResistAllModifierPoints );
+  void setSpellEffectElementModifierPoints( ElementType::ElementType elementType, int newSpellEffectElementModifierPoints );
+  void setSpellEffectAllModifierPoints( int newSpellEffectAllModifierPoints );
+  void setSpellCriticalModifierPoints( int newSpellCriticalModifierPoints );
+  void setHealthRegen( int newHealthRegen );
+  void setManaRegen( int newManaRegen );
+  void setFatigueRegen( int newFatigueRegen );
 
   void setBoundingBox( int bbx, int bby, int bbw, int bbh );
   void setUseBoundingBox( bool use );
@@ -161,8 +162,8 @@ class CCharacter {
   void addItemToLootTable( Item *item, double dropChance );
   void setCoinDrop( int minCoinDrop, int maxCoinDrop, double dropChance );
 
-	void setPosition( int xpos, int ypos );
-	void inscribeSpellInSpellbook( CSpellActionBase *spell );
+  void setPosition( int xpos, int ypos );
+  void inscribeSpellInSpellbook( CSpellActionBase *spell );
 };
 
 namespace StatsType
@@ -176,12 +177,12 @@ namespace StatsType
       Wisdom,
       Health,
       Mana,
-  Fatigue,
+      Fatigue,
       Armor,
       DamageModifier,
       HitModifier,
       EvadeModifier,
-  ParryModifier,
+      ParryModifier,
       BlockModifier,
       MeleeCritical,
       SpellCritical,
@@ -189,42 +190,43 @@ namespace StatsType
       SpellEffectAll,
       HealthRegen,
       ManaRegen,
-  FatigueRegen,
+      FatigueRegen,
       Count
   };
 }
 
 namespace ElementType
 {
-	enum ElementType
-	{
-		Fire,
-		Water,
-		Air,
-		Earth,
-		Light,
-		Dark,
-		Count
-	};
+  enum ElementType
+  {
+    Fire,
+    Water,
+    Air,
+    Earth,
+    Light,
+    Dark,
+    Count
+  };
 }
 
 namespace EffectType
 {
-	enum EffectType {
-		SingleTargetSpell,
-		SelfAffectingSpell
-	};
+  enum EffectType
+  {
+    SingleTargetSpell,
+    SelfAffectingSpell
+  };
 }
 
 namespace PositionType
 {
-	enum PositionType
-	{
-		BOTTOMLEFT,
-		BOTTOMCENTER,
-		LEFTCENTER,
-		CENTER
-	};
+  enum PositionType
+  {
+    BOTTOMLEFT,
+    BOTTOMCENTER,
+    LEFTCENTER,
+    CENTER
+  };
 }
 
 namespace ItemQuality
@@ -282,20 +284,21 @@ namespace EquipPosition
 
 namespace ItemType
 {
-	enum ItemType
-	{
-		QUESTITEM,
-		MISCELLANEOUS,
-		ARMOR,
-		WEAPON,
-		JEWELRY,
-		SCROLL,
-		POTION,
-		FOOD,
-		DRINK,
-		NEWSPELL,
-		COUNT
-	};
+  enum ItemType
+  {
+    QUESTITEM,
+    MISCELLANEOUS,
+    ARMOR,
+    WEAPON,
+    JEWELRY,
+    SCROLL,
+    POTION,
+    FOOD,
+    DRINK,
+    NEWSPELL,
+    STONE,
+    COUNT
+  };
 }
 
 namespace ArmorType
@@ -512,7 +515,6 @@ class GeneralBuffSpell : public ConfigurableSpell
 	void setStats( StatsType::StatsType statsType, int amount );
 	void setResistElementModifierPoints( ElementType::ElementType elementType, int resistModifierPoints );
 	void setSpellEffectElementModifierPoints( ElementType::ElementType elementType, int spellEffectElementModifierPoints );
-
 };
 
 class MeleeDamageAction : public ConfigurableAction
@@ -529,6 +531,11 @@ class RangedDamageAction : public ConfigurableAction
 	void setAnimationTexture( int num, std::string filename );
 };
 
+class GeneralLuaSpell : public ConfigurableSpell
+{
+  void setEffectType( EffectType::EffectType newEffectType );
+};
+
 class Quest
 {
 	void addRequiredItemForCompletion( Item* requiredItem, int quantity );
@@ -541,78 +548,80 @@ class Quest
 
 namespace DawnInterface
 {
-	CCharacter* createNewMobType( std::string typeID );
-	Item* createNewItem(std::string name,
-	                    int sizeX,
-	                    int sizeY,
-	                    std::string symbolFile,
-	                    ItemQuality::ItemQuality itemQuality,
-	                    EquipPosition::EquipPosition equipPosition,
-	                    ItemType::ItemType itemType,
-	                    ArmorType::ArmorType armorType,
-	                    WeaponType::WeaponType weaponType );
-	void giveItemToPlayer( Item* item );
-	void giveExpToPlayer( int experience );
-	CNPC* addMobSpawnPoint( std::string mobID, int x_pos, int y_pos, int respawn_rate, int do_respawn );
-	void removeMobSpawnPoint( CNPC *mobSpawnPoint );
-	GeneralRayDamageSpell* createGeneralRayDamageSpell();
-	GeneralAreaDamageSpell* createGeneralAreaDamageSpell();
-	GeneralBoltDamageSpell* createGeneralBoltDamageSpell();
-	GeneralHealingSpell* createGeneralHealingSpell();
-	GeneralBuffSpell* createGeneralBuffSpell();
-	MeleeDamageAction* createMeleeDamageAction();
-	RangedDamageAction* createRangedDamageAction();
-	GeneralRayDamageSpell* copySpell( GeneralRayDamageSpell *other );
-	GeneralAreaDamageSpell* copySpell( GeneralAreaDamageSpell *other );
-	GeneralBoltDamageSpell* copySpell( GeneralBoltDamageSpell *other );
-	GeneralHealingSpell* copySpell( GeneralHealingSpell *other );
-	GeneralBuffSpell* copySpell( GeneralBuffSpell *other );
-	MeleeDamageAction* copySpell( MeleeDamageAction *other );
-	RangedDamageAction* copySpell( RangedDamageAction *other );
-	void inscribeSpellInPlayerSpellbook( CSpellActionBase *inscribedSpell );
-	InteractionPoint* addInteractionPoint();
-	InteractionPoint* addCharacterInteractionPoint( CCharacter *character );
-	InteractionRegion* addInteractionRegion();
-	TextWindow *createTextWindow(); 
-	void removeInteractionPoint( InteractionPoint *pointToRemove );
-	void removeInteractionRegion( InteractionRegion *regionToRemove );
-	LuaCallIndirection* createEventHandler();
-	Quest* addQuest( std::string questName, std::string questDescription );
-	Shop *addShop();
-	void enterZone( std::string zoneName, int enterX, int enterY );
-	bool isSavingAllowed();
-	void setSavingAllowed( bool savingAllowed );
-	void setBackgroundMusic( std::string filename );
+  CCharacter* createNewMobType( std::string typeID );
+  Item* createNewItem(std::string name,
+                      int sizeX,
+                      int sizeY,
+                      std::string symbolFile,
+                      ItemQuality::ItemQuality itemQuality,
+                      EquipPosition::EquipPosition equipPosition,
+                      ItemType::ItemType itemType,
+                      ArmorType::ArmorType armorType,
+                      WeaponType::WeaponType weaponType );
+  void giveItemToPlayer( Item* item );
+  void giveExpToPlayer( int experience );
+  CNPC* addMobSpawnPoint( std::string mobID, int x_pos, int y_pos, int respawn_rate, int do_respawn );
+  void removeMobSpawnPoint( CNPC *mobSpawnPoint );
+  GeneralRayDamageSpell* createGeneralRayDamageSpell();
+  GeneralAreaDamageSpell* createGeneralAreaDamageSpell();
+  GeneralBoltDamageSpell* createGeneralBoltDamageSpell();
+  GeneralHealingSpell* createGeneralHealingSpell();
+  GeneralBuffSpell* createGeneralBuffSpell();
+  MeleeDamageAction* createMeleeDamageAction();
+  RangedDamageAction* createRangedDamageAction();
+  GeneralLuaSpell* createGeneralLuaSpell();
+  GeneralRayDamageSpell* copySpell( GeneralRayDamageSpell *other );
+  GeneralAreaDamageSpell* copySpell( GeneralAreaDamageSpell *other );
+  GeneralBoltDamageSpell* copySpell( GeneralBoltDamageSpell *other );
+  GeneralHealingSpell* copySpell( GeneralHealingSpell *other );
+  GeneralBuffSpell* copySpell( GeneralBuffSpell *other );
+  MeleeDamageAction* copySpell( MeleeDamageAction *other );
+  RangedDamageAction* copySpell( RangedDamageAction *other );
+  GeneralLuaSpell* copySpell( GeneralLuaSpell* other );
+  void inscribeSpellInPlayerSpellbook( CSpellActionBase *inscribedSpell );
+  InteractionPoint* addInteractionPoint();
+  InteractionPoint* addCharacterInteractionPoint( CCharacter *character );
+  InteractionRegion* addInteractionRegion();
+  TextWindow *createTextWindow(); 
+  void removeInteractionPoint( InteractionPoint *pointToRemove );
+  void removeInteractionRegion( InteractionRegion *regionToRemove );
+  LuaCallIndirection* createEventHandler();
+  Quest* addQuest( std::string questName, std::string questDescription );
+  Shop *addShop();
+  void enterZone( std::string zoneName, int enterX, int enterY );
+  bool isSavingAllowed();
+  void setSavingAllowed( bool savingAllowed );
+  void setBackgroundMusic( std::string filename );
 
-	Player *getPlayer();
+  Player *getPlayer();
 
-	// functions used for loading only
-	std::string getInventorySaveText();
-	std::string getSpellbookSaveText();
-	void restoreItemInBackpack( Item *item, int inventoryPosX, int inventoryPosY, int stackSize = 1 );
-	void restoreWieldItem( int slot, Item *item );
-	void restoreGroundLootItem( Item *item, int xPos, int yPos );
-	void restoreGroundGold( int amount, int xPos, int yPos );
-	void setCurrentZone( std::string zoneName );
-	std::string getAllZonesSaveText();
-	std::string getReenterCurrentZoneText();
-	std::string getItemReferenceRestore( CCharacter *character );
-	std::string getItemReferenceRestore( InteractionPoint *interactionPoint );
-	std::string getItemReferenceRestore( InteractionRegion *interactionRegion );
-	std::string getItemReferenceRestore( Shop *shop );
-	std::string getItemReferenceRestore( CallIndirection *eventHandler );
-	std::string getItemReferenceRestore( Quest *quest );
-	std::string getItemReferenceRestore( TextWindow *textWindow );
-	// Note: void* interface for ignoring must be the last since tolua resolves overloading from last to first function, 
-	//       taking any function where conversion is successful
-	std::string getReinitialisationString( std::string fullVarName, void *ignore );
-	std::string getReinitialisationString( std::string fullVarName, Quest *quest );
-	CCharacter* restoreCharacterReference( std::string zoneName, int posInArray );
-	InteractionPoint* restoreInteractionPointReference( std::string zoneName, int posInArray );
-	InteractionRegion* restoreInteractionRegionReference( std::string zoneName, int posInArray );
-	CallIndirection* restoreEventHandlerReference( std::string zoneName, int posInArray );
-	std::string getActionbarSaveText();
-	void restoreActionBar( int buttonNr, CSpellActionBase *action );
+  // functions used for loading only
+  std::string getInventorySaveText();
+  std::string getSpellbookSaveText();
+  void restoreItemInBackpack( Item *item, int inventoryPosX, int inventoryPosY, int stackSize = 1 );
+  void restoreWieldItem( int slot, Item *item );
+  void restoreGroundLootItem( Item *item, int xPos, int yPos );
+  void restoreGroundGold( int amount, int xPos, int yPos );
+  void setCurrentZone( std::string zoneName );
+  std::string getAllZonesSaveText();
+  std::string getReenterCurrentZoneText();
+  std::string getItemReferenceRestore( CCharacter *character );
+  std::string getItemReferenceRestore( InteractionPoint *interactionPoint );
+  std::string getItemReferenceRestore( InteractionRegion *interactionRegion );
+  std::string getItemReferenceRestore( Shop *shop );
+  std::string getItemReferenceRestore( CallIndirection *eventHandler );
+  std::string getItemReferenceRestore( Quest *quest );
+  std::string getItemReferenceRestore( TextWindow *textWindow );
+  // Note: void* interface for ignoring must be the last since tolua resolves overloading from last to first function, 
+  //       taking any function where conversion is successful
+  std::string getReinitialisationString( std::string fullVarName, void *ignore );
+  std::string getReinitialisationString( std::string fullVarName, Quest *quest );
+  CCharacter* restoreCharacterReference( std::string zoneName, int posInArray );
+  InteractionPoint* restoreInteractionPointReference( std::string zoneName, int posInArray );
+  InteractionRegion* restoreInteractionRegionReference( std::string zoneName, int posInArray );
+  CallIndirection* restoreEventHandlerReference( std::string zoneName, int posInArray );
+  std::string getActionbarSaveText();
+  void restoreActionBar( int buttonNr, CSpellActionBase *action );
 }
 
 // EDITOR Stuff
@@ -654,10 +663,10 @@ class TileSet
 
 namespace EditorInterface
 {
-	TileSet *getTileSet();
-	void addGroundTile( int posX, int posY, int tile );
-	void addEnvironment( int posX, int posY, int posZ, int tile );
-	void adjustLastRGBA( double red, double green, double blue, double alpha );
-	void adjustLastScale( double scaleX, double scaleY );
-	void addCollisionRect( int lrx, int lry, int width, int height );
+  TileSet* getTileSet();
+  void addGroundTile( int posX, int posY, int tile );
+  void addEnvironment( int posX, int posY, int posZ, int tile );
+  void adjustLastRGBA( double red, double green, double blue, double alpha );
+  void adjustLastScale( double scaleX, double scaleY );
+  void addCollisionRect( int lrx, int lry, int width, int height );
 }

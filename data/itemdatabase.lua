@@ -21,7 +21,6 @@
 -- For example "Spellcharges" work this way now. If we want to let the player have 5 charges of an healing potion in one inventory position, then we need to set setMaxStackSize( 5 ) to that item.
 -- Same goes for any other item we want to stack up.
 
-
 itemDatabase = {};
 
 itemDatabase["axeofanguish"]=DawnInterface.createNewItem( "Axe of Anguish", 2, 3, "data/items/Axe2.tga", ItemQuality.ENHANCED, EquipPosition.MAIN_HAND, ItemType.WEAPON, ArmorType.NO_ARMOR, WeaponType.TWOHAND_AXE );
@@ -234,7 +233,7 @@ curItem = itemDatabase["sylphirantidote"];
 curItem:setMaxStackSize( 1 );
 curItem:setDescription( "Brewed by Jemma the Wicked." );
 
-itemDatabase["windstone"]=DawnInterface.createNewItem( "Wind Stone", 1, 1, "data/items/windstone.tga", ItemQuality.NORMAL, EquipPosition.NONE, ItemType.SCROLL, ArmorType.NO_ARMOR, WeaponType.NO_WEAPON );
+itemDatabase["windstone"]=DawnInterface.createNewItem( "Wind Stone", 1, 1, "data/items/windstone.png", ItemQuality.NORMAL, EquipPosition.NONE, ItemType.STONE, ArmorType.NO_ARMOR, WeaponType.NO_WEAPON );
 curItem = itemDatabase["windstone"];
 curItem:setRequiredLevel( 1 );
 curItem:setSpell( spellDatabase["windtravel"] );

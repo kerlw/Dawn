@@ -1,20 +1,19 @@
-/**
-    Copyright (C) 2009,2010,2011  Dawn - 2D roleplaying game
+/* Copyright (C) 2009,2010,2011,2012  Dawn - 2D roleplaying game
 
-    This file is a part of the dawn-rpg project <https://github.com/frusen/Dawn>.
+   This file is a part of the dawn-rpg project <https://github.com/frusen/Dawn>.
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>. **/
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include "shop.h"
 #include <sstream>
@@ -32,342 +31,347 @@ extern std::auto_ptr<Shop> shopWindow;
 
 namespace DawnInterface
 {
-	void addTextToLogWindow( GLfloat color[], const char *text, ... );
-	Shop *addShop()
-	{
-		return shopWindow.get();
-	}
+  void addTextToLogWindow( GLfloat color[], const char* text, ... );
+  Shop* addShop()
+  {
+    return shopWindow.get();
+  }
 }
 
-Shop::Shop( Player *player_, CNPC *shopkeeper_) : FramesBase( 30, 80, 454, 404, 13, 15 )
+Shop::Shop( Player* player_, CNPC* shopkeeper_ )
+  : FramesBase( 30, 80, 454, 404, 13, 15 )
 {
-    addMoveableFrame( 454, 21, 13, 398 );
-    addCloseButton( 22, 22, 444, 398 );
-    currentTab = 0;
-    backpackFieldWidth = 32;
-    backpackFieldHeight = 32;
-    backpackSeparatorWidth = 3;
-    backpackSeparatorHeight = 3;
-    backpackOffsetX = 67;
-    backpackOffsetY = 56;
-    numSlotsX = 10;
-    numSlotsY = 6;
-    floatingSelection = NULL;
-    player = player_;
-    shopkeeper = shopkeeper_;
+  addMoveableFrame( 454, 21, 13, 398 );
+  addCloseButton( 22, 22, 444, 398 );
+  currentTab = 0;
+  backpackFieldWidth = 32;
+  backpackFieldHeight = 32;
+  backpackSeparatorWidth = 3;
+  backpackSeparatorHeight = 3;
+  backpackOffsetX = 67;
+  backpackOffsetY = 56;
+  numSlotsX = 10;
+  numSlotsY = 6;
+  floatingSelection = NULL;
+  player = player_;
+  shopkeeper = shopkeeper_;
 
-    tabs[0].tabimage.LoadIMG("data/interface/Shop/weapontab.tga",0);
-    tabs[0].height = 128;
-    tabs[0].width = 128;
+  tabs[0].tabimage.LoadIMG("data/interface/Shop/weapontab.tga",0);
+  tabs[0].height = 128;
+  tabs[0].width = 128;
+  tabs[0].posX = 61;
+  tabs[0].posY = 264;
 
-    tabs[0].posX = 61;
-    tabs[0].posY = 264;
+  tabs[1].tabimage.LoadIMG("data/interface/Shop/armortab.tga",0);
+  tabs[1].height = 128;
+  tabs[1].width = 128;
+  tabs[1].posX = 202;
+  tabs[1].posY = 264;
 
-    tabs[1].tabimage.LoadIMG("data/interface/Shop/armortab.tga",0);
-    tabs[1].height = 128;
-    tabs[1].width = 128;
-    tabs[1].posX = 202;
-    tabs[1].posY = 264;
+  tabs[2].tabimage.LoadIMG("data/interface/Shop/misctab.tga",0);
+  tabs[2].height = 128;
+  tabs[2].width = 128;
+  tabs[2].posX = 343;
+  tabs[2].posY = 264;
 
-    tabs[2].tabimage.LoadIMG("data/interface/Shop/misctab.tga",0);
-    tabs[2].height = 128;
-    tabs[2].width = 128;
-    tabs[2].posX = 343;
-    tabs[2].posY = 264;
+  // load the font for itemstack text.
+  itemStackFont = FontCache::getFontFromCache("data/verdana.ttf", 12);
 
-    // load the font for itemstack text.
-    itemStackFont = FontCache::getFontFromCache("data/verdana.ttf", 12);
+  loadShopkeeperInventory();
+  loadTextures();
 
-    loadShopkeeperInventory();
-    loadTextures();
-
-    slotUsed = new bool**[3];
-    for ( size_t curItemTab=0; curItemTab<3; ++curItemTab ) {
-        slotUsed[ curItemTab ] = new bool*[numSlotsX];
-        for ( size_t curX=0; curX<numSlotsX; ++curX ) {
-            slotUsed[ curItemTab ][ curX ] = new bool[numSlotsY];
-            for ( size_t curY=0; curY<numSlotsY; ++curY ) {
-                slotUsed[ curItemTab ][ curX ][ curY ] = false;
-            }
-        }
+  slotUsed = new bool**[3];
+  for( size_t curItemTab=0; curItemTab<3; ++curItemTab )
+  {
+    slotUsed[ curItemTab ] = new bool*[numSlotsX];
+    for( size_t curX=0; curX<numSlotsX; ++curX )
+    {
+      slotUsed[ curItemTab ][ curX ] = new bool[numSlotsY];
+      for( size_t curY=0; curY<numSlotsY; ++curY )
+      {
+	slotUsed[ curItemTab ][ curX ][ curY ] = false;
+      }
     }
+  }
 };
 
 void Shop::toggle()
 {
-    if ( isVisible() == false )
-    {
-        // this seeds a new ticket so that item tooltips will be reloaded.
-        player->startShopping();
-        player->setTicketForItemTooltip();
-    } else {
-        player->stopShopping();
-    }
-    FramesBase::toggle();
+  if( isVisible() == false )
+  {
+    // this seeds a new ticket so that item tooltips will be reloaded.
+    player->startShopping();
+    player->setTicketForItemTooltip();
+  }
+  else
+  {
+    player->stopShopping();
+  }
+
+  FramesBase::toggle();
 }
 
 void Shop::loadTextures()
 {
-    textures.LoadIMG("data/interface/Shop/base.tga",0);
-    textures.LoadIMG("data/white2x2pixel.tga",1);
+  textures.LoadIMG( "data/interface/Shop/base.tga", 0 );
+  textures.LoadIMG( "data/white2x2pixel.tga", 1 );
 }
 
 void Shop::loadShopkeeperInventory()
 {
-
 }
 
 void Shop::draw( int mouseX, int mouseY )
 {
-    DrawingHelpers::mapTextureToRect( textures.getTexture(0),
-                                      world_x + posX, textures.getTexture(0).width, world_y + posY, textures.getTexture(0).height);
-    drawTabs();
-    drawItems();
-    drawItemTooltip( mouseX, mouseY );
-    drawFloatingSelection( mouseX, mouseY );
+  DrawingHelpers::mapTextureToRect( textures.getTexture(0),
+				    world_x + posX, textures.getTexture(0).width, world_y + posY, textures.getTexture(0).height);
+  drawTabs();
+  drawItems();
+  drawItemTooltip( mouseX, mouseY );
+  drawFloatingSelection( mouseX, mouseY );
 }
 
 void Shop::drawTabs()
 {
-    DrawingHelpers::mapTextureToRect( tabs[currentTab].tabimage.getTexture(0),
-                                      world_x + tabs[currentTab].posX + posX, tabs[currentTab].width , world_y + tabs[currentTab].posY + posY, tabs[currentTab].height );
+  DrawingHelpers::mapTextureToRect( tabs[currentTab].tabimage.getTexture(0),
+				    world_x + tabs[currentTab].posX + posX, tabs[currentTab].width , world_y + tabs[currentTab].posY + posY, tabs[currentTab].height );
 }
 
 void Shop::drawItems()
 {
-    size_t numItems = shopkeeperInventory[currentTab].size();
-	for ( size_t curItemNr=0; curItemNr<numItems; ++curItemNr ) {
-		InventoryItem *curInvItem = shopkeeperInventory[ currentTab ][ curItemNr ];
-		Item *curItem = curInvItem->getItem();
-		CTexture *symbolTexture = curItem->getSymbolTexture();
+  size_t numItems = shopkeeperInventory[currentTab].size();
+  for ( size_t curItemNr=0; curItemNr<numItems; ++curItemNr ) {
+    InventoryItem *curInvItem = shopkeeperInventory[ currentTab ][ curItemNr ];
+    Item *curItem = curInvItem->getItem();
+    CTexture *symbolTexture = curItem->getSymbolTexture();
 
-		size_t invPosX = curInvItem->getInventoryPosX();
-		size_t invPosY = curInvItem->getInventoryPosY();
-		size_t sizeX = curItem->getSizeX();
-		size_t sizeY = curItem->getSizeY();
+    size_t invPosX = curInvItem->getInventoryPosX();
+    size_t invPosY = curInvItem->getInventoryPosY();
+    size_t sizeX = curItem->getSizeX();
+    size_t sizeY = curItem->getSizeY();
 
-		GLfloat shade[4] = { 0.0f, 0.0f, 0.0f, 0.1f };
+    GLfloat shade[4] = { 0.0f, 0.0f, 0.0f, 0.1f };
 
-		// if the item is equippable for the player and if we can afford it,
-		// we draw a green backdrop. If not, a red backdrop.
-		if ( curInvItem->canPlayerUseItem() == true && ( player->getCoins() >= curItem->getValue() ) )
-		{
-		    shade[1] = 1.0f; // green color
-        } else {
-            shade[0] = 1.0f; // red color
-        }
-
-        glColor4fv(shade);
-        DrawingHelpers::mapTextureToRect( textures.getTexture(1),
-                                          world_x + posX + backpackOffsetX + invPosX * backpackFieldWidth + invPosX * backpackSeparatorWidth,
-		                                  backpackFieldWidth * sizeX + (sizeX-1)*backpackSeparatorWidth,
-		                                  world_y + posY + backpackOffsetY + invPosY * backpackFieldHeight + invPosY * backpackSeparatorHeight,
-		                                  backpackFieldHeight * sizeY + (sizeY-1)*backpackSeparatorHeight);
-
-        glColor4f(1.0f,1.0f,1.0f,1.0f);
-
-		DrawingHelpers::mapTextureToRect( symbolTexture->getTexture(0),
-		                                  world_x + posX + backpackOffsetX + invPosX * backpackFieldWidth + invPosX * backpackSeparatorWidth,
-		                                  backpackFieldWidth * sizeX + (sizeX-1)*backpackSeparatorWidth,
-		                                  world_y + posY + backpackOffsetY + invPosY * backpackFieldHeight + invPosY * backpackSeparatorHeight,
-		                                  backpackFieldHeight * sizeY + (sizeY-1)*backpackSeparatorHeight);
-
-        // if we have an item that is stackable, and the stacksize is more than 1, we draw that number.
-		if ( curInvItem->getCurrentStackSize() > 1 ) {
-            itemStackFont->drawText( world_x + posX + backpackOffsetX + backpackFieldWidth - itemStackFont->calcStringWidth( "%d", curInvItem->getCurrentStackSize() ) + invPosX * backpackFieldWidth + invPosX * backpackSeparatorWidth,
-                                 world_y + posY + backpackOffsetY + invPosY * backpackFieldHeight + invPosY * backpackSeparatorHeight,
-                                 "%d", curInvItem->getCurrentStackSize() );
-		}
+    // if the item is equippable for the player and if we can afford it,
+    // we draw a green backdrop. If not, a red backdrop.
+    if ( curInvItem->canPlayerUseItem() == true && ( player->getCoins() >= curItem->getValue() ) )
+    {
+      shade[1] = 1.0f; // green color
+    } else {
+      shade[0] = 1.0f; // red color
     }
+
+    glColor4fv(shade);
+    DrawingHelpers::mapTextureToRect( textures.getTexture(1),
+				      world_x + posX + backpackOffsetX + invPosX * backpackFieldWidth + invPosX * backpackSeparatorWidth,
+				      backpackFieldWidth * sizeX + (sizeX-1)*backpackSeparatorWidth,
+				      world_y + posY + backpackOffsetY + invPosY * backpackFieldHeight + invPosY * backpackSeparatorHeight,
+				      backpackFieldHeight * sizeY + (sizeY-1)*backpackSeparatorHeight);
+
+    glColor4f(1.0f,1.0f,1.0f,1.0f);
+
+    DrawingHelpers::mapTextureToRect( symbolTexture->getTexture(0),
+				      world_x + posX + backpackOffsetX + invPosX * backpackFieldWidth + invPosX * backpackSeparatorWidth,
+				      backpackFieldWidth * sizeX + (sizeX-1)*backpackSeparatorWidth,
+				      world_y + posY + backpackOffsetY + invPosY * backpackFieldHeight + invPosY * backpackSeparatorHeight,
+				      backpackFieldHeight * sizeY + (sizeY-1)*backpackSeparatorHeight);
+
+    // if we have an item that is stackable, and the stacksize is more than 1, we draw that number.
+    if ( curInvItem->getCurrentStackSize() > 1 ) {
+      itemStackFont->drawText( world_x + posX + backpackOffsetX + backpackFieldWidth - itemStackFont->calcStringWidth( "%d", curInvItem->getCurrentStackSize() ) + invPosX * backpackFieldWidth + invPosX * backpackSeparatorWidth,
+			       world_y + posY + backpackOffsetY + invPosY * backpackFieldHeight + invPosY * backpackSeparatorHeight,
+			       "%d", curInvItem->getCurrentStackSize() );
+    }
+  }
 }
 
 void Shop::drawItemTooltip( int mouseX, int mouseY )
 {
-    // draws tooltip over item in the shop
-    if ( isOnSlotsScreen(mouseX,mouseY) && isVisible() && floatingSelection == NULL ) {
-        InventoryItem *tooltipItem;
-        int fieldIndexX = ( mouseX - (posX + backpackOffsetX) ) / (backpackFieldWidth+backpackSeparatorWidth);
-        int fieldIndexY = ( mouseY - (posY + backpackOffsetY) ) / (backpackFieldHeight+backpackSeparatorHeight);
+  // draws tooltip over item in the shop
+  if ( isOnSlotsScreen(mouseX,mouseY) && isVisible() && floatingSelection == NULL ) {
+    InventoryItem *tooltipItem;
+    int fieldIndexX = ( mouseX - (posX + backpackOffsetX) ) / (backpackFieldWidth+backpackSeparatorWidth);
+    int fieldIndexY = ( mouseY - (posY + backpackOffsetY) ) / (backpackFieldHeight+backpackSeparatorHeight);
 
-        if ( !isPositionFree( fieldIndexX, fieldIndexY, currentTab ) ) {
-            // draw tooltip of the current item in the shop.
-            tooltipItem = getItemAt( fieldIndexX, fieldIndexY, currentTab );
-            tooltipItem->getTooltip()->setShopItem( true );
-            tooltipItem->getTooltip()->draw( mouseX, mouseY );
+    if ( !isPositionFree( fieldIndexX, fieldIndexY, currentTab ) ) {
+      // draw tooltip of the current item in the shop.
+      tooltipItem = getItemAt( fieldIndexX, fieldIndexY, currentTab );
+      tooltipItem->getTooltip()->setShopItem( true );
+      tooltipItem->getTooltip()->draw( mouseX, mouseY );
 
-            //if player is holding down right shift and has an
-            // item with same slot equipped, we draw that too.
-            Uint8 *keys;
-            keys = SDL_GetKeyState(NULL);
-            int thisTooltipPosX;
-            int previousFrameHeight;
-            bool firstItemCompared = false;
-            if ( keys[SDLK_LSHIFT] )
-            {
-                std::vector<InventoryItem*> equippedItems = player->getInventory()->getEquippedItems();
-                for ( size_t curItem = 0; curItem < equippedItems.size(); curItem++ )
-                {
-                    if ( equippedItems[ curItem ]->getItem()->getEquipPosition() == tooltipItem->getItem()->getEquipPosition() )
-                    {
-                        int thisTooltipPosY = mouseY;
-                        // if this is our second item we're adding to the compare, then we need to position it next to the previous tooltip.
-                        if ( firstItemCompared == true )
-                        {
-                            thisTooltipPosY += previousFrameHeight + 30;
-                        }
+      //if player is holding down right shift and has an
+      // item with same slot equipped, we draw that too.
+      Uint8 *keys;
+      keys = SDL_GetKeyState(NULL);
+      int thisTooltipPosX;
+      int previousFrameHeight;
+      bool firstItemCompared = false;
+      if ( keys[SDLK_LSHIFT] )
+      {
+	std::vector<InventoryItem*> equippedItems = player->getInventory()->getEquippedItems();
+	for ( size_t curItem = 0; curItem < equippedItems.size(); curItem++ )
+	{
+	  if ( equippedItems[ curItem ]->getItem()->getEquipPosition() == tooltipItem->getItem()->getEquipPosition() )
+	  {
+	    int thisTooltipPosY = mouseY;
+	    // if this is our second item we're adding to the compare, then we need to position it next to the previous tooltip.
+	    if ( firstItemCompared == true )
+	    {
+	      thisTooltipPosY += previousFrameHeight + 30;
+	    }
 
-                        // if this is the first (or only) item we're going to draw in the compare we check where it will fit.
-                        if ( firstItemCompared == false ) {
-							if ( Configuration::screenWidth - (mouseX + tooltipItem->getTooltip()->getTooltipWidth() + 60) > equippedItems[ curItem ]->getTooltip()->getTooltipWidth() ) {
-                                thisTooltipPosX = mouseX + tooltipItem->getTooltip()->getTooltipWidth() + 30;
-                            } else {
-                                thisTooltipPosX = mouseX - 30 - equippedItems[ curItem ]->getTooltip()->getTooltipWidth();
-                            }
-                        }
+	    // if this is the first (or only) item we're going to draw in the compare we check where it will fit.
+	    if ( firstItemCompared == false ) {
+	      if ( Configuration::screenWidth - (mouseX + tooltipItem->getTooltip()->getTooltipWidth() + 60) > equippedItems[ curItem ]->getTooltip()->getTooltipWidth() ) {
+		thisTooltipPosX = mouseX + tooltipItem->getTooltip()->getTooltipWidth() + 30;
+	      } else {
+		thisTooltipPosX = mouseX - 30 - equippedItems[ curItem ]->getTooltip()->getTooltipWidth();
+	      }
+	    }
 
-                        previousFrameHeight = equippedItems[ curItem ]->getTooltip()->getTooltipHeight();
-                        equippedItems[ curItem ]->getTooltip()->draw( thisTooltipPosX, thisTooltipPosY );
-                        firstItemCompared = true;
-                    }
-                }
-            }
-        }
+	    previousFrameHeight = equippedItems[ curItem ]->getTooltip()->getTooltipHeight();
+	    equippedItems[ curItem ]->getTooltip()->draw( thisTooltipPosX, thisTooltipPosY );
+	    firstItemCompared = true;
+	  }
+	}
+      }
     }
+  }
 }
 
 void Shop::drawFloatingSelection( int mouseX, int mouseY )
 {
-	// draw floating selection
-	if ( hasFloatingSelection() ) {
-		Item *floatingItem = floatingSelection->getItem();
-		size_t sizeX = floatingItem->getSizeX();
-		size_t sizeY = floatingItem->getSizeY();
+  // draw floating selection
+  if ( hasFloatingSelection() ) {
+    Item *floatingItem = floatingSelection->getItem();
+    size_t sizeX = floatingItem->getSizeX();
+    size_t sizeY = floatingItem->getSizeY();
 
-		DrawingHelpers::mapTextureToRect( floatingItem->getSymbolTexture()->getTexture(0),
-		                                  mouseX, backpackFieldWidth * sizeX + (sizeX-1)*backpackSeparatorWidth,
-		                                  mouseY-20, backpackFieldHeight * sizeY + (sizeY-1)*backpackSeparatorHeight);
-	}
+    DrawingHelpers::mapTextureToRect( floatingItem->getSymbolTexture()->getTexture(0),
+				      mouseX, backpackFieldWidth * sizeX + (sizeX-1)*backpackSeparatorWidth,
+				      mouseY-20, backpackFieldHeight * sizeY + (sizeY-1)*backpackSeparatorHeight);
+  }
 }
 
 void Shop::clicked( int mouseX, int mouseY, uint8_t mouseState )
 {
-    if ( isOnSlotsScreen( mouseX, mouseY ) )
+  if ( isOnSlotsScreen( mouseX, mouseY ) )
+  {
+    if ( inventoryScreen->hasFloatingSelection() )
     {
-        if ( inventoryScreen->hasFloatingSelection() )
-        {
-            sellToShop( inventoryScreen->getFloatingSelection(), true );
-            inventoryScreen->unsetFloatingSelection();
-        }
-
-        if ( hasFloatingSelection() )
-        {
-            sellToShop( getFloatingSelection(), false );
-            unsetFloatingSelection();
-            return;
-        }
-
-        int fieldIndexX = ( mouseX - (posX + backpackOffsetX) ) / (backpackFieldWidth+backpackSeparatorWidth);
-        int fieldIndexY = ( mouseY - (posY + backpackOffsetY) ) / (backpackFieldHeight+backpackSeparatorHeight);
-
-        if ( !isPositionFree( fieldIndexX, fieldIndexY, currentTab ) )
-        {
-            InventoryItem *curItem = getItemAt( fieldIndexX, fieldIndexY, currentTab );
-            if ( player->getCoins() >= curItem->getItem()->getValue() )
-            {
-                if ( mouseState == SDL_BUTTON_RIGHT ) {
-                    // direct buy on right button
-                    bool inserted = player->getInventory()->insertItem( curItem->getItem(), curItem );
-                    if ( inserted ) {
-                        floatingSelection = curItem;
-                        removeItem( floatingSelection );
-                        buyFromShop();
-                    }
-                } else {
-                    // add pick up item on left click
-                    floatingSelection = curItem;
-                    removeItem( floatingSelection );
-                }
-            }
-        }
-        return;
+      sellToShop( inventoryScreen->getFloatingSelection(), true );
+      inventoryScreen->unsetFloatingSelection();
     }
 
-    // loop through our tabs, see if any got clicked.
-    for (size_t tabIndex = 0; tabIndex <= 2; tabIndex++) {
-        if ( mouseX > tabs[tabIndex].posX + posX
-            && mouseY > tabs[tabIndex].posY + posY
-            && mouseX < tabs[tabIndex].posX + posX + tabs[tabIndex].width
-            && mouseY < tabs[tabIndex].posY + posY + tabs[tabIndex].height ) {
-            currentTab = tabIndex;
-            return;
-        }
-    }
-
-    if ( !isOnSlotsScreen( mouseX, mouseY ) )
+    if ( hasFloatingSelection() )
     {
-        if ( hasFloatingSelection() )
-        {
-            sellToShop( getFloatingSelection(), false );
-            unsetFloatingSelection();
-            return;
-        }
+      sellToShop( getFloatingSelection(), false );
+      unsetFloatingSelection();
+      return;
     }
+
+    int fieldIndexX = ( mouseX - (posX + backpackOffsetX) ) / (backpackFieldWidth+backpackSeparatorWidth);
+    int fieldIndexY = ( mouseY - (posY + backpackOffsetY) ) / (backpackFieldHeight+backpackSeparatorHeight);
+
+    if ( !isPositionFree( fieldIndexX, fieldIndexY, currentTab ) )
+    {
+      InventoryItem *curItem = getItemAt( fieldIndexX, fieldIndexY, currentTab );
+      if ( player->getCoins() >= curItem->getItem()->getValue() )
+      {
+	if ( mouseState == SDL_BUTTON_RIGHT ) {
+	  // direct buy on right button
+	  bool inserted = player->getInventory()->insertItem( curItem->getItem(), curItem );
+	  if ( inserted ) {
+	    floatingSelection = curItem;
+	    removeItem( floatingSelection );
+	    buyFromShop();
+	  }
+	} else {
+	  // add pick up item on left click
+	  floatingSelection = curItem;
+	  removeItem( floatingSelection );
+	}
+      }
+    }
+    return;
+  }
+
+  // loop through our tabs, see if any got clicked.
+  for (size_t tabIndex = 0; tabIndex <= 2; tabIndex++) {
+    if ( mouseX > tabs[tabIndex].posX + posX
+	 && mouseY > tabs[tabIndex].posY + posY
+	 && mouseX < tabs[tabIndex].posX + posX + tabs[tabIndex].width
+	 && mouseY < tabs[tabIndex].posY + posY + tabs[tabIndex].height ) {
+      currentTab = tabIndex;
+      return;
+    }
+  }
+
+  if ( !isOnSlotsScreen( mouseX, mouseY ) )
+  {
+    if ( hasFloatingSelection() )
+    {
+      sellToShop( getFloatingSelection(), false );
+      unsetFloatingSelection();
+      return;
+    }
+  }
 }
 
 bool Shop::isOnSlotsScreen( int x, int y )
 {
-	if ( x < static_cast<int>(posX + backpackOffsetX)
-	     || y < static_cast<int>(posY + backpackOffsetY)
-	     || x > static_cast<int>(posX + backpackOffsetX + backpackFieldWidth * numSlotsX + (numSlotsX-1)*backpackSeparatorWidth)
-	     || y > static_cast<int>(posY + backpackOffsetY + backpackFieldHeight * numSlotsY + (numSlotsY-1)*backpackSeparatorHeight) ) {
-		return false;
-	}
-	return true;
+  if ( x < static_cast<int>(posX + backpackOffsetX)
+       || y < static_cast<int>(posY + backpackOffsetY)
+       || x > static_cast<int>(posX + backpackOffsetX + backpackFieldWidth * numSlotsX + (numSlotsX-1)*backpackSeparatorWidth)
+       || y > static_cast<int>(posY + backpackOffsetY + backpackFieldHeight * numSlotsY + (numSlotsY-1)*backpackSeparatorHeight) ) {
+    return false;
+  }
+  return true;
 }
 
 bool Shop::isPositionFree( size_t invPosX, size_t invPosY, size_t curTab ) const
 {
-	if ( invPosX >= numSlotsX || invPosY >= numSlotsY ) {
-		return false;
-	}
+  if ( invPosX >= numSlotsX || invPosY >= numSlotsY ) {
+    return false;
+  }
 
-	return ( !slotUsed[ curTab ][ invPosX ][ invPosY ] );
+  return ( !slotUsed[ curTab ][ invPosX ][ invPosY ] );
 }
 
-void Shop::addItem( Item *item )
+void Shop::addItem( Item* item )
 {
-	InventoryItem invItem( item, 0, 0, player );
-	sellToShop( &invItem, false );
+  InventoryItem invItem( item, 0, 0, player );
+  sellToShop( &invItem, false );
 }
 
 void Shop::sellToShop( InventoryItem *sellItem, bool givePlayerMoney )
 {
-	Item *item = sellItem->getItem();
+  Item* item = sellItem->getItem();
 
-	size_t itemSizeX = item->getSizeX();
-	size_t itemSizeY = item->getSizeY();
+  size_t itemSizeX = item->getSizeX();
+  size_t itemSizeY = item->getSizeY();
 
-	size_t itemTab = getItemTab( item );
+  size_t itemTab = getItemTab( item );
 
-	bool foundPosition = false;
-	size_t foundX = 0;
-	size_t foundY = 0;
+  bool foundPosition = false;
+  size_t foundX = 0;
+  size_t foundY = 0;
 
-	// look for next free position
-	for ( size_t freeX=0; freeX<numSlotsX-itemSizeX+1 && !foundPosition; ++freeX ) {
-		for ( size_t freeY=0; freeY<numSlotsY-itemSizeY+1 && !foundPosition; ++freeY ) {
-			if ( hasSufficientSpaceAt( freeX, freeY, itemSizeX, itemSizeY, itemTab ) ) {
-				foundPosition = true;
-				foundX = freeX;
-				foundY = freeY;
-			}
-		}
-	}
-
-	if ( foundPosition ) {
-		InventoryItem *newItem = new InventoryItem( item, foundX, foundY, player, sellItem );
-        insertItemAt( newItem, foundX, foundY, itemTab );
+  // look for next free position
+  for ( size_t freeX=0; freeX<numSlotsX-itemSizeX+1 && !foundPosition; ++freeX ) {
+    for ( size_t freeY=0; freeY<numSlotsY-itemSizeY+1 && !foundPosition; ++freeY ) {
+      if ( hasSufficientSpaceAt( freeX, freeY, itemSizeX, itemSizeY, itemTab ) ) {
+	foundPosition = true;
+	foundX = freeX;
+	foundY = freeY;
+      }
     }
+  }
+
+  if ( foundPosition ) {
+    InventoryItem *newItem = new InventoryItem( item, foundX, foundY, player, sellItem );
+    insertItemAt( newItem, foundX, foundY, itemTab );
+  }
 
 	if ( givePlayerMoney ) {
         SoundEngine::playSound( "data/sound/sell_buy_item.ogg" );
@@ -437,45 +441,48 @@ InventoryItem* Shop::getItemAt( size_t invPosX, size_t invPosY, size_t itemTab )
 	abort();
 }
 
-size_t Shop::getItemTab( Item *item )
+size_t Shop::getItemTab( Item* item )
 {
-    switch ( item->getItemType() )
+  switch ( item->getItemType() )
+  {
+  case ItemType::MISCELLANEOUS:
+    return 2;
+    break;
+  case ItemType::ARMOR:
+    return 1;
+    break;
+  case ItemType::WEAPON:
+    if ( item->getWeaponType() == WeaponType::SHIELD ) // this is to get all shields into the secondary tab.
     {
-        case ItemType::MISCELLANEOUS:
-            return 2;
-        break;
-        case ItemType::ARMOR:
-            return 1;
-        break;
-        case ItemType::WEAPON:
-            if ( item->getWeaponType() == WeaponType::SHIELD ) // this is to get all shields into the secondary tab.
-            {
-                return 1;
-            }
-            return 0;
-        break;
-        case ItemType::JEWELRY:
-            return 2;
-        break;
-        case ItemType::SCROLL:
-            return 2;
-        break;
-        case ItemType::POTION:
-            return 2;
-        break;
-        case ItemType::FOOD:
-            return 2;
-        break;
-        case ItemType::DRINK:
-            return 2;
-        break;
-        case ItemType::NEWSPELL:
-            return 2;
-        break;
-        default:
-            return 0;
-        break;
+      return 1;
     }
+    return 0;
+    break;
+  case ItemType::JEWELRY:
+    return 2;
+    break;
+  case ItemType::SCROLL:
+    return 2;
+    break;
+  case ItemType::POTION:
+    return 2;
+    break;
+  case ItemType::FOOD:
+    return 2;
+    break;
+  case ItemType::DRINK:
+    return 2;
+    break;
+  case ItemType::NEWSPELL:
+    return 2;
+    break;
+  case ItemType::STONE:
+    return 2;
+    break;
+  default:
+    return 0;
+    break;
+  }
 }
 
 bool Shop::hasFloatingSelection() const

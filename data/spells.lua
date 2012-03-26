@@ -731,3 +731,14 @@ curSpell:setSpellSymbol( "data/spells/landyrsforce/symbol.tga" );
 curSpell:setCooldown( 12 );
 curSpell:addAdditionalSpellOnTarget( spellDatabase["sylphiricacideffect1"], 1.0 );
 curSpell:setRequiredClass( CharacterClass.Ranger );
+
+curSpell = DawnInterface.createGeneralLuaSpell();
+spellDatabase["windtravel"] = curSpell;
+curSpell:setName( "Wind Travel" );
+curSpell:setInfo( "Travel with the wind." );
+curSpell:setCastTime( 500 );
+curSpell:setSpellCost( 0 );
+curSpell:setSpellSymbol( "data/spells/leatherskin/symbol.tga" );
+curSpell:setEffectType( EffectType.SelfAffectingSpell );
+curSpell:setRequiredClass( CharacterClass.ANYCLASS );
+--curSpell:setCode( "DawnInterface.enterZone( 'data/zone1', 666, 1400 );" );

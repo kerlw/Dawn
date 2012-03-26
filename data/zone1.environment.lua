@@ -516,10 +516,10 @@ EditorInterface.addEnvironment( 1852, 1504, 0, MapData.DontSave.tree_tree1_tga )
 EditorInterface.addEnvironment( -1657, 1498, 0, MapData.DontSave.tree_tree1_tga );
 EditorInterface.addEnvironment( -1402, 1494, 0, MapData.DontSave.tree_tree1_tga );
 EditorInterface.addEnvironment( -452, 1493, 0, MapData.DontSave.stone_stone1_tga );
-EditorInterface.adjustLastRGBA( 0.48, 1, 0.34, 1 );
+EditorInterface.adjustLastRGBA( 1.93715e-07, 6.70552e-07, 1.01, 1 );
 EditorInterface.addEnvironment( 2232, 1490, 0, MapData.DontSave.tree_tree1_tga );
 EditorInterface.addEnvironment( -626, 1490, 0, MapData.DontSave.stone_stone1_tga );
-EditorInterface.adjustLastRGBA( 0.16, 0.74, 0.24, 1 );
+EditorInterface.adjustLastRGBA( 0.01, 1.01, 0.00999996, 1 );
 EditorInterface.addEnvironment( -2417, 1479, 0, MapData.DontSave.tree_tree2_tga );
 EditorInterface.addEnvironment( -1041, 1478, 0, MapData.DontSave.tree_tree2_tga );
 EditorInterface.addEnvironment( -2296, 1478, 0, MapData.DontSave.tree_tree2_tga );
@@ -546,7 +546,7 @@ EditorInterface.addEnvironment( -756, 1410, 0, MapData.DontSave.tree_tree2_tga )
 EditorInterface.addEnvironment( -1462, 1397, 0, MapData.DontSave.tree_tree1_tga );
 EditorInterface.addEnvironment( -2310, 1391, 0, MapData.DontSave.tree_tree2_tga );
 EditorInterface.addEnvironment( -536, 1379, 0, MapData.DontSave.stone_stone2_tga );
-EditorInterface.adjustLastRGBA( 1, 0.38, 0.63, 1 );
+EditorInterface.adjustLastRGBA( 1, 7.45058e-08, 1.01, 1 );
 EditorInterface.addEnvironment( 2306, 1376, 0, MapData.DontSave.tree_tree1_tga );
 EditorInterface.addEnvironment( -1744, 1374, 0, MapData.DontSave.tree_tree1_tga );
 EditorInterface.addEnvironment( -1923, 1370, 0, MapData.DontSave.tree_tree2_tga );
@@ -576,9 +576,9 @@ EditorInterface.addEnvironment( -1802, 1316, 0, MapData.DontSave.tree_tree2_tga 
 EditorInterface.addEnvironment( 404, 1313, 0, MapData.DontSave.village_fence4_tga );
 EditorInterface.addEnvironment( -228, 1301, 0, MapData.DontSave.tree_tree2_tga );
 EditorInterface.addEnvironment( -451, 1289, 0, MapData.DontSave.stone_stone1_tga );
-EditorInterface.adjustLastRGBA( 0.52, 1, 0.39, 1 );
+EditorInterface.adjustLastRGBA( 1.01, 6.70552e-07, 7.45058e-08, 1 );
 EditorInterface.addEnvironment( -634, 1285, 0, MapData.DontSave.stone_stone1_tga );
-EditorInterface.adjustLastRGBA( 0.62, 1, 0.3, 1 );
+EditorInterface.adjustLastRGBA( 1.01, 1, 7.45058e-08, 1 );
 EditorInterface.addEnvironment( -1879, 1284, 0, MapData.DontSave.tree_tree1_tga );
 EditorInterface.addEnvironment( 2031, 1281, 0, MapData.DontSave.tree_tree1_tga );
 EditorInterface.addEnvironment( 3613, 1277, 0, MapData.DontSave.tree_tree1_tga );

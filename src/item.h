@@ -129,6 +129,7 @@ namespace ItemType
     FOOD,
     DRINK,
     NEWSPELL,
+    STONE,
     COUNT
   };
 }
@@ -316,14 +317,14 @@ class TriggerSpellOnItem
 {
 public:
   TriggerSpellOnItem( CSpellActionBase* spellToTrigger, float chanceToTrigger, TriggerType::TriggerType triggerType, bool castOnSelf );
-  CSpellActionBase *getSpellToTrigger() const;
+  CSpellActionBase* getSpellToTrigger() const;
   float getChanceToTrigger() const;
   TriggerType::TriggerType getTriggerType() const;
   bool getCastOnSelf() const;
   std::string getTooltipText() const;
 
 private:
-  CSpellActionBase *spellToTrigger;
+  CSpellActionBase* spellToTrigger;
   float chanceToTrigger;
   TriggerType::TriggerType triggerType;
   bool castOnSelf;
@@ -406,9 +407,9 @@ private:
 
   bool useableItem;
 
-  int16_t *statsModifier;
-  int16_t *resistElementModifier;
-  int16_t *spellEffectElementModifier;
+  int16_t* statsModifier;
+  int16_t* resistElementModifier;
+  int16_t* spellEffectElementModifier;
 
   uint8_t minDamage;
   uint8_t maxDamage;
@@ -419,7 +420,7 @@ private:
 
   uint32_t value;
 
-  CSpell *spell;
+  CSpell* spell;
 
 protected:
   CTexture symbolTexture;

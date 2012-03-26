@@ -1,4 +1,4 @@
-/* Copyright (C) 2009,2010,2011  Dawn - 2D roleplaying game
+/* Copyright (C) 2009,2010,2011,2012  Dawn - 2D roleplaying game
 
    This file is a part of the dawn-rpg project <https://github.com/frusen/Dawn>.
 
@@ -29,11 +29,11 @@ InventoryItem::InventoryItem( Item* item,
                               size_t inventoryPosY,
                               Player* player,
                               InventoryItem* copyFrom )
-  :  item( item ),
-     player( player ),
-     currentStackSize( 1 ),
-     inventoryPosX( inventoryPosX ),
-     inventoryPosY( inventoryPosY )
+  : item( item ),
+    player( player ),
+    currentStackSize( 1 ),
+    inventoryPosX( inventoryPosX ),
+    inventoryPosY( inventoryPosY )
 {
   // copy properties from the original inventoryItem (if we've suggested so)
   if( copyFrom != NULL )
@@ -88,7 +88,7 @@ itemTooltip* InventoryItem::getTooltip() const
 /// Class Inventory
 
 Inventory::Inventory( size_t sizeX_, size_t sizeY_, Player* player_ )
-  :  player( player_ )
+  : player( player_ )
 {
   size_t numEquippable = static_cast<size_t>( ItemSlot::COUNT );
   equippedItems = new InventoryItem* [ numEquippable ];

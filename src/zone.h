@@ -1,4 +1,4 @@
-/* Copyright (C) 2009,2010,2011  Dawn - 2D roleplaying game
+/* Copyright (C) 2009,2010,2011,2012  Dawn - 2D roleplaying game
 
    This file is a part of the dawn-rpg project <https://github.com/frusen/Dawn>.
 
@@ -57,6 +57,7 @@ struct sEnvironmentMap
   {
     x_pos = _x;
     y_pos = _y;
+    z_pos = _z_pos;
     tile = _tile;
     transparency = _tp;
     red = _red;
@@ -64,7 +65,6 @@ struct sEnvironmentMap
     blue = _blue;
     x_scale = _x_scale;
     y_scale = _y_scale;
-    z_pos = _z_pos;
   };
 
   // instead of using a predicate in our sort call.
@@ -189,10 +189,10 @@ public:
   std::string getLuaSaveText() const;
   void addEventHandler( CallIndirection *newEventHandler );
   // used to restore references when loading
-  void findCharacter( CCharacter *character, bool &found, size_t &foundPos ) const;
-  void findInteractionPoint( InteractionPoint *interactionPoint, bool &found, size_t &foundPos ) const;
-  void findInteractionRegion( InteractionRegion *interactionRegion, bool &found, size_t &foundPos ) const;
-  void findEventHandler( CallIndirection *eventHandler, bool &found, size_t &foundPos ) const;
+  void findCharacter( CCharacter* character, bool &found, size_t& foundPos ) const;
+  void findInteractionPoint( InteractionPoint* interactionPoint, bool& found, size_t& foundPos ) const;
+  void findInteractionRegion( InteractionRegion* interactionRegion, bool& found, size_t& foundPos ) const;
+  void findEventHandler( CallIndirection* eventHandler, bool& found, size_t& foundPos ) const;
   CCharacter* getCharacterPointer( size_t posInArray ) const;
   InteractionPoint* getInteractionPointPointer( size_t posInArray ) const;
   InteractionRegion* getInteractionRegionPointer( size_t posInArray ) const;

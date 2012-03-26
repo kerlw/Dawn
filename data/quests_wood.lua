@@ -1,13 +1,11 @@
 -- init quest namespace so different quests / zones don't conflict in names
-if( quest_playHideAndSeek == nil )
-then
-	quest_playHideAndSeek = {}
+if ( quest_playHideAndSeek == nil ) then
+  quest_playHideAndSeek = {}
 end
 
 function quest_playHideAndSeek.enterTown()
-	if ( not DawnInterface.isSavingAllowed() )
-	then
-		DawnInterface.setSavingAllowed( true );
+  if ( not DawnInterface.isSavingAllowed() ) then
+    DawnInterface.setSavingAllowed( true );
 
 		local textWindow = DawnInterface.createTextWindow();
 		textWindow:center();
