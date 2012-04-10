@@ -1,4 +1,5 @@
 /* Copyright (C) 2009,2010,2011,2012  Dawn - 2D roleplaying game
+
    This file is a part of the dawn-rpg project <https://github.com/frusen/Dawn>.
 
    This program is free software: you can redistribute it and/or modify
@@ -14,14 +15,14 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "interface.h"
-#include "spell.h"
-#include "globals.h"
-#include "npc.h"
-#include "zone.h"
-#include "player.h"
-#include "drawinghelpers.h"
-#include "random.h"
+#include "interface.hpp"
+#include "spell.hpp"
+#include "globals.hpp"
+#include "npc.hpp"
+#include "zone.hpp"
+#include "player.hpp"
+#include "drawinghelpers.hpp"
+#include "random.hpp"
 #include <vector>
 
 int mx, my;

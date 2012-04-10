@@ -15,8 +15,8 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "gameloophandler.h"
-#include "dawnstate.h"
+#include "gameloophandler.hpp"
+#include "dawnstate.hpp"
 
 void GameLoopHandler::setDone()
 {
@@ -33,9 +33,9 @@ bool GameLoopHandler::isDone()
 #include "threadObject/Thread.h"
 #include "GLee/GLee.h"
 #include <GL/gl.h>
-#include "framesbase.h"
+#include "framesbase.hpp"
 extern std::vector <FramesBase*> activeFrames;
-#include "configuration.h"
+#include "configuration.hpp"
 
 void MainMenuHandler::activate( SDL_Event *lastEvent )
 {
@@ -50,7 +50,7 @@ void MainMenuHandler::drawScene()
   glClear( GL_COLOR_BUFFER_BIT );
   glLoadIdentity(); // reset view to 0,0
 
-  for( int curFrame = activeFrames.size()-1; curFrame >= 0; --curFrame )
+  for ( int curFrame = activeFrames.size()-1; curFrame >= 0; --curFrame )
   {
     activeFrames[curFrame]->draw( lastEvent->motion.x, Configuration::screenHeight - lastEvent->motion.y - 1 );
   }
@@ -60,11 +60,11 @@ void MainMenuHandler::drawScene()
 
 void MainMenuHandler::handleEvents()
 {
-  while( SDL_PollEvent( lastEvent ) )
+  while ( SDL_PollEvent( lastEvent ) )
   {
-    if(lastEvent->type == SDL_MOUSEBUTTONDOWN)
+    if ( lastEvent->type == SDL_MOUSEBUTTONDOWN )
     {
-      if( !mouseButtonDown )
+      if ( !mouseButtonDown )
       {
 	mouseButtonDown = true;
 	// iterate through all our active frames and click on them if mouse is over.
@@ -92,9 +92,9 @@ void MainMenuHandler::finish()
 
 // LoadingScreenHandler
 
-#include "loadingmanager.h"
-#include "loadingscreen.h"
-#include "textureframe.h"
+#include "loadingmanager.hpp"
+#include "loadingscreen.hpp"
+#include "textureframe.hpp"
 
 TextureFrame* textureFrame = NULL;
 DawnInitObject* curTextureProcessor = NULL;
@@ -233,10 +233,10 @@ void processFontInOpenGLThread( GLFT_Font *font, const std::string &filename, un
 
 // GameScreenHandler
 
-#include "interactionpoint.h"
-#include "interactionregion.h"
-#include "textwindow.h"
-#include "utils.h"
+#include "interactionpoint.hpp"
+#include "interactionregion.hpp"
+#include "textwindow.hpp"
+#include "utils.hpp"
 
 extern std::vector<TextWindow*> allTextWindows;
 extern cameraFocusHandler focus;
@@ -702,7 +702,7 @@ void GameScreenHandler::updateScene()
           while(activeFrames.size() > check)
           {
             // is the current frame a textbox?
-            if( strcmp(activeFrames[check]->getName(),"text") == 0 )
+            if( strcmp(activeFrames[check]->getName().c_str(),"text") == 0 )
             {
               // don't close it
               check++;
@@ -720,18 +720,18 @@ void GameScreenHandler::updateScene()
       }
       else
       {
-        // are more frames than the options window open?
-        if(activeFrames.size() > 1)
+        /* Are more frames than the options window open? */
+        if ( activeFrames.size() > 1 )
         {
           int check = 1;
           
-          // close all frames
-          while(activeFrames.size() > check)
+          /* Close all frames. */
+          while (activeFrames.size() > check)
           {
-            // is the current frame a textbox?
-            if( strcmp(activeFrames[check]->getName(),"text") == 0 )
+            /* Is the current frame a textbox? */
+            if ( strcmp( activeFrames[check]->getName().c_str(), "text" ) == 0 )
             {
-              // don't close it
+              /* Don't close it. */
               check++;
             }
             else
@@ -742,7 +742,7 @@ void GameScreenHandler::updateScene()
         }
         else
         {
-          // close the options window
+          /* Close the options window. */
           activeFrames[1]->toggle();
         }
       }
@@ -827,11 +827,6 @@ void GameScreenHandler::updateScene()
   {
     player->setMovementSpeed( 1 );
   }
-
-  //	if (keys[SDLK_BACKSPACE] && player->getTarget() != NULL) {
-  //		GLfloat color[] = {255, 255, 255, 255};
-  //		DawnInterface::addTextToLogWindow(color, "TarX:%d TarY:%d", player->getTarget()->getXPos(), player->getTarget()->getYPos());
-  //	}
 
   focus.updateFocus();
 }

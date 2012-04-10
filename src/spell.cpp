@@ -15,22 +15,20 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "spell.h"
-
+#include "spell.hpp"
 #include <iostream>
 #include <cstdlib>
 #include <memory>
-#include "character.h"
-#include "player.h"
-#include "texture.h"
-#include "statssystem.h"
-#include "drawinghelpers.h"
-#include "item.h"
-#include "soundengine.h"
-#include "globals.h"
-#include "luafunctions.h"
-#include "random.h"
-
+#include "character.hpp"
+#include "player.hpp"
+#include "texture.hpp"
+#include "statssystem.hpp"
+#include "drawinghelpers.hpp"
+#include "item.hpp"
+#include "soundengine.hpp"
+#include "globals.hpp"
+#include "luafunctions.hpp"
+#include "random.hpp"
 #include <cassert>
 
 namespace DawnInterface
@@ -2110,7 +2108,7 @@ void GeneralLuaSpell::startEffect()
   }
   effectStart = SDL_GetTicks();
   
-  LuaFunctions::executeLuaScript( "DawnInterface.enterZone( 'data/zone1', 666, 1400 );" );
+  LuaFunctions::executeLuaScript( "DawnInterface.enterZone( 'data/zone1', 666, 1400 );DawnInterface.setSavingAllowed( true );" );
 
   creator->addCooldownSpell( dynamic_cast<CSpellActionBase*> ( cast( NULL, NULL ) ) );
   unbindFromCreator();

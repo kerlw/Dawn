@@ -13,7 +13,7 @@
 /* Exported function */
 TOLUA_API int  tolua_luainterface_open (lua_State* tolua_S);
 
-#include "luainterface.h"
+#include "luainterface.hpp"
 
 /* function to register type */
 static void tolua_reg_types (lua_State* tolua_S)

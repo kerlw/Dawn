@@ -1,4 +1,4 @@
-/* Copyright (C) 2009,2010,2011  Dawn - 2D roleplaying game
+/* Copyright (C) 2009,2010,2011,2012  Dawn - 2D roleplaying game
 
    This file is a part of the dawn-rpg project <https://github.com/frusen/Dawn>.
 
@@ -15,21 +15,21 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "character.h"
+#include "character.hpp"
 #include <cassert>
-#include "drawinghelpers.h"
-#include "spell.h"
-#include "interface.h"
-#include "groundloot.h"
-#include "statssystem.h"
-#include "zone.h"
-#include "questwindow.h"
+#include "drawinghelpers.hpp"
+#include "spell.hpp"
+#include "interface.hpp"
+#include "groundloot.hpp"
+#include "statssystem.hpp"
+#include "zone.hpp"
+#include "questwindow.hpp"
 
-#include "npc.h"
-#include "player.h"
-#include "configuration.h"
-#include "globals.h"
-#include "random.h"
+#include "npc.hpp"
+#include "player.hpp"
+#include "configuration.hpp"
+#include "globals.hpp"
+#include "random.hpp"
 
 #include <map>
 #include <string>
@@ -44,13 +44,13 @@ extern std::auto_ptr<QuestWindow> questWindow;
 // Dawn LUA Interface
 namespace DawnInterface
 {
-	CCharacter* createNewMobType( std::string typeID )
-	{
-		CCharacter* newMobType = new CNPC(0, 0, 0, 0, 0);
-		allMobTypes[ typeID ] = newMobType;
-		return newMobType;
-	}
-	void addTextToLogWindow( GLfloat color[], const char* text, ... );
+  CCharacter* createNewMobType( std::string typeID )
+  {
+    CCharacter* newMobType = new CNPC(0, 0, 0, 0, 0);
+    allMobTypes[ typeID ] = newMobType;
+    return newMobType;
+  }
+  void addTextToLogWindow( GLfloat color[], const char* text, ... );
 }
 
 bool CCharacter::hasTarget( CCharacter* target )
@@ -129,7 +129,7 @@ void CCharacter::baseOnType( std::string otherName )
 
 std::string CCharacter::getClassID() const
 {
-	return classID;
+  return classID;
 }
 
 const uint16_t NULLABLE_ATTRIBUTE_MIN = 0;
@@ -184,22 +184,22 @@ std::string CCharacter::getName() const
 
 void CCharacter::setName( std::string newName )
 {
-	name = newName;
+  name = newName;
 }
 
 void CCharacter::setArmor( uint16_t newArmor )
 {
-    armor = newArmor;
+  armor = newArmor;
 }
 
 uint16_t CCharacter::getArmor() const
 {
-    return armor;
+  return armor;
 }
 
 uint16_t CCharacter::getModifiedArmor() const
 {
-	return getArmor() + StatsSystem::getStatsSystem()->calculateDamageReductionPoints( this );
+  return getArmor() + StatsSystem::getStatsSystem()->calculateDamageReductionPoints( this );
 }
 
 void CCharacter::modifyArmor( int16_t armorModifier )
@@ -895,25 +895,25 @@ std::vector<sLootTable> CCharacter::getLootTable() const
 	return lootTable;
 }
 
-void CCharacter::setTexture( ActivityType::ActivityType activity, CTexture *newTexture )
+void CCharacter::setTexture( ActivityType::ActivityType activity, CTexture* newTexture )
 {
-	size_t activityNr = static_cast<size_t>( activity );
-	this->texture[ activityNr ] = newTexture;
+  size_t activityNr = static_cast<size_t>( activity );
+  this->texture[ activityNr ] = newTexture;
 }
 
 CTexture* CCharacter::getTexture( ActivityType::ActivityType activity ) const
 {
-	size_t activityNr = static_cast<size_t>( activity );
-	return this->texture[ activityNr ];
+  size_t activityNr = static_cast<size_t>( activity );
+  return this->texture[ activityNr ];
 }
 
 void CCharacter::setNumMoveTexturesPerDirection( ActivityType::ActivityType activity, int numTextures )
 {
-	size_t activityNr = static_cast<size_t>(activity);
-	numMoveTexturesPerDirection[ activityNr ] = numTextures;
-	assert( texture[ activityNr ] == NULL );
+  size_t activityNr = static_cast<size_t>( activity );
+  numMoveTexturesPerDirection[ activityNr ] = numTextures;
+  assert( texture[ activityNr ] == NULL );
 
-	texture[ activityNr ] = new CTexture();
+  texture[ activityNr ] = new CTexture();
 }
 
 void CCharacter::setMoveTexture( ActivityType::ActivityType activity, int direction, int index, std::string filename, int textureOffsetX, int textureOffsetY )
@@ -937,7 +937,7 @@ CCharacter::CCharacter()
 	  current_health( 1 ),
 	  max_mana( 0 ),
 	  current_mana( 0 ),
-      healthRegen( 0 ),
+	  healthRegen( 0 ),
 	  manaRegen( 0 ),
 	  armor( 0 ),
 	  damageModifierPoints( 0 ),
@@ -1842,23 +1842,27 @@ void CCharacter::dropItems()
 
 void CCharacter::Die()
 {
-	if ( hasChoosenDyingDirection == false ) {
-			dyingDirection = static_cast<Direction>( activeDirection );
-			dyingStartFrame = SDL_GetTicks();
-			reduceDyingTranspFrame = SDL_GetTicks() + 7000;
-	}
+  if ( hasChoosenDyingDirection == false )
+  {
+    dyingDirection = static_cast<Direction>( activeDirection );
+    dyingStartFrame = SDL_GetTicks();
+    reduceDyingTranspFrame = SDL_GetTicks() + 7000;
+  }
 }
 
-void CCharacter::Heal(int amount)
+void CCharacter::Heal( int amount )
 {
-	if (alive) {
-		uint16_t modifiedDiff = getModifiedMaxHealth() - getCurrentHealth();
-	    if ( modifiedDiff <= amount ) {
-			amount = modifiedDiff;
-		}
-		addDamageDisplayToGUI( amount, false, 1 );
-		modifyCurrentHealth( amount );
-	}
+  if ( alive ) 
+  {
+    uint16_t modifiedDiff = getModifiedMaxHealth() - getCurrentHealth();
+    if ( modifiedDiff <= amount )
+    {
+      amount = modifiedDiff;
+    }
+
+    addDamageDisplayToGUI( amount, false, 1 );
+    modifyCurrentHealth( amount );
+  }
 }
 
 void CCharacter::setActiveGUI( CInterface *GUI_ )

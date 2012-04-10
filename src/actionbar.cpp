@@ -15,28 +15,28 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "actionbar.h"
-#include "character.h"
-#include "player.h"
-#include "drawinghelpers.h"
-#include "timeconverterhelper.h"
-#include "spell.h"
+#include "actionbar.hpp"
+#include "character.hpp"
+#include "player.hpp"
+#include "drawinghelpers.hpp"
+#include "timeconverterhelper.hpp"
+#include "spell.hpp"
 #include <memory>
 #include <cassert>
-#include "fontcache.h"
-#include "globals.h"
+#include "fontcache.hpp"
+#include "globals.hpp"
 
 extern std::auto_ptr<Spellbook> spellbook;
 extern int mouseX, mouseY, world_x, world_y;
 
 ActionBar::ActionBar( Player* player_ )
-  :  player( player_ ),
-     posY ( 13 ),
-     width ( 630 ),
-     height ( 49 ),
-     spellQueue( NULL ),
-     preparingAoESpell( false ),
-     cursorRadius( 0 )
+  : player( player_ ),
+    posY ( 13 ),
+    width ( 630 ),
+    height ( 49 ),
+    spellQueue( NULL ),
+    preparingAoESpell( false ),
+    cursorRadius( 0 )
 {
   shortcutFont = NULL;
   cooldownFont = NULL;

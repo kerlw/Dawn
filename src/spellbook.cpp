@@ -1,4 +1,4 @@
-/* Copyright (C) 2009,2010,2011  Dawn - 2D roleplaying game
+/* Copyright (C) 2009,2010,2011,2012  Dawn - 2D roleplaying game
 
    This file is a part of the dawn-rpg project <https://github.com/frusen/Dawn>.
 
@@ -15,16 +15,15 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "spellbook.h"
-#include "drawinghelpers.h"
-#include "character.h"
-#include "player.h"
-#include "globals.h"
-
+#include "spellbook.hpp"
+#include "drawinghelpers.hpp"
+#include "character.hpp"
+#include "player.hpp"
+#include "globals.hpp"
 #include <cassert>
 #include <memory>
-#include "fontcache.h"
-#include "framesbase.h"
+#include "fontcache.hpp"
+#include "framesbase.hpp"
 
 void sSpellSlot::initFont()
 {

@@ -15,10 +15,10 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "framesbase.h"
-#include "configuration.h"
+#include "framesbase.hpp"
+#include "configuration.hpp"
 #include <vector>
-#include "drawinghelpers.h"
+#include "drawinghelpers.hpp"
 
 extern std::vector <FramesBase*> activeFrames;
 
@@ -52,7 +52,7 @@ FramesBase::FramesBase( int16_t posX_, int16_t posY_, uint16_t frameWidth_, uint
   }
 }
 
-FramesBase::FramesBase( int16_t posX_, int16_t posY_, uint16_t frameWidth_, uint16_t frameHeight_, int16_t frameOffsetX_, int16_t frameOffsetY_, char* name_ )
+FramesBase::FramesBase( int16_t posX_, int16_t posY_, uint16_t frameWidth_, uint16_t frameHeight_, int16_t frameOffsetX_, int16_t frameOffsetY_, std::string name_ )
   : posX( posX_ ),
     posY( posY_ ),
     frameWidth( frameWidth_ ),
@@ -134,28 +134,28 @@ bool FramesBase::isMovingFrame() const
 
 void FramesBase::draw( int mouseX, int mouseY )
 {
-	if( childFrames.size() > 0 )
-	{
-		glTranslatef( posX, posY, 0.0f );
+  if ( childFrames.size() > 0 )
+  {
+    glTranslatef( posX, posY, 0.0f );
 
-		for( size_t curChildNr=0; curChildNr<childFrames.size(); ++curChildNr )
-		{
-			childFrames[ curChildNr ]->draw( mouseX-posX, mouseY-posY );
-		}
+    for ( size_t curChildNr=0; curChildNr<childFrames.size(); ++curChildNr )
+    {
+      childFrames[ curChildNr ]->draw( mouseX-posX, mouseY-posY );
+    }
 
-		glTranslatef( -posX, -posY, 0.0f );
-	}
+    glTranslatef( -posX, -posY, 0.0f );
+  }
 }
 
 void FramesBase::clicked( int mouseX, int mouseY, uint8_t mouseState )
 {
-	//bool clickHandled = false;
-	for ( size_t curChildNr=0; curChildNr<childFrames.size(); ++curChildNr )
-	{
-		// clickHandled |= childControls[ curChildNr ]->click( mouseX-relPosX, mouseY-relPosY, mouseState );
-		childFrames[ curChildNr ]->clicked( mouseX-posX, mouseY-posY, mouseState );
-	}
-	//return clickHandled;
+  //bool clickHandled = false;
+  for ( size_t curChildNr=0; curChildNr<childFrames.size(); ++curChildNr )
+  {
+    // clickHandled |= childControls[ curChildNr ]->click( mouseX-relPosX, mouseY-relPosY, mouseState );
+    childFrames[ curChildNr ]->clicked( mouseX-posX, mouseY-posY, mouseState );
+  }
+  //return clickHandled;
 }
 
 bool FramesBase::isMouseOnTitlebar( int mouseX, int mouseY ) const
@@ -305,7 +305,7 @@ int FramesBase::getHeight() const
   return frameHeight;
 }
 
-char* FramesBase::getName() const
+std::string FramesBase::getName() const
 {
   return name;
 }

@@ -15,16 +15,16 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "shop.h"
+#include "shop.hpp"
 #include <sstream>
-#include "player.h"
+#include "player.hpp"
 #include <cassert>
 #include <memory>
-#include "drawinghelpers.h"
-#include "framesbase.h"
-#include "inventoryscreen.h"
-#include "configuration.h"
-#include "soundengine.h"
+#include "drawinghelpers.hpp"
+#include "framesbase.hpp"
+#include "inventoryscreen.hpp"
+#include "configuration.hpp"
+#include "soundengine.hpp"
 
 extern std::auto_ptr<InventoryScreen> inventoryScreen;
 extern std::auto_ptr<Shop> shopWindow;

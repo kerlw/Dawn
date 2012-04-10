@@ -15,8 +15,8 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "item.h"
-#include "spell.h"
+#include "item.hpp"
+#include "spell.hpp"
 #include <memory>
 #include <cassert>
 

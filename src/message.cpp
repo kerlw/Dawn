@@ -18,8 +18,8 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-#include "message.h"
-#include "fontcache.h"
+#include "message.hpp"
+#include "fontcache.hpp"
 
 CMessage::CMessage()
 {

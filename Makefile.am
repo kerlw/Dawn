@@ -18,123 +18,123 @@ dawndatadir = $(bindir)/data
 
 
 dawn_rpg_SOURCES = src/a_star.cpp \
-	src/a_star.h \
+	src/a_star.hpp \
 	src/actionbar.cpp \
-	src/actionbar.h \
+	src/actionbar.hpp \
 	src/buffwindow.cpp \
-	src/buffwindow.h \
+	src/buffwindow.hpp \
 	src/callindirection.cpp \
-	src/callindirection.h \
+	src/callindirection.hpp \
 	src/camerafocushandler.cpp \
-	src/camerafocushandler.h \
+	src/camerafocushandler.hpp \
 	src/character.cpp \
-	src/character.h \
-	src/direction.h \
-	src/drawinghelpers.h \
+	src/character.hpp \
+	src/direction.hpp \
+	src/drawinghelpers.hpp \
 	src/editor.cpp \
-	src/editor.h \
+	src/editor.hpp \
 	src/characterinfoscreen.cpp \
-	src/characterinfoscreen.h \
+	src/characterinfoscreen.hpp \
 	src/interface.cpp \
-	src/interface.h \
+	src/interface.hpp \
 	src/luafunctions.cpp \
-	src/luafunctions.h \
+	src/luafunctions.hpp \
 	src/luainterfacegenerated.cpp \
-	src/luainterfacegenerated.h \
-	src/luainterface.h \
-	src/magic.h \
+	src/luainterfacegenerated.hpp \
+	src/luainterface.hpp \
+	src/magic.hpp \
 	src/magic.cpp \
 	src/message.cpp \
-	src/message.h \
+	src/message.hpp \
 	src/npc.cpp \
-	src/npc.h \
+	src/npc.hpp \
 	src/commonsounds.cpp \
-	src/commonsounds.h \
-	src/configurableframe.h \
+	src/commonsounds.hpp \
+	src/configurableframe.hpp \
 	src/configurableframe.cpp \
-	src/configuredframes.h \
+	src/configuredframes.hpp \
 	src/configuredframes.cpp \
 	src/configuration.cpp \
-	src/configuration.h \
-	src/controlelement.h \
+	src/configuration.hpp \
+	src/controlelement.hpp \
 	src/controlelement.cpp \
 	src/spell.cpp \
-	src/spell.h \
+	src/spell.hpp \
 	src/texture.cpp \
-	src/texture.h \
+	src/texture.hpp \
 	src/zone.cpp \
-	src/zone.h \
-	src/dawnstate.h \
+	src/zone.hpp \
+	src/dawnstate.hpp \
 	src/dawnstate.cpp \
 	src/debug.cpp \
-	src/debug.h \
+	src/debug.hpp \
 	src/elements.cpp \
-	src/elements.h \
-	src/frames.h \
+	src/elements.hpp \
+	src/frames.hpp \
 	src/frames.cpp \
 	src/framesbase.cpp \
-	src/framesbase.h \
+	src/framesbase.hpp \
 	src/fontcache.cpp \
-	src/fontcache.h \
-	src/gameloophandler.h \
+	src/fontcache.hpp \
+	src/gameloophandler.hpp \
 	src/gameloophandler.cpp \
 	src/GLFT_Font.cpp \
-	src/GLFT_Font.h \
+	src/GLFT_Font.hpp \
 	src/globals.cpp \
-	src/globals.h \
+	src/globals.hpp \
 	src/groundloot.cpp \
-	src/groundloot.h \
+	src/groundloot.hpp \
 	src/interactionpoint.cpp \
-	src/interactionpoint.h \
+	src/interactionpoint.hpp \
 	src/interactionregion.cpp \
-	src/interactionregion.h \
+	src/interactionregion.hpp \
 	src/inventory.cpp \
-	src/inventory.h \
+	src/inventory.hpp \
 	src/inventoryscreen.cpp \
-	src/inventoryscreen.h \
+	src/inventoryscreen.hpp \
 	src/item.cpp \
-	src/item.h \
-	src/loadingmanager.h \
+	src/item.hpp \
+	src/loadingmanager.hpp \
 	src/loadingscreen.cpp \
-	src/loadingscreen.h \
+	src/loadingscreen.hpp \
 	src/logwindow.cpp \
-	src/logwindow.h \
+	src/logwindow.hpp \
 	src/main.cpp \
 	src/musiccache.cpp \
-	src/musiccache.h \
+	src/musiccache.hpp \
 	src/optionswindow.cpp \
-	src/optionswindow.h \
+	src/optionswindow.hpp \
 	src/player.cpp \
-	src/player.h \
+	src/player.hpp \
 	src/quest.cpp \
-	src/quest.h \
+	src/quest.hpp \
 	src/questwindow.cpp \
-	src/questwindow.h \
+	src/questwindow.hpp \
 	src/random.cpp \
-	src/random.h \
+	src/random.hpp \
 	src/resolution.cpp \
-	src/resolution.h \
+	src/resolution.hpp \
 	src/shop.cpp \
-	src/shop.h \
+	src/shop.hpp \
 	src/soundengine.cpp \
 	src/soundengine.h \
 	src/spellbook.cpp \
-	src/spellbook.h \
-	src/stats.h \
+	src/spellbook.hpp \
+	src/stats.hpp \
 	src/statssystem.cpp \
-	src/statssystem.h \
+	src/statssystem.hpp \
 	src/testinterface.cpp \
-	src/testinterface.h \
-	src/textureframe.h \
+	src/testinterface.hpp \
+	src/textureframe.hpp \
 	src/textwindow.cpp \
-	src/textwindow.h \
+	src/textwindow.hpp \
 	src/tileset.cpp \
-	src/tileset.h \
-	src/timeconverterhelper.h \
+	src/tileset.hpp \
+	src/timeconverterhelper.hpp \
 	src/tooltip.cpp \
-	src/tooltip.h \
+	src/tooltip.hpp \
 	src/utils.cpp \
-	src/utils.h \
+	src/utils.hpp \
 	src/GLee/GLee.cpp \
 	src/GLee/GLee.h \
 	src/pnglite/pnglite.c \

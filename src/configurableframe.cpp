@@ -15,11 +15,10 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "configurableframe.h"
-
-#include "drawinghelpers.h"
-#include "frames.h"
-#include "configuration.h"
+#include "configurableframe.hpp"
+#include "drawinghelpers.hpp"
+#include "frames.hpp"
+#include "configuration.hpp"
 
 #include <iostream>
 

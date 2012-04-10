@@ -5,7 +5,7 @@ local thePlayer = DawnInterface.getPlayer();
 -- items to give to our warriors
 if ( thePlayer:getClass() == CharacterClass.Warrior ) then
   DawnInterface.giveItemToPlayer( itemDatabase["axeofanguish"] );
-  DawnInterface.giveItemToPlayer( itemDatabase["bladeofstrength"] );
+  DawnInterface.giveItemToPlayer( itemDatabase["swordofkhazom"] );
 end
 
 -- items to give to our rangers
@@ -20,7 +20,6 @@ if ( thePlayer:getClass() == CharacterClass.Liche ) then
   DawnInterface.giveItemToPlayer( itemDatabase["daggerofflowingthought"] );
 end
 
-DawnInterface.giveItemToPlayer( itemDatabase["swordofkhazom"] );
 DawnInterface.giveItemToPlayer( itemDatabase["eyeoflicor"] );
 DawnInterface.giveItemToPlayer( itemDatabase["gnollshield"] );
 DawnInterface.giveItemToPlayer( itemDatabase["gutteraxe"] );

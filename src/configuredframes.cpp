@@ -15,15 +15,14 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "configuredframes.h"
-
-#include "controlelement.h"
-#include "configuration.h"
-#include "fontcache.h"
-#include "player.h"
-#include "globals.h"
-#include "resolution.h"
-#include "testinterface.h"
+#include "configuredframes.hpp"
+#include "controlelement.hpp"
+#include "configuration.hpp"
+#include "fontcache.hpp"
+#include "player.hpp"
+#include "globals.hpp"
+#include "resolution.hpp"
+#include "testinterface.hpp"
 #include "SDL/SDL.h"
 #include <sstream>
 

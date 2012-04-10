@@ -15,11 +15,11 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "quest.h"
-#include "zone.h"
-#include "globals.h"
-#include "shop.h"
-#include "luainterface.h"
+#include "quest.hpp"
+#include "zone.hpp"
+#include "globals.hpp"
+#include "shop.hpp"
+#include "luainterface.hpp"
 
 Quest::Quest( std::string name, std::string description, QuestWindow* questHandler )
   : name( name ),

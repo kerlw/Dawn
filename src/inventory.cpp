@@ -15,13 +15,11 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "inventory.h"
-
-#include "item.h"
-#include "character.h"
-#include "player.h"
-#include "globals.h"
-
+#include "inventory.hpp"
+#include "item.hpp"
+#include "character.hpp"
+#include "player.hpp"
+#include "globals.hpp"
 #include <cassert>
 
 InventoryItem::InventoryItem( Item* item,

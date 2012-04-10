@@ -1,34 +1,32 @@
-/**
-    Copyright (C) 2009,2010,2011  Dawn - 2D roleplaying game
+/* Copyright (C) 2009,2010,2011,2012  Dawn - 2D roleplaying game
 
-    This file is a part of the dawn-rpg project <https://github.com/frusen/Dawn>.
+   This file is a part of the dawn-rpg project <https://github.com/frusen/Dawn>.
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+   This program is free software: you can redistribute it and/or modify
+   it under the terms of the GNU General Public License as published by
+   the Free Software Foundation, either version 3 of the License, or
+   (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+   This program is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+   GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>. **/
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "player.h"
-#include "inventory.h"
-#include "groundloot.h"
-#include "statssystem.h"
-#include "zone.h"
-#include "globals.h"
-#include "soundengine.h"
-
+#include "player.hpp"
+#include "inventory.hpp"
+#include "groundloot.hpp"
+#include "statssystem.hpp"
+#include "zone.hpp"
+#include "globals.hpp"
+#include "soundengine.hpp"
 #include <limits>
 #include <cassert>
 #include <memory>
 
-const uint16_t NULLABLE_ATTRIBUTE_MIN = 0;
+const uint16_t NULLABLE_ATTRIBUTE_MIN     = 0;
 const uint16_t NON_NULLABLE_ATTRIBUTE_MIN = 1;
 
 namespace DawnInterface
@@ -151,55 +149,55 @@ Direction Player::GetDirection()
 
 Inventory* Player::getInventory()
 {
-	return &inventory;
+  return &inventory;
 }
 
 void Player::clearInventory()
 {
-	inventory.clear();
+  inventory.clear();
 }
 
 void Player::Move()
 {
-	int oldX = getXPos();
-	int oldY = getYPos();
+  int oldX = getXPos();
+  int oldY = getYPos();
 
-	CCharacter::MoveSpecific( movementSpeed );
+  CCharacter::MoveSpecific( movementSpeed );
 
-	dx = getXPos()-oldX;
-	dy = getYPos()-oldY;
+  dx = getXPos()-oldX;
+  dy = getYPos()-oldY;
 
-	// if the character has moved, enable walking sound
-	if( oldX != getXPos() || oldY != getYPos() )
-	{
-		SoundEngine::useWalkingSound( true );
-	}
-	else
-	{
-		SoundEngine::useWalkingSound( false );
-	}
+  /* If the character has moved, enable walking sound. */
+  if( oldX != getXPos() || oldY != getYPos() )
+  {
+    SoundEngine::useWalkingSound( true );
+  }
+  else
+  {
+    SoundEngine::useWalkingSound( false );
+  }
 }
 
 void Player::Die()
 {
-	alive = false;
+  alive = false;
 }
 
 bool Player::isPlayer() const
 {
-	return true;
+  return true;
 }
 
 bool Player::canWearArmorType( Item* item ) const
 {
-	if( ArmorType::getHighestArmorTypeByClass( getClass() ) < item->getArmorType() )
-	{
-		return false;
-	}
-	return true;
+  if ( ArmorType::getHighestArmorTypeByClass( getClass() ) < item->getArmorType() )
+  {
+    return false;
+  }
+  return true;
 }
 
-/// helperfunctions for items.
+/* Helperfunctions for items. */
 static int16_t getItemStrengthHelper( Item* item ) { return item->getStats( StatsType::Strength ); }
 static int16_t getItemDexterityHelper( Item* item ) { return item->getStats( StatsType::Dexterity ); }
 static int16_t getItemVitalityHelper( Item* item ) { return item->getStats( StatsType::Vitality ); }
@@ -551,5 +549,5 @@ std::string Player::getSaveText() const
 
 void Player::setMovementSpeed( uint8_t n )
 {
-	movementSpeed = n;
+  movementSpeed = n;
 }

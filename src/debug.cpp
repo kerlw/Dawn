@@ -15,10 +15,10 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "debug.h"
-#include "configuration.h"
+#include "debug.hpp"
+#include "configuration.hpp"
 
-#include <SDL/SDL.h> // just for SDL_GetTicks()
+#include <SDL/SDL.h>
 #include <cassert>
 
 #ifndef WIN32

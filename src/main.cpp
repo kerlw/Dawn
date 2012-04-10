@@ -39,30 +39,30 @@
 #include "GLFT_Font.h"
 #include "pnglite/pnglite.h"
 
-#include "zone.h"
-#include "interface.h"
-#include "editor.h"
-#include "inventoryscreen.h"
-#include "utils.h"
-#include "actionbar.h"
-#include "buffwindow.h"
-#include "shop.h"
-#include "debug.h"
-#include "interactionpoint.h"
-#include "textwindow.h"
-#include "questwindow.h"
-#include "optionswindow.h"
-#include "loadingscreen.h"
-#include "globals.h"
-#include "logwindow.h"
-#include "soundengine.h"
-#include "configuration.h"
-#include "frames.h"
-#include "gameloophandler.h"
-#include "configuredframes.h"
-#include "resolution.h"
-#include "testinterface.h"
-#include "loadingmanager.h"
+#include "zone.hpp"
+#include "interface.hpp"
+#include "editor.hpp"
+#include "inventoryscreen.hpp"
+#include "utils.hpp"
+#include "actionbar.hpp"
+#include "buffwindow.hpp"
+#include "shop.hpp"
+#include "debug.hpp"
+#include "interactionpoint.hpp"
+#include "textwindow.hpp"
+#include "questwindow.hpp"
+#include "optionswindow.hpp"
+#include "loadingscreen.hpp"
+#include "globals.hpp"
+#include "logwindow.hpp"
+#include "soundengine.hpp"
+#include "configuration.hpp"
+#include "frames.hpp"
+#include "gameloophandler.hpp"
+#include "configuredframes.hpp"
+#include "resolution.hpp"
+#include "testinterface.hpp"
+#include "loadingmanager.hpp"
 
 #ifdef _WIN32
 #define SDLK_PRINT 316 // this is because Windows printscreen doesn't match the SDL predefined keycode.
@@ -547,7 +547,7 @@ void game_loop()
   }
 }
 
-int main(int argc, char* argv[])
+int main( int argc, char* argv[] )
 {
   // init random number generator
   RNG::initRNG( time( 0 ) );
@@ -555,7 +555,7 @@ int main(int argc, char* argv[])
   // load settings
   LuaFunctions::executeLuaFile( "settings.lua" );
 
-  if( dawn_init( argc, argv ) )
+  if ( dawn_init( argc, argv ) )
   {
     std::auto_ptr<GameScreenHandler> gameLoopHandler( new GameScreenHandler() );
     std::auto_ptr<LoadingScreenHandler> loadingScreenHandler( new LoadingScreenHandler( loadingScreen.get(), new DawnInitObject() ) );

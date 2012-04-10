@@ -25,12 +25,11 @@ itemDatabase = {};
 
 itemDatabase["axeofanguish"]=DawnInterface.createNewItem( "Axe of Anguish", 2, 3, "data/items/Axe2.tga", ItemQuality.ENHANCED, EquipPosition.MAIN_HAND, ItemType.WEAPON, ArmorType.NO_ARMOR, WeaponType.TWOHAND_AXE );
 curItem = itemDatabase["axeofanguish"];
-curItem:setStats( StatsType.Strength, 2 );
-curItem:setStats( StatsType.HitModifier, 5 );
-curItem:setMinDamage( 7 );
-curItem:setMaxDamage( 15 );
+curItem:setStats( StatsType.Strength, 3 );
+curItem:setMinDamage( 20 );
+curItem:setMaxDamage( 35 );
 curItem:setRequiredLevel( 1 );
-curItem:setStats( StatsType.MeleeCritical, 25 );
+curItem:setStats( StatsType.MeleeCritical, 30 );
 curItem:setValue( 56818 );
 
 
@@ -45,9 +44,9 @@ curItem:setValue( 80 );
 itemDatabase["swordofkhazom"]=DawnInterface.createNewItem( "Sword of Khazom", 1, 3, "data/items/Sword1.tga", ItemQuality.LORE, EquipPosition.MAIN_HAND, ItemType.WEAPON, ArmorType.NO_ARMOR, WeaponType.ONEHAND_SWORD );
 curItem = itemDatabase["swordofkhazom"];
 curItem:setStats( StatsType.Dexterity, 5 );
-curItem:setStats( StatsType.Strength, 10 );
 curItem:setStats( StatsType.Health, 75 );
-curItem:setMinDamage( 10 );
+curItem:setStats( StatsType.HitModifier, 15 );
+curItem:setMinDamage( 15 );
 curItem:setMaxDamage( 25 );
 curItem:setDescription( "Once wielded by Irk the Unholy." );
 curItem:setResistElementModifierPoints( ElementType.Dark, 15 );

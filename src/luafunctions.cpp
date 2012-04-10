@@ -15,16 +15,15 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "luainterface.h"
-
+#include "luainterface.hpp"
 #include "lua.hpp"
 
 #include <cstdlib>
 #include <iostream>
 
 #include <tolua++.h>
-#include "luainterfacegenerated.h"
-#include "debug.h"
+#include "luainterfacegenerated.hpp"
+#include "debug.hpp"
 
 namespace LuaFunctions
 {

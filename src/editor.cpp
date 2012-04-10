@@ -15,15 +15,15 @@
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
-#include "editor.h"
-#include "zone.h"
+#include "editor.hpp"
+#include "zone.hpp"
 #include "GLFT_Font.h"
 
-#include "drawinghelpers.h"
-#include "fontcache.h"
-#include "globals.h"
-#include "tileset.h"
-#include "interactionregion.h"
+#include "drawinghelpers.hpp"
+#include "fontcache.hpp"
+#include "globals.hpp"
+#include "tileset.hpp"
+#include "interactionregion.hpp"
 
 #include <iostream>
 
