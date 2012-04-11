@@ -1,4 +1,18 @@
+<<<<<<< HEAD
+EditorInterface.addCollisionRect( 1661, 1161, 250, 343 );
+EditorInterface.addCollisionRect( 2447, 792, 70, 70 );
+EditorInterface.addCollisionRect( 1631, 688, 26, 55 );
+EditorInterface.addCollisionRect( 1690, 187, 474, 132 );
+EditorInterface.addCollisionRect( 1590, 227, 100, 100 );
+EditorInterface.addCollisionRect( 1309, 222, 282, 73 );
 EditorInterface.addCollisionRect( 1180, 128, 191, 76 );
+EditorInterface.addCollisionRect( 1542, 581, 41, 108 );
+EditorInterface.addCollisionRect( 1472, 478, 33, 86 );
+EditorInterface.addCollisionRect( 1329, 505, 39, 94 );
+EditorInterface.addCollisionRect( 1258, 435, 31, 81 );
+=======
+EditorInterface.addCollisionRect( 1180, 128, 191, 76 );
+>>>>>>> 8872d8ed6b69dedaf4194ae2e0875575b5e006bc
 EditorInterface.addCollisionRect( 407, 1296, 233, 76 );
 EditorInterface.addCollisionRect( 237, 1414, 204, 73 );
 EditorInterface.addCollisionRect( 407, 1334, 34, 100 );
@@ -117,15 +131,24 @@ EditorInterface.addCollisionRect( -621, 1311, 16, 13 );
 EditorInterface.addCollisionRect( -616, 1524, 21, 7 );
 EditorInterface.addCollisionRect( -444, 1524, 28, 11 );
 EditorInterface.addCollisionRect( -437, 1320, 16, 11 );
-EditorInterface.addCollisionRect( -150, 935, 109, 64 );
+EditorInterface.addCollisionRect( -124, 935, 59, 64 );
 EditorInterface.addCollisionRect( -249, 952, 109, 64 );
 EditorInterface.addCollisionRect( -393, 841, 109, 64 );
 EditorInterface.addCollisionRect( -500, 940, 109, 64 );
 EditorInterface.addCollisionRect( -417, 974, 109, 64 );
 EditorInterface.addCollisionRect( -362, 928, 109, 64 );
-EditorInterface.addCollisionRect( -56, 882, 109, 64 );
+EditorInterface.addCollisionRect( -29, 882, 55, 64 );
 EditorInterface.addCollisionRect( -2, 1003, 109, 64 );
 EditorInterface.addCollisionRect( -28, 1031, 109, 64 );
+<<<<<<< HEAD
+EditorInterface.addCollisionRect( 111, 872, 45, 64 );
+EditorInterface.addCollisionRect( 212, 865, 45, 64 );
+EditorInterface.addCollisionRect( 246, 710, 62, 64 );
+EditorInterface.addCollisionRect( 231, 610, 66, 64 );
+EditorInterface.addCollisionRect( 95, 470, 61, 64 );
+EditorInterface.addCollisionRect( 35, 411, 45, 64 );
+EditorInterface.addCollisionRect( 223, 480, 59, 64 );
+=======
 EditorInterface.addCollisionRect( 77, 872, 109, 64 );
 EditorInterface.addCollisionRect( 175, 865, 109, 64 );
 EditorInterface.addCollisionRect( 221, 710, 109, 64 );
@@ -133,6 +156,7 @@ EditorInterface.addCollisionRect( 231, 610, 62, 64 );
 EditorInterface.addCollisionRect( 91, 470, 55, 64 );
 EditorInterface.addCollisionRect( 29, 411, 58, 64 );
 EditorInterface.addCollisionRect( 230, 490, 45, 40 );
+>>>>>>> 8872d8ed6b69dedaf4194ae2e0875575b5e006bc
 EditorInterface.addCollisionRect( 1068, 30, 109, 64 );
 EditorInterface.addCollisionRect( 910, 150, 15, 14 );
 EditorInterface.addCollisionRect( 742, 59, 109, 64 );
@@ -140,6 +164,43 @@ EditorInterface.addCollisionRect( 606, 28, 42, 64 );
 EditorInterface.addCollisionRect( 644, 61, 109, 64 );
 EditorInterface.addCollisionRect( 480, 13, 35, 56 );
 EditorInterface.addCollisionRect( 1168, 61, 109, 64 );
+<<<<<<< HEAD
+EditorInterface.addCollisionRect( 908, 376, 48, 64 );
+EditorInterface.addCollisionRect( 893, 497, 34, 64 );
+EditorInterface.addCollisionRect( 800, 566, 37, 64 );
+EditorInterface.addCollisionRect( -92, 284, 35, 64 );
+EditorInterface.addCollisionRect( -171, -253, 68, 87 );
+EditorInterface.addCollisionRect( -100, -171, 109, 64 );
+EditorInterface.addCollisionRect( 57, -154, 109, 64 );
+EditorInterface.addCollisionRect( 233, -83, 109, 64 );
+EditorInterface.addCollisionRect( 287, -15, 109, 64 );
+EditorInterface.addCollisionRect( 341, 42, 109, 64 );
+EditorInterface.addCollisionRect( 157, -34, 109, 64 );
+EditorInterface.addCollisionRect( 403, -105, 10, 10 );
+EditorInterface.addCollisionRect( 353, -188, 10, 10 );
+EditorInterface.addCollisionRect( 419, -186, 15, 15 );
+EditorInterface.addCollisionRect( 142, 364, 15, 27 );
+EditorInterface.addCollisionRect( 207, 408, 15, 30 );
+EditorInterface.addCollisionRect( 268, 402, 10, 10 );
+EditorInterface.addCollisionRect( 227, 359, 15, 17 );
+EditorInterface.addCollisionRect( 1043, 683, 28, 83 );
+EditorInterface.addCollisionRect( 1009, 616, 35, 67 );
+EditorInterface.addCollisionRect( 1119, 822, 26, 64 );
+EditorInterface.addCollisionRect( 1143, 885, 20, 83 );
+EditorInterface.addCollisionRect( 1180, 968, 25, 74 );
+EditorInterface.addCollisionRect( 1212, 1056, 27, 76 );
+EditorInterface.addCollisionRect( 3608, 625, 74, 68 );
+EditorInterface.addCollisionRect( 3871, 742, 68, 87 );
+EditorInterface.addCollisionRect( 3923, 638, 68, 87 );
+EditorInterface.addCollisionRect( 3891, 514, 68, 87 );
+EditorInterface.addCollisionRect( 3879, 854, 68, 87 );
+EditorInterface.addCollisionRect( 3776, 884, 68, 87 );
+EditorInterface.addCollisionRect( 3840, 375, 68, 87 );
+EditorInterface.addCollisionRect( 3760, 304, 109, 64 );
+EditorInterface.addCollisionRect( 3648, 304, 109, 64 );
+EditorInterface.addCollisionRect( 3527, 349, 109, 64 );
+EditorInterface.addCollisionRect( 3459, 415, 109, 64 );
+=======
 EditorInterface.addCollisionRect( 907, 380, 49, 55 );
 EditorInterface.addCollisionRect( 883, 492, 62, 64 );
 EditorInterface.addCollisionRect( 794, 572, 54, 64 );
@@ -176,6 +237,7 @@ EditorInterface.addCollisionRect( 3793, 298, 46, 71 );
 EditorInterface.addCollisionRect( 3675, 304, 63, 64 );
 EditorInterface.addCollisionRect( 3546, 349, 71, 64 );
 EditorInterface.addCollisionRect( 3491, 415, 58, 56 );
+>>>>>>> 8872d8ed6b69dedaf4194ae2e0875575b5e006bc
 EditorInterface.addCollisionRect( 3364, 321, 109, 64 );
 EditorInterface.addCollisionRect( 3217, 689, 49, 68 );
 EditorInterface.addCollisionRect( 3249, 724, 48, 87 );
@@ -574,6 +636,16 @@ EditorInterface.addCollisionRect( 1189, 222, 8, 7 );
 EditorInterface.addCollisionRect( -467, 181, 59, 16 );
 EditorInterface.addCollisionRect( -449, 200, 25, 15 );
 EditorInterface.addCollisionRect( -427, 307, 76, 54 );
+<<<<<<< HEAD
+EditorInterface.addCollisionRect( -499, 378, 39, 20 );
+EditorInterface.addCollisionRect( -298, 322, 75, 42 );
+EditorInterface.addCollisionRect( -607, -135, 15, 16 );
+EditorInterface.addCollisionRect( 1131, 1099, 25, 81 );
+EditorInterface.addCollisionRect( 1197, 1165, 19, 78 );
+EditorInterface.addCollisionRect( 776, 409, 43, 100 );
+EditorInterface.addCollisionRect( 1644, 750, 27, 53 );
+EditorInterface.addCollisionRect( 1656, 855, 23, 69 );
+=======
 EditorInterface.addCollisionRect( -504, 340, 30, 99 );
 EditorInterface.addCollisionRect( -298, 338, 66, 42 );
 EditorInterface.addCollisionRect( 769, 471, 55, 36 );
@@ -656,3 +728,4 @@ EditorInterface.addCollisionRect( 604, 502, 100, 100 );
 EditorInterface.addCollisionRect( -1547, 672, 286, 57 );
 EditorInterface.addCollisionRect( -1540, 1018, 265, 40 );
 EditorInterface.addCollisionRect( -1514, 1056, 209, 33 );
+>>>>>>> 8872d8ed6b69dedaf4194ae2e0875575b5e006bc
