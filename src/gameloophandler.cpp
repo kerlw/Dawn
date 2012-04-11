@@ -553,7 +553,7 @@ void GameScreenHandler::updateScene()
   Globals::getCurrentZone()->cleanupInteractionList();
   Globals::getCurrentZone()->cleanupInteractionRegionList();
 
-  // something more like key handling (should it go to the handleEvents?)
+  /*// something more like key handling (should it go to the handleEvents?)
   if( keys[SDLK_k] ) // kill all NPCs in the zone. testing purposes.
   {
     std::vector<CNPC*> zoneNPCs = Globals::getCurrentZone()->getNPCs();
@@ -564,7 +564,7 @@ void GameScreenHandler::updateScene()
 	zoneNPCs[x]->Die();
       }
     }
-  }
+    }*/
 
   if(lastEvent->key.keysym.sym == SDLK_PRINT && !KP_screenshot)
   {

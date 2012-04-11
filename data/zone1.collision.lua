@@ -554,7 +554,7 @@ EditorInterface.addCollisionRect( -342, 90, 91, 100 );
 EditorInterface.addCollisionRect( -180, 193, 89, 100 );
 EditorInterface.addCollisionRect( -15, -137, 57, 100 );
 EditorInterface.addCollisionRect( -720, -199, 100, 100 );
-EditorInterface.addCollisionRect( -1548, 628, 289, 97 );
+EditorInterface.addCollisionRect( -1548, 665, 289, 36 );
 EditorInterface.addCollisionRect( -1597, 698, 391, 345 );
 EditorInterface.addCollisionRect( -1571, 1017, 328, 78 );
 EditorInterface.addCollisionRect( 2008, -3253, 100, 100 );

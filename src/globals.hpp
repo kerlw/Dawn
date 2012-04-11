@@ -24,7 +24,7 @@
 #include <vector>
 #include <assert.h>
 
-// ideally this file should not add any include dependency on dawn files
+/* Ideally this file should not add any include dependency on dawn files. */
 class CZone;
 class Player;
 class CSpellActionBase;

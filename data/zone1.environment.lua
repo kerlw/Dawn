@@ -875,7 +875,7 @@ EditorInterface.addEnvironment( 991, 552, 0, MapData.DontSave.tree_tree2_tga );
 EditorInterface.addEnvironment( 213, 552, 0, MapData.DontSave.tree_tree1_tga );
 EditorInterface.addEnvironment( -1362, 551, 0, MapData.DontSave.village_village9_tga );
 EditorInterface.addEnvironment( 2841, 550, 0, MapData.DontSave.tree_tree1_tga );
-EditorInterface.addEnvironment( -1442, 550, 0, MapData.DontSave.village_village12_tga );
+EditorInterface.addEnvironment( -1442, 550, 0, MapData.DontSave.village_village11_tga );
 EditorInterface.addEnvironment( 1133, 546, 0, MapData.DontSave.tree_tree2_tga );
 EditorInterface.addEnvironment( 1530, 538, 0, MapData.DontSave.tree_tree2_tga );
 EditorInterface.addEnvironment( -60, 538, 0, MapData.DontSave.tree_tree1_tga );
