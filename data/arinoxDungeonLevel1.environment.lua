@@ -10,7 +10,7 @@ EditorInterface.addEnvironment( 970, 1955, 0, MapData.DontSave.houseinterior_ins
 EditorInterface.addEnvironment( 1116, 1915, 0, MapData.DontSave.houseinterior_insidewall5_tga );
 EditorInterface.addEnvironment( 970, 1915, 0, MapData.DontSave.houseinterior_insidewall7_tga );
 EditorInterface.addEnvironment( 3016, 1902, 0, MapData.DontSave.houseinterior_insidewall_door_tga );
-EditorInterface.adjustLastScale( 1.03, 1.02 );
+EditorInterface.adjustLastScale( 1.03,1.02 );
 EditorInterface.addEnvironment( 2144, 1875, 0, MapData.DontSave.houseinterior_insidewall5_tga );
 EditorInterface.addEnvironment( 2102, 1875, 0, MapData.DontSave.houseinterior_insidewall4_tga );
 EditorInterface.addEnvironment( 1967, 1875, 0, MapData.DontSave.houseinterior_insidewall_door_tga );
