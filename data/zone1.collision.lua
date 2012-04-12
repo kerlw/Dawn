@@ -778,3 +778,4 @@ EditorInterface.addCollisionRect( -2110, -40, 27, 32 );
 EditorInterface.addCollisionRect( -2092, -175, 15, 61 );
 EditorInterface.addCollisionRect( -2106, 105, 37, 37 );
 EditorInterface.addCollisionRect( 1258, 163, 20, 57 );
+EditorInterface.addCollisionRect( 741, 1691, 68, 80 );
