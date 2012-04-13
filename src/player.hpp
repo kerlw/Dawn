@@ -73,8 +73,8 @@ public:
   Inventory* getInventory();
   void clearInventory();
 
-  bool isSpellInscribedInSpellbook( CSpellActionBase *spell ) const;
-  bool canWearArmorType( Item *item ) const;
+  bool isSpellInscribedInSpellbook( CSpellActionBase* spell ) const;
+  bool canWearArmorType( Item* item ) const;
 
   std::string getSaveText() const;
 

@@ -200,22 +200,24 @@ void CNPC::Draw()
 
 void CNPC::Respawn()
 {
-	if (alive == false && do_respawn == true) {
-		respawn_thisframe = SDL_GetTicks();
-		if ((respawn_thisframe-respawn_lastframe) > (seconds_to_respawn * 1000)) {
-			setTarget( NULL );
-			alive = true;
-			chasingPlayer = false;
-			waypoints.clear();
-			x_pos = x_spawn_pos;
-			y_pos = y_spawn_pos;
-			respawn_thisframe = 0.0f;
-			respawn_lastframe = 0.0f;
-			setCurrentHealth( getModifiedMaxHealth() );
-			setCurrentMana( getModifiedMaxMana() );
-			Init( x_spawn_pos, y_spawn_pos );
-        }
-	}
+  if ( alive == false && do_respawn == true )
+  {
+    respawn_thisframe = SDL_GetTicks();
+    if ((respawn_thisframe-respawn_lastframe) > (seconds_to_respawn * 1000))
+    {
+      setTarget( NULL );
+      alive = true;
+      chasingPlayer = false;
+      waypoints.clear();
+      x_pos = x_spawn_pos;
+      y_pos = y_spawn_pos;
+      respawn_thisframe = 0.0f;
+      respawn_lastframe = 0.0f;
+      setCurrentHealth( getModifiedMaxHealth() );
+      setCurrentMana( getModifiedMaxMana() );
+      Init( x_spawn_pos, y_spawn_pos );
+    }
+  }
 }
 
 

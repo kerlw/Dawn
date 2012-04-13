@@ -18,7 +18,7 @@
 #ifndef CHARACTER_HPP
 #define CHARACTER_HPP
 
-#include "GLee/GLee.h" // OpenGL Easy Extention Library
+#include "GLee/GLee.h"
 #include <SDL/SDL.h>
 #include <cmath>
 #include <string>

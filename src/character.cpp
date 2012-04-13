@@ -41,7 +41,7 @@
 std::map< std::string, CCharacter* > allMobTypes;
 extern std::auto_ptr<QuestWindow> questWindow;
 
-// Dawn LUA Interface
+/* Dawn LUA Interface. */
 namespace DawnInterface
 {
   CCharacter* createNewMobType( std::string typeID )
@@ -795,30 +795,32 @@ void CCharacter::gainExperience( uint64_t addExp )
 
 uint64_t CCharacter::getExpNeededForLevel( uint8_t level ) const
 {
-	assert( level > 0 );
-	uint64_t result = (level*(level-1)* 50);
-	return result;
+  assert( level > 0 );
+  uint64_t result = (level*(level-1)* 50);
+  return result;
 }
 
 bool CCharacter::canRaiseLevel() const
 {
-	return ( experience >= getExpNeededForLevel( getLevel() + 1 ) && ( getExpNeededForLevel( getLevel() + 1 ) != getExpNeededForLevel( getLevel() ) ) );
+  return ( experience >= getExpNeededForLevel( getLevel() + 1 ) && ( getExpNeededForLevel( getLevel() + 1 ) != getExpNeededForLevel( getLevel() ) ) );
 }
 
 void CCharacter::raiseLevel()
 {
-	if ( canRaiseLevel() ) {
-		setMaxHealth( getMaxHealth() * 1.1 );
-		setStrength( getStrength() * 1.1 );
-		setLevel( getLevel() + 1 );
-		GLfloat yellow[] = { 1.0f, 1.0f, 0.0f };
-		if ( isPlayer() == true )
-		{
-			dynamic_cast<Player*>(this)->setTicketForItemTooltip();
-			dynamic_cast<Player*>(this)->setTicketForSpellTooltip();
-		}
-		DawnInterface::addTextToLogWindow( yellow, "You are now a level %d %s.", getLevel(), getClassName().c_str() );
-	}
+  if ( canRaiseLevel() )
+  {
+    setMaxHealth( getMaxHealth() * 1.1 );
+    setStrength( getStrength() * 1.1 );
+    setLevel( getLevel() + 1 );
+
+    GLfloat yellow[] = { 1.0f, 1.0f, 0.0f };
+    if ( isPlayer() == true )
+    {
+      dynamic_cast<Player*>(this)->setTicketForItemTooltip();
+      dynamic_cast<Player*>(this)->setTicketForSpellTooltip();
+    }
+    DawnInterface::addTextToLogWindow( yellow, "You are now a level %d %s.", getLevel(), getClassName().c_str() );
+  }
 }
 
 void CCharacter::setClass( CharacterClass::CharacterClass characterClass )
@@ -998,17 +1000,17 @@ CCharacter::~CCharacter()
 
 int CCharacter::getXPos() const
 {
-	return x_pos;
+  return x_pos;
 }
 
 int CCharacter::getYPos() const
 {
-	return y_pos;
+  return y_pos;
 }
 
 int CCharacter::getWidth() const
 {
-	return useBoundingBox ? boundingBoxW : texture[0]->getTexture( 1 ).width;
+  return useBoundingBox ? boundingBoxW : texture[0]->getTexture( 1 ).width;
 }
 
 int CCharacter::getHeight() const

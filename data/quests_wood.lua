@@ -64,7 +64,7 @@ function quest_playHideAndSeek.onActivateJohn()
   elseif( quest_playHideAndSeek.fulfilled and not quest_playHideAndSeek.rewardGot ) then
     local textWindow = DawnInterface.createTextWindow();
     textWindow:setPosition( PositionType.CENTER, 512, 382 );
-    textWindow:setText( "Thank you for looking after my brother. We will leave for home now. Take this ring for your effords." );
+    textWindow:setText( "Thank you for looking after my brother. We will leave for home now. Take this ring for your effords. You should see Rake Fleetwood. He's the shop keeper in Arinox which is just north of here. He will buy any item." );
     textWindow:setAutocloseTime( 5000 );
     quest_playHideAndSeek.rewardGot = true;
     DawnInterface.removeInteractionPoint( john );

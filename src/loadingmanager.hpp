@@ -491,6 +491,8 @@ public:
     }
 
     player->setMoveTexture( ActivityType::Walking, STOP, 0, std::string("").append( characterDataString ).append("walking s0000.tga" ) );
+
+    /* Set stats. */
     player->setBoundingBox( 18, 20, 64, 64 );
     player->setUseBoundingBox( true );
     player->Init(512,400);

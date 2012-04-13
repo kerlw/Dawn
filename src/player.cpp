@@ -51,7 +51,7 @@ namespace DawnInterface
 
   void giveExpToPlayer( uint16_t experience )
   {
-    Player *player = Globals::getPlayer();
+    Player* player = Globals::getPlayer();
     player->gainExperience( experience );
   }
 }
@@ -59,30 +59,30 @@ namespace DawnInterface
 Player::Player()
   : inventory( Inventory( 10, 4, this ) )
 {
-	setName("Enylyn");
-	movementSpeed = 1;
+  setName("Enylyn");
+  movementSpeed = 1;
 }
 
 void Player::Draw()
 {
-	CalculateStats();
-	cleanupActiveSpells();
-	cleanupCooldownSpells();
-	direction_texture = GetDirectionTexture();
-	ActivityType::ActivityType curActivity = getCurActivity();
-	if (alive == true)
-	{
-		int drawX = x_pos;
-		int drawY = y_pos;
-		if( getUseBoundingBox() )
-		{
-			drawX -= getBoundingBoxX();
-			drawY -= getBoundingBoxY();
-		}
+  CalculateStats();
+  cleanupActiveSpells();
+  cleanupCooldownSpells();
+  direction_texture = GetDirectionTexture();
+  ActivityType::ActivityType curActivity = getCurActivity();
+  if (alive == true)
+  {
+    int drawX = x_pos;
+    int drawY = y_pos;
+    if( getUseBoundingBox() )
+    {
+      drawX -= getBoundingBoxX();
+      drawY -= getBoundingBoxY();
+    }
 
-		float color[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    float color[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 
-		// if player is invisible we draw at 0.2 transparency.. if sneaking we draw at 0.5 and with darker colors (shade)
+    // if player is invisible we draw at 0.2 transparency.. if sneaking we draw at 0.5 and with darker colors (shade)
 		if( isSneaking() == true )
 		{
 		    color[0] = 0.7f;
@@ -100,51 +100,51 @@ void Player::Draw()
 
 Direction Player::GetDirection()
 {
-	keys = SDL_GetKeyState(NULL);
+  keys = SDL_GetKeyState(NULL);
 
-	if( keys[SDLK_UP] || keys[SDLK_w] )
-	{
-		if( keys[SDLK_LEFT] || keys[SDLK_a] )
-		{
-			return NW;
-		}
-		else if( keys[SDLK_RIGHT] || keys[SDLK_d] )
-		{
-			return NE;
-		}
-		else
-		{
-			return N;
-		}
-	}
+  if( keys[SDLK_UP] || keys[SDLK_w] )
+  {
+    if( keys[SDLK_LEFT] || keys[SDLK_a] )
+    {
+      return NW;
+    }
+    else if( keys[SDLK_RIGHT] || keys[SDLK_d] )
+    {
+      return NE;
+    }
+    else
+    {
+      return N;
+    }
+  }
 
-	if( keys[SDLK_DOWN] || keys[SDLK_s] )
-	{
-		if( keys[SDLK_LEFT] || keys[SDLK_a] )
-		{
-			return SW;
-		}
-		else if( keys[SDLK_RIGHT] || keys[SDLK_d] )
-		{
-			return SE;
-		}
-		else
-		{
-			return S;
-		}
-	}
+  if( keys[SDLK_DOWN] || keys[SDLK_s] )
+  {
+    if( keys[SDLK_LEFT] || keys[SDLK_a] )
+    {
+      return SW;
+    }
+    else if( keys[SDLK_RIGHT] || keys[SDLK_d] )
+    {
+      return SE;
+    }
+    else
+    {
+      return S;
+    }
+  }
 
-	if( keys[SDLK_LEFT] || keys[SDLK_a] )
-	{
-		return W;
-	}
+  if( keys[SDLK_LEFT] || keys[SDLK_a] )
+  {
+    return W;
+  }
 
-	if( keys[SDLK_RIGHT] || keys[SDLK_d] )
-	{
-		return E;
-	}
+  if( keys[SDLK_RIGHT] || keys[SDLK_d] )
+  {
+    return E;
+  }
 
-	return STOP;
+  return STOP;
 }
 
 Inventory* Player::getInventory()
@@ -194,6 +194,7 @@ bool Player::canWearArmorType( Item* item ) const
   {
     return false;
   }
+
   return true;
 }
 
@@ -352,7 +353,7 @@ uint16_t Player::getModifiedDamageModifierPoints() const
 
 uint16_t Player::getModifiedHitModifierPoints() const
 {
-	return getModifiedAttribute( inventory, this, getHitModifierPoints(), &getItemHitModifierPointsHelper, &getSpellHitModifierPointsHelper, NULLABLE_ATTRIBUTE_MIN ) + StatsSystem::getStatsSystem()->calculateHitModifierPoints( this );
+  return getModifiedAttribute( inventory, this, getHitModifierPoints(), &getItemHitModifierPointsHelper, &getSpellHitModifierPointsHelper, NULLABLE_ATTRIBUTE_MIN ) + StatsSystem::getStatsSystem()->calculateHitModifierPoints( this );
 }
 
 uint16_t Player::getModifiedEvadeModifierPoints() const
@@ -367,129 +368,129 @@ uint16_t Player::getModifiedParryModifierPoints() const
 
 uint16_t Player::getModifiedBlockModifierPoints() const
 {
-	return getModifiedAttribute( inventory, this, getBlockModifierPoints(), &getItemBlockModifierPointsHelper, &getSpellBlockModifierPointsHelper, NULLABLE_ATTRIBUTE_MIN ) + StatsSystem::getStatsSystem()->calculateBlockModifierPoints( this );
+  return getModifiedAttribute( inventory, this, getBlockModifierPoints(), &getItemBlockModifierPointsHelper, &getSpellBlockModifierPointsHelper, NULLABLE_ATTRIBUTE_MIN ) + StatsSystem::getStatsSystem()->calculateBlockModifierPoints( this );
 }
 
 uint16_t Player::getModifiedMeleeCriticalModifierPoints() const
 {
-	return getModifiedAttribute( inventory, this, getMeleeCriticalModifierPoints(), &getItemMeleeCriticalModifierPointsHelper, &getSpellMeleeCriticalModifierPointsHelper, NULLABLE_ATTRIBUTE_MIN ) + StatsSystem::getStatsSystem()->calculateMeleeCriticalModifierPoints( this );
+  return getModifiedAttribute( inventory, this, getMeleeCriticalModifierPoints(), &getItemMeleeCriticalModifierPointsHelper, &getSpellMeleeCriticalModifierPointsHelper, NULLABLE_ATTRIBUTE_MIN ) + StatsSystem::getStatsSystem()->calculateMeleeCriticalModifierPoints( this );
 }
 
 uint16_t Player::getModifiedResistElementModifierPoints( ElementType::ElementType elementType ) const
 {
-	return getModifiedAttribute( elementType, inventory, this, getResistElementModifierPoints( elementType ) + getResistAllModifierPoints(), &getItemResistElementModifierPointsHelper, &getSpellResistElementModifierPointsHelper, NULLABLE_ATTRIBUTE_MIN ) + StatsSystem::getStatsSystem()->calculateResistElementModifierPoints( elementType, this );
+  return getModifiedAttribute( elementType, inventory, this, getResistElementModifierPoints( elementType ) + getResistAllModifierPoints(), &getItemResistElementModifierPointsHelper, &getSpellResistElementModifierPointsHelper, NULLABLE_ATTRIBUTE_MIN ) + StatsSystem::getStatsSystem()->calculateResistElementModifierPoints( elementType, this );
 }
 
 uint16_t Player::getModifiedSpellEffectElementModifierPoints( ElementType::ElementType elementType ) const
 {
-	return getModifiedAttribute( elementType, inventory, this, getSpellEffectElementModifierPoints( elementType ) + getSpellEffectAllModifierPoints(), &getItemSpellEffectElementModifierPointsHelper, &getSpellSpellEffectElementModifierPointsHelper, NULLABLE_ATTRIBUTE_MIN ) + StatsSystem::getStatsSystem()->calculateSpellEffectElementModifierPoints( elementType, this );
+  return getModifiedAttribute( elementType, inventory, this, getSpellEffectElementModifierPoints( elementType ) + getSpellEffectAllModifierPoints(), &getItemSpellEffectElementModifierPointsHelper, &getSpellSpellEffectElementModifierPointsHelper, NULLABLE_ATTRIBUTE_MIN ) + StatsSystem::getStatsSystem()->calculateSpellEffectElementModifierPoints( elementType, this );
 }
 
 uint16_t Player::getModifiedSpellCriticalModifierPoints() const
 {
-	return getModifiedAttribute( inventory, this, getSpellCriticalModifierPoints(), &getItemSpellCriticalModifierPointsHelper, &getSpellSpellCriticalModifierPointsHelper, NULLABLE_ATTRIBUTE_MIN ) + StatsSystem::getStatsSystem()->calculateSpellCriticalModifierPoints( this );
+  return getModifiedAttribute( inventory, this, getSpellCriticalModifierPoints(), &getItemSpellCriticalModifierPointsHelper, &getSpellSpellCriticalModifierPointsHelper, NULLABLE_ATTRIBUTE_MIN ) + StatsSystem::getStatsSystem()->calculateSpellCriticalModifierPoints( this );
 }
 
 uint16_t Player::getModifiedStrength() const
 {
-	return getModifiedAttribute( inventory, this, getStrength(), &getItemStrengthHelper, &getSpellStrengthHelper, NON_NULLABLE_ATTRIBUTE_MIN );
+  return getModifiedAttribute( inventory, this, getStrength(), &getItemStrengthHelper, &getSpellStrengthHelper, NON_NULLABLE_ATTRIBUTE_MIN );
 }
 
 uint16_t Player::getModifiedDexterity() const
 {
-	return getModifiedAttribute( inventory, this, getDexterity(), &getItemDexterityHelper, &getSpellDexterityHelper, NON_NULLABLE_ATTRIBUTE_MIN );
+  return getModifiedAttribute( inventory, this, getDexterity(), &getItemDexterityHelper, &getSpellDexterityHelper, NON_NULLABLE_ATTRIBUTE_MIN );
 }
 
 uint16_t Player::getModifiedVitality() const
 {
-	return getModifiedAttribute( inventory, this, getVitality(), &getItemVitalityHelper, &getSpellVitalityHelper, NON_NULLABLE_ATTRIBUTE_MIN );
+  return getModifiedAttribute( inventory, this, getVitality(), &getItemVitalityHelper, &getSpellVitalityHelper, NON_NULLABLE_ATTRIBUTE_MIN );
 }
 
 uint16_t Player::getModifiedIntellect() const
 {
-	return getModifiedAttribute( inventory, this, getIntellect(), &getItemIntellectHelper, &getSpellIntellectHelper, NON_NULLABLE_ATTRIBUTE_MIN );
+  return getModifiedAttribute( inventory, this, getIntellect(), &getItemIntellectHelper, &getSpellIntellectHelper, NON_NULLABLE_ATTRIBUTE_MIN );
 }
 
 uint16_t Player::getModifiedWisdom() const
 {
-	return getModifiedAttribute( inventory, this, getWisdom(), &getItemWisdomHelper, &getSpellWisdomHelper, NON_NULLABLE_ATTRIBUTE_MIN );
+  return getModifiedAttribute( inventory, this, getWisdom(), &getItemWisdomHelper, &getSpellWisdomHelper, NON_NULLABLE_ATTRIBUTE_MIN );
 }
 
 uint16_t Player::getModifiedMaxHealth() const
 {
-	return getModifiedAttribute( inventory, this, getMaxHealth(), &getItemHealthHelper, &getSpellHealthHelper, NON_NULLABLE_ATTRIBUTE_MIN );
+  return getModifiedAttribute( inventory, this, getMaxHealth(), &getItemHealthHelper, &getSpellHealthHelper, NON_NULLABLE_ATTRIBUTE_MIN );
 }
 
 uint16_t Player::getModifiedMaxMana() const
 {
-	return getModifiedAttribute( inventory, this, getMaxMana(), &getItemManaHelper, &getSpellManaHelper, NULLABLE_ATTRIBUTE_MIN );
+  return getModifiedAttribute( inventory, this, getMaxMana(), &getItemManaHelper, &getSpellManaHelper, NULLABLE_ATTRIBUTE_MIN );
 }
 
 uint16_t Player::getModifiedMaxFatigue() const
 {
-	return getModifiedAttribute( inventory, this, getMaxFatigue(), &getItemFatigueHelper, &getSpellFatigueHelper, NULLABLE_ATTRIBUTE_MIN );
+  return getModifiedAttribute( inventory, this, getMaxFatigue(), &getItemFatigueHelper, &getSpellFatigueHelper, NULLABLE_ATTRIBUTE_MIN );
 }
 
 uint16_t Player::getModifiedMinDamage() const
 {
-	uint16_t inventoryMinDamage = getModifiedAttribute( inventory, this, 0, &getItemMinDamageHelper, &getSpellMinDamageHelper, NON_NULLABLE_ATTRIBUTE_MIN );
+  uint16_t inventoryMinDamage = getModifiedAttribute( inventory, this, 0, &getItemMinDamageHelper, &getSpellMinDamageHelper, NON_NULLABLE_ATTRIBUTE_MIN );
 	return inventoryMinDamage;
 }
 
 uint16_t Player::getModifiedMaxDamage() const
 {
-	uint16_t inventoryMaxDamage = getModifiedAttribute( inventory, this, 0, &getItemMaxDamageHelper, &getSpellMaxDamageHelper, getModifiedMinDamage() );
-	return inventoryMaxDamage;
+  uint16_t inventoryMaxDamage = getModifiedAttribute( inventory, this, 0, &getItemMaxDamageHelper, &getSpellMaxDamageHelper, getModifiedMinDamage() );
+  return inventoryMaxDamage;
 }
 
 uint16_t Player::getModifiedHealthRegen() const
 {
-	return getModifiedAttribute( inventory, this, getHealthRegen(), &getItemHealthRegenHelper, &getSpellHealthRegenHelper, NULLABLE_ATTRIBUTE_MIN );
+  return getModifiedAttribute( inventory, this, getHealthRegen(), &getItemHealthRegenHelper, &getSpellHealthRegenHelper, NULLABLE_ATTRIBUTE_MIN );
 }
 
 uint16_t Player::getModifiedManaRegen() const
 {
-	return getModifiedAttribute( inventory, this, getManaRegen(), &getItemManaRegenHelper, &getSpellManaRegenHelper, NULLABLE_ATTRIBUTE_MIN );
+  return getModifiedAttribute( inventory, this, getManaRegen(), &getItemManaRegenHelper, &getSpellManaRegenHelper, NULLABLE_ATTRIBUTE_MIN );
 }
 
 uint16_t Player::getModifiedFatigueRegen() const
 {
-	return getModifiedAttribute( inventory, this, getFatigueRegen(), &getItemFatigueRegenHelper, &getSpellFatigueRegenHelper, NULLABLE_ATTRIBUTE_MIN );
+  return getModifiedAttribute( inventory, this, getFatigueRegen(), &getItemFatigueRegenHelper, &getSpellFatigueRegenHelper, NULLABLE_ATTRIBUTE_MIN );
 }
 
 void Player::setTicketForItemTooltip ()
 {
-	ticketForItemTooltip = SDL_GetTicks();
+  ticketForItemTooltip = SDL_GetTicks();
 }
 
 void Player::setTicketForSpellTooltip ()
 {
-	ticketForSpellTooltip = SDL_GetTicks();
+  ticketForSpellTooltip = SDL_GetTicks();
 }
 
 uint32_t Player::getTicketForItemTooltip() const
 {
-	return ticketForItemTooltip;
+  return ticketForItemTooltip;
 }
 
 uint32_t Player::getTicketForSpellTooltip() const
 {
-	return ticketForSpellTooltip;
+  return ticketForSpellTooltip;
 }
 
 bool Player::isSpellInscribedInSpellbook( CSpellActionBase* spell ) const
 {
-	for( size_t curSpell = 0; curSpell < getSpellbook().size(); curSpell++ )
-	{
-		if( getSpellbook()[ curSpell ]->getName() == spell->getName() )
-		{
-			if( getSpellbook()[ curSpell ]->getRank() >= spell->getRank() )
-			{
-				return true; // yes, spell is already inscribed in spellbook with same or higher rank.
-			}
-		}
-	}
-	return false;
+  for( size_t curSpell = 0; curSpell < getSpellbook().size(); curSpell++ )
+  {
+    if( getSpellbook()[ curSpell ]->getName() == spell->getName() )
+    {
+      if( getSpellbook()[ curSpell ]->getRank() >= spell->getRank() )
+      {
+	return true; // yes, spell is already inscribed in spellbook with same or higher rank.
+      }
+    }
+  }
+  return false;
 }
 
 std::string Player::getSaveText() const
