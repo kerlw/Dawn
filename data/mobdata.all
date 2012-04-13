@@ -45,11 +45,11 @@ for index=0,8,1 do
 end
 
 wolfbase:setStrength( 15 )
-wolfbase:setDexterity( 25 )
+wolfbase:setDexterity( 22 )
 wolfbase:setVitality( 15 )
 wolfbase:setIntellect( 10 )
 wolfbase:setWisdom( 10 )
-wolfbase:setMaxHealth( 250 )
+wolfbase:setMaxHealth( 230 )
 wolfbase:setMaxMana( 500 )
 wolfbase:setMaxFatigue( 100 )
 wolfbase:setHealthRegen( 0 )

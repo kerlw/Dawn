@@ -217,7 +217,7 @@ int StatsSystem::calculateDamageModifierPoints( const CCharacter *character ) co
 
 int StatsSystem::calculateHitModifierPoints( const CCharacter *character ) const
 {
-	return ( character->getModifiedDexterity() * 4 );
+	return ( character->getModifiedDexterity() + 60 );
 }
 
 int StatsSystem::calculateEvadeModifierPoints( const CCharacter *character ) const

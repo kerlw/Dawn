@@ -45,7 +45,7 @@ itemDatabase["swordofkhazom"]=DawnInterface.createNewItem( "Sword of Khazom", 1,
 curItem = itemDatabase["swordofkhazom"];
 curItem:setStats( StatsType.Dexterity, 5 );
 curItem:setStats( StatsType.Health, 75 );
-curItem:setStats( StatsType.HitModifier, 15 );
+--curItem:setStats( StatsType.HitModifier, 15 );
 curItem:setMinDamage( 15 );
 curItem:setMaxDamage( 25 );
 curItem:setDescription( "Once wielded by Irk the Unholy." );
