@@ -35,11 +35,11 @@ struct SearchListStruct
 
   SearchListStruct( const Point &p_, int value_, int estimatedF_, Direction predDir_ )
     :  p( p_ ),
-     value( value_ ),
-     estimatedF( estimatedF_ ),
+       value( value_ ),
+       estimatedF( estimatedF_ ),
        predDir( predDir_ )
-    {
-    }
+  {
+  }
 
   bool operator == ( const SearchListStruct &other ) const
   {
@@ -61,8 +61,8 @@ Direction dirToPredecessor[] = { STOP, S, SW, W, NW, N, NE, E, SE };
 int counter = 0;
 int maxValue = 0;
 
-/* this is the step-width for neighbours in pixels.
-   a bigger value makes the value slightly suboptimal
+/* This is the step-width for neighbours in pixels.
+   A bigger value makes the value slightly suboptimal
    (and no path may be found through very narrow passages)
    but the heuristics gets *much* faster. */
 int distanceSkip = 10;
@@ -70,15 +70,15 @@ int distanceSkip = 10;
 SearchListStruct popMinimumElement( std::list<SearchListStruct> & list )
 {
   assert( list.size() > 0 );
-  // note: This can be drastically improved if the list is kept sorted
-  // inserting will not be very expensive in that case either
+  /* This can be drastically improved if the list is kept sorted.
+     Inserting will not be very expensive in that case either. */
   int minEstimate = std::numeric_limits<int>::max();
   std::list<SearchListStruct>::iterator minIt = list.begin();
-  for( std::list<SearchListStruct>::iterator it=list.begin();
-       it!=list.end();
-       ++it )
+  for ( std::list<SearchListStruct>::iterator it=list.begin();
+        it!=list.end();
+        ++it )
   {
-    if( it->estimatedF < minEstimate )
+    if ( it->estimatedF < minEstimate )
     {
       minIt = it;
       minEstimate = it->estimatedF;

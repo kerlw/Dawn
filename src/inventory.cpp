@@ -33,8 +33,8 @@ InventoryItem::InventoryItem( Item* item,
     inventoryPosX( inventoryPosX ),
     inventoryPosY( inventoryPosY )
 {
-  // copy properties from the original inventoryItem (if we've suggested so)
-  if( copyFrom != NULL )
+  /* Copy properties from the original inventoryItem (if we've suggested so). */
+  if ( copyFrom != NULL )
   {
     copyAttributes( copyFrom );
   }
@@ -619,16 +619,16 @@ std::string Inventory::getReloadText()
 
 void Inventory::clear()
 {
-  // remove backpack items
-  for( size_t backpackNr=0; backpackNr<backpackItems.size(); ++backpackNr )
+  /* Remove backpack items. */
+  for ( size_t backpackNr=0; backpackNr<backpackItems.size(); ++backpackNr )
   {
     InventoryItem *curBackpackItem = backpackItems[ backpackNr ];
     delete curBackpackItem;
   }
   backpackItems.resize( 0 );
 
-  // free space in inventory so we can place new items
-  for( size_t curX=0; curX<sizeX; ++ curX )
+  /* Free space in inventory so we can place new items. */
+  for ( size_t curX=0; curX<sizeX; ++ curX )
   {
     for( size_t curY=0; curY<sizeY; ++curY )
     {
@@ -636,15 +636,15 @@ void Inventory::clear()
     }
   }
 
-  // remove equipped items
+  /* Remove equipped items. */
   size_t numEquippable = static_cast<size_t>( ItemSlot::COUNT );
-  for( size_t curEquippable=0; curEquippable<numEquippable; ++curEquippable )
+  for ( size_t curEquippable=0; curEquippable<numEquippable; ++curEquippable )
   {
-    if( equippedItems[ curEquippable ] != NULL )
+    if ( equippedItems[ curEquippable ] != NULL )
     {
       /* check if our weapon is of a two-handed type, then we need to set the
          other side (offhand or mainhand) to NULL aswell. */
-      if( equippedItems[curEquippable]->getItem()->isTwoHandedWeapon() == true )
+      if ( equippedItems[curEquippable]->getItem()->isTwoHandedWeapon() == true )
       {
         delete equippedItems[ curEquippable ];
         equippedItems[ ItemSlot::MAIN_HAND ] = NULL;

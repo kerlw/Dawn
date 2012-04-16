@@ -3383,6 +3383,37 @@ static int tolua_luainterface_Shop_addItem00(lua_State* tolua_S)
 }
 #endif //#ifndef TOLUA_DISABLE
 
+/* method: clear of class  Shop */
+#ifndef TOLUA_DISABLE_tolua_luainterface_Shop_clear00
+static int tolua_luainterface_Shop_clear00(lua_State* tolua_S)
+{
+#ifndef TOLUA_RELEASE
+ tolua_Error tolua_err;
+ if (
+     !tolua_isusertype(tolua_S,1,"Shop",0,&tolua_err) ||
+     !tolua_isnoobj(tolua_S,2,&tolua_err)
+ )
+  goto tolua_lerror;
+ else
+#endif
+ {
+  Shop* self = (Shop*)  tolua_tousertype(tolua_S,1,0);
+#ifndef TOLUA_RELEASE
+  if (!self) tolua_error(tolua_S,"invalid 'self' in function 'clear'", NULL);
+#endif
+  {
+   self->clear();
+  }
+ }
+ return 0;
+#ifndef TOLUA_RELEASE
+ tolua_lerror:
+ tolua_error(tolua_S,"#ferror in function 'clear'.",&tolua_err);
+ return 0;
+#endif
+}
+#endif //#ifndef TOLUA_DISABLE
+
 /* method: addAdditionalSpellOnTarget of class  CSpellActionBase */
 #ifndef TOLUA_DISABLE_tolua_luainterface_CSpellActionBase_addAdditionalSpellOnTarget00
 static int tolua_luainterface_CSpellActionBase_addAdditionalSpellOnTarget00(lua_State* tolua_S)
@@ -7795,6 +7826,7 @@ TOLUA_API int tolua_luainterface_open (lua_State* tolua_S)
   tolua_beginmodule(tolua_S,"Shop");
    tolua_function(tolua_S,"toggle",tolua_luainterface_Shop_toggle00);
    tolua_function(tolua_S,"addItem",tolua_luainterface_Shop_addItem00);
+   tolua_function(tolua_S,"clear",tolua_luainterface_Shop_clear00);
   tolua_endmodule(tolua_S);
   tolua_cclass(tolua_S,"CSpellActionBase","CSpellActionBase","",NULL);
   tolua_beginmodule(tolua_S,"CSpellActionBase");

@@ -16,15 +16,15 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 
 #include "shop.hpp"
-#include <sstream>
 #include "player.hpp"
-#include <cassert>
-#include <memory>
 #include "drawinghelpers.hpp"
 #include "framesbase.hpp"
 #include "inventoryscreen.hpp"
 #include "configuration.hpp"
 #include "soundengine.hpp"
+#include <cassert>
+#include <memory>
+#include <sstream>
 
 extern std::auto_ptr<InventoryScreen> inventoryScreen;
 extern std::auto_ptr<Shop> shopWindow;
@@ -43,38 +43,39 @@ Shop::Shop( Player* player_, CNPC* shopkeeper_ )
 {
   addMoveableFrame( 454, 21, 13, 398 );
   addCloseButton( 22, 22, 444, 398 );
-  currentTab = 0;
-  backpackFieldWidth = 32;
-  backpackFieldHeight = 32;
-  backpackSeparatorWidth = 3;
+
+  currentTab              = 0;
+  backpackFieldWidth      = 32;
+  backpackFieldHeight     = 32;
+  backpackSeparatorWidth  = 3;
   backpackSeparatorHeight = 3;
-  backpackOffsetX = 67;
-  backpackOffsetY = 56;
-  numSlotsX = 10;
-  numSlotsY = 6;
-  floatingSelection = NULL;
-  player = player_;
-  shopkeeper = shopkeeper_;
+  backpackOffsetX         = 67;
+  backpackOffsetY         = 56;
+  numSlotsX               = 10;
+  numSlotsY               = 6;
+  floatingSelection       = NULL;
+  player                  = player_;
+  shopkeeper              = shopkeeper_;
 
-  tabs[0].tabimage.LoadIMG("data/interface/Shop/weapontab.tga",0);
+  tabs[0].tabimage.LoadIMG( "data/interface/Shop/weapontab.tga", 0 );
   tabs[0].height = 128;
-  tabs[0].width = 128;
-  tabs[0].posX = 61;
-  tabs[0].posY = 264;
+  tabs[0].width  = 128;
+  tabs[0].posX   = 61;
+  tabs[0].posY   = 264;
 
-  tabs[1].tabimage.LoadIMG("data/interface/Shop/armortab.tga",0);
+  tabs[1].tabimage.LoadIMG( "data/interface/Shop/armortab.tga", 0 );
   tabs[1].height = 128;
-  tabs[1].width = 128;
-  tabs[1].posX = 202;
-  tabs[1].posY = 264;
+  tabs[1].width  = 128;
+  tabs[1].posX   = 202;
+  tabs[1].posY   = 264;
 
-  tabs[2].tabimage.LoadIMG("data/interface/Shop/misctab.tga",0);
+  tabs[2].tabimage.LoadIMG( "data/interface/Shop/misctab.tga", 0 );
   tabs[2].height = 128;
-  tabs[2].width = 128;
-  tabs[2].posX = 343;
-  tabs[2].posY = 264;
+  tabs[2].width  = 128;
+  tabs[2].posX   = 343;
+  tabs[2].posY   = 264;
 
-  // load the font for itemstack text.
+  /* Load the font for itemstack text. */
   itemStackFont = FontCache::getFontFromCache("data/verdana.ttf", 12);
 
   loadShopkeeperInventory();
@@ -89,7 +90,7 @@ Shop::Shop( Player* player_, CNPC* shopkeeper_ )
       slotUsed[ curItemTab ][ curX ] = new bool[numSlotsY];
       for( size_t curY=0; curY<numSlotsY; ++curY )
       {
-	slotUsed[ curItemTab ][ curX ][ curY ] = false;
+        slotUsed[ curItemTab ][ curX ][ curY ] = false;
       }
     }
   }
@@ -124,7 +125,10 @@ void Shop::loadShopkeeperInventory()
 void Shop::draw( int mouseX, int mouseY )
 {
   DrawingHelpers::mapTextureToRect( textures.getTexture(0),
-				    world_x + posX, textures.getTexture(0).width, world_y + posY, textures.getTexture(0).height);
+                                    world_x + posX,
+                                    textures.getTexture(0).width,
+                                    world_y + posY,
+                                    textures.getTexture(0).height );
   drawTabs();
   drawItems();
   drawItemTooltip( mouseX, mouseY );
@@ -187,13 +191,17 @@ void Shop::drawItems()
 
 void Shop::drawItemTooltip( int mouseX, int mouseY )
 {
-  // draws tooltip over item in the shop
-  if ( isOnSlotsScreen(mouseX,mouseY) && isVisible() && floatingSelection == NULL ) {
+  /* Draws tooltip over item in the shop. */
+  if ( isOnSlotsScreen(mouseX,mouseY) &&
+       isVisible() &&
+       floatingSelection == NULL )
+  {
     InventoryItem *tooltipItem;
     int fieldIndexX = ( mouseX - (posX + backpackOffsetX) ) / (backpackFieldWidth+backpackSeparatorWidth);
     int fieldIndexY = ( mouseY - (posY + backpackOffsetY) ) / (backpackFieldHeight+backpackSeparatorHeight);
 
-    if ( !isPositionFree( fieldIndexX, fieldIndexY, currentTab ) ) {
+    if ( !isPositionFree( fieldIndexX, fieldIndexY, currentTab ) )
+    {
       // draw tooltip of the current item in the shop.
       tooltipItem = getItemAt( fieldIndexX, fieldIndexY, currentTab );
       tooltipItem->getTooltip()->setShopItem( true );
@@ -241,15 +249,16 @@ void Shop::drawItemTooltip( int mouseX, int mouseY )
 
 void Shop::drawFloatingSelection( int mouseX, int mouseY )
 {
-  // draw floating selection
-  if ( hasFloatingSelection() ) {
-    Item *floatingItem = floatingSelection->getItem();
+  /* Draw floating selection. */
+  if ( hasFloatingSelection() )
+  {
+    Item* floatingItem = floatingSelection->getItem();
     size_t sizeX = floatingItem->getSizeX();
     size_t sizeY = floatingItem->getSizeY();
 
     DrawingHelpers::mapTextureToRect( floatingItem->getSymbolTexture()->getTexture(0),
-				      mouseX, backpackFieldWidth * sizeX + (sizeX-1)*backpackSeparatorWidth,
-				      mouseY-20, backpackFieldHeight * sizeY + (sizeY-1)*backpackSeparatorHeight);
+                                      mouseX, backpackFieldWidth * sizeX + (sizeX-1)*backpackSeparatorWidth,
+                                      mouseY-20, backpackFieldHeight * sizeY + (sizeY-1)*backpackSeparatorHeight);
   }
 }
 
@@ -344,7 +353,7 @@ void Shop::addItem( Item* item )
   sellToShop( &invItem, false );
 }
 
-void Shop::sellToShop( InventoryItem *sellItem, bool givePlayerMoney )
+void Shop::sellToShop( InventoryItem* sellItem, bool givePlayerMoney )
 {
   Item* item = sellItem->getItem();
 
@@ -357,33 +366,51 @@ void Shop::sellToShop( InventoryItem *sellItem, bool givePlayerMoney )
   size_t foundX = 0;
   size_t foundY = 0;
 
-  // look for next free position
-  for ( size_t freeX=0; freeX<numSlotsX-itemSizeX+1 && !foundPosition; ++freeX ) {
-    for ( size_t freeY=0; freeY<numSlotsY-itemSizeY+1 && !foundPosition; ++freeY ) {
-      if ( hasSufficientSpaceAt( freeX, freeY, itemSizeX, itemSizeY, itemTab ) ) {
-	foundPosition = true;
-	foundX = freeX;
-	foundY = freeY;
+  /* Look for next free position. */
+  for ( size_t freeX=0; freeX<numSlotsX-itemSizeX+1 && !foundPosition; ++freeX )
+  {
+    for ( size_t freeY=0; freeY<numSlotsY-itemSizeY+1 && !foundPosition; ++freeY )
+    {
+      if ( hasSufficientSpaceAt( freeX, freeY, itemSizeX, itemSizeY, itemTab ) )
+      {
+        foundPosition = true;
+        foundX        = freeX;
+        foundY        = freeY;
       }
     }
   }
 
-  if ( foundPosition ) {
-    InventoryItem *newItem = new InventoryItem( item, foundX, foundY, player, sellItem );
-    insertItemAt( newItem, foundX, foundY, itemTab );
+  if ( foundPosition )
+  {
+    InventoryItem* newItem = new InventoryItem( item,
+                                                foundX,
+                                                foundY,
+                                                player,
+                                                sellItem );
+    insertItemAt( newItem,
+                  foundX,
+                  foundY,
+                  itemTab );
   }
 
-	if ( givePlayerMoney ) {
-        SoundEngine::playSound( "data/sound/sell_buy_item.ogg" );
-	    GLfloat yellow[] = { 1.0f, 1.0f, 0.0f };
-	    player->giveCoins( floor( sellItem->getItem()->getValue() * 0.75 ) * sellItem->getCurrentStackSize() );
-	    if ( sellItem->getCurrentStackSize() > 1 ) {
-            DawnInterface::addTextToLogWindow( yellow, "Sold %d %s.", sellItem->getCurrentStackSize(), item->getName().c_str() );
-	    } else {
-            DawnInterface::addTextToLogWindow( yellow, "Sold %s.", item->getName().c_str() );
-	    }
-        // player only gets 75% of the itemvalue when he sells an item
-	}
+  if ( givePlayerMoney )
+  {
+    SoundEngine::playSound( "data/sound/sell_buy_item.ogg" );
+    GLfloat yellow[] = { 1.0f, 1.0f, 0.0f };
+    /* Player only gets 75% of the itemvalue when he sells an item. */
+    player->giveCoins( floor( sellItem->getItem()->getValue() * 0.75 ) * sellItem->getCurrentStackSize() );
+    if ( sellItem->getCurrentStackSize() > 1 )
+    {
+      DawnInterface::addTextToLogWindow( yellow,
+                                         "Sold %d %s.",
+                                         sellItem->getCurrentStackSize(),
+                                         item->getName().c_str() );
+    }
+    else
+    {
+      DawnInterface::addTextToLogWindow( yellow, "Sold %s.", item->getName().c_str() );
+    }
+  }
 }
 
 void Shop::buyFromShop()
@@ -393,9 +420,12 @@ void Shop::buyFromShop()
     SoundEngine::playSound( "data/sound/sell_buy_item.ogg" );
 
     GLfloat yellow[] = { 1.0f, 1.0f, 0.0f };
-    if ( floatingSelection->getCurrentStackSize() > 1 ) {
+    if ( floatingSelection->getCurrentStackSize() > 1 )
+    {
         DawnInterface::addTextToLogWindow( yellow, "Purchased %d %s.", floatingSelection->getCurrentStackSize(), floatingSelection->getItem()->getName().c_str() );
-    } else {
+    }
+    else
+    {
         DawnInterface::addTextToLogWindow( yellow, "Purchased %s.", floatingSelection->getItem()->getName().c_str() );
     }
 
@@ -403,7 +433,10 @@ void Shop::buyFromShop()
     floatingSelection = NULL;
 }
 
-void Shop::insertItemAt( InventoryItem *inventoryItem, size_t invPosX, size_t invPosY, size_t itemTab )
+void Shop::insertItemAt( InventoryItem* inventoryItem,
+                         size_t invPosX,
+                         size_t invPosY,
+                         size_t itemTab )
 {
 	assert( hasSufficientSpaceAt( invPosX, invPosY, inventoryItem->getSizeX(), inventoryItem->getSizeY(), itemTab ) );
 	inventoryItem->setInventoryPos( invPosX, invPosY );
@@ -437,8 +470,8 @@ InventoryItem* Shop::getItemAt( size_t invPosX, size_t invPosY, size_t itemTab )
 		}
 	}
 
-	// should have found an item so should never reach here
-	abort();
+  /* Should have found an item so should never reach here. */
+  abort();
 }
 
 size_t Shop::getItemTab( Item* item )
@@ -452,7 +485,8 @@ size_t Shop::getItemTab( Item* item )
     return 1;
     break;
   case ItemType::WEAPON:
-    if ( item->getWeaponType() == WeaponType::SHIELD ) // this is to get all shields into the secondary tab.
+    /* This is to get all shields into the secondary tab. */
+    if ( item->getWeaponType() == WeaponType::SHIELD )
     {
       return 1;
     }
@@ -487,20 +521,20 @@ size_t Shop::getItemTab( Item* item )
 
 bool Shop::hasFloatingSelection() const
 {
-    return floatingSelection != NULL;
+  return floatingSelection != NULL;
 }
 
 void Shop::unsetFloatingSelection()
 {
-    assert( floatingSelection != NULL );
+  assert( floatingSelection != NULL );
 
-    delete floatingSelection;
-    floatingSelection = NULL;
+  delete floatingSelection;
+  floatingSelection = NULL;
 }
 
-InventoryItem *Shop::getFloatingSelection() const
+InventoryItem* Shop::getFloatingSelection() const
 {
-    return floatingSelection;
+  return floatingSelection;
 }
 
 bool Shop::hasSufficientSpaceAt( size_t inventoryPosX, size_t inventoryPosY, size_t itemSizeX, size_t itemSizeY, size_t itemTab ) const
@@ -525,88 +559,127 @@ bool Shop::hasSufficientSpaceAt( size_t inventoryPosX, size_t inventoryPosY, siz
 
 void Shop::removeItem( InventoryItem *inventoryItem )
 {
-	for ( size_t curTab = 0; curTab < 3; ++curTab ) {
-	    for ( size_t curBackpackItemNr=0; curBackpackItemNr<shopkeeperInventory[curTab].size(); ++curBackpackItemNr ) {
-            if ( shopkeeperInventory[ curTab ][ curBackpackItemNr ] == inventoryItem ) {
-                for ( size_t curX=inventoryItem->getInventoryPosX(); curX<inventoryItem->getInventoryPosX() + inventoryItem->getSizeX(); ++curX ) {
-                    for ( size_t curY=inventoryItem->getInventoryPosY(); curY<inventoryItem->getInventoryPosY() + inventoryItem->getSizeY(); ++curY ) {
-                        slotUsed[curTab][curX][curY] = false;
-                    }
-                }
-                shopkeeperInventory[ curTab ][ curBackpackItemNr ] = shopkeeperInventory[ curTab ][ shopkeeperInventory[curTab].size() - 1 ];
-                shopkeeperInventory[ curTab ].resize( shopkeeperInventory[ curTab ].size() - 1 );
-            }
-	    }
+  for ( size_t curTab = 0; curTab < 3; ++curTab )
+  {
+    for ( size_t curBackpackItemNr=0; curBackpackItemNr<shopkeeperInventory[curTab].size(); ++curBackpackItemNr )
+    {
+      if ( shopkeeperInventory[ curTab ][ curBackpackItemNr ] == inventoryItem )
+      {
+	for ( size_t curX=inventoryItem->getInventoryPosX(); curX<inventoryItem->getInventoryPosX() + inventoryItem->getSizeX(); ++curX )
+	{
+	  for ( size_t curY=inventoryItem->getInventoryPosY(); curY<inventoryItem->getInventoryPosY() + inventoryItem->getSizeY(); ++curY )
+	  {
+	    slotUsed[curTab][curX][curY] = false;
+	  }
 	}
+	shopkeeperInventory[ curTab ][ curBackpackItemNr ] = shopkeeperInventory[ curTab ][ shopkeeperInventory[curTab].size() - 1 ];
+	shopkeeperInventory[ curTab ].resize( shopkeeperInventory[ curTab ].size() - 1 );
+      }
+    }
+  }
 }
 
 std::string currency::getLongTextString( uint32_t coins )
 {
-    std::stringstream ss;
-    ss.clear();
+  std::stringstream ss;
+  ss.clear();
 
-    uint32_t copper = 0, silver = 0, gold = 0;
-    bool addComma = false;
+  uint32_t copper = 0, silver = 0, gold = 0;
+  bool addComma = false;
 
-    exchangeCoins( copper, silver, gold, coins );
-    if ( gold > 0 ) {
-        ss << gold << " gold";
-        addComma = true;
-    }
-    if ( silver > 0 ) {
-        if ( addComma == true ) {
-            ss << ", ";
-        }
-        ss << silver << " silver";
-        addComma = true;
-    }
-    if ( copper > 0 ) {
-        if ( addComma == true ) {
-            ss << ", ";
-        }
-        ss << copper << " copper";
-    }
-    return ss.str();;
-}
+  exchangeCoins( copper, silver, gold, coins );
+  if ( gold > 0 )
+  {
+    ss << gold << " gold";
+    addComma = true;
+  }
 
-void currency::exchangeCoins( uint32_t &copper, uint32_t &silver, uint32_t &gold, uint32_t &coins )
-{
-    // exchanging coins to copper coins.
-    copper = coins%100;
-    coins -= copper;
-    if ( coins == 0 )
-        return;
-
-    coins /= 100;
-    silver =  coins%100;
-    coins -= silver;
-    if ( coins == 0 )
-        return;
-
-    gold = coins/100;
-}
-
-std::string currency::convertCoinsToString( currency::currency currency, uint32_t coins )
-{
-    std::stringstream ss;
-    std::string output;
-
-    uint32_t copper = 0, silver = 0, gold = 0;
-
-    exchangeCoins( copper, silver, gold, coins );
-
-    switch ( currency )
+  if ( silver > 0 )
+  {
+    if ( addComma == true )
     {
-        case currency::COPPER:
-            ss << copper;
-        break;
-        case currency::SILVER:
-            ss << silver;
-        break;
-        case currency::GOLD:
-            ss << gold;
-        break;
-    };
+      ss << ", ";
+    }
+    ss << silver << " silver";
+    addComma = true;
+  }
 
-    return ss.str();
+  if ( copper > 0 )
+  {
+    if ( addComma == true )
+    {
+      ss << ", ";
+    }
+    ss << copper << " copper";
+  }
+
+  return ss.str();;
+}
+
+void currency::exchangeCoins( uint32_t& copper,
+                              uint32_t& silver,
+                              uint32_t& gold,
+                              uint32_t& coins )
+{
+  /* Exchanging coins to copper coins. */
+  copper = coins % 100;
+  coins -= copper;
+  if ( coins == 0 )
+  {
+    return;
+  }
+
+  coins /= 100;
+  silver =  coins%100;
+  coins -= silver;
+  if ( coins == 0 )
+  {
+    return;
+  }
+
+  gold = coins / 100;
+}
+
+std::string currency::convertCoinsToString( currency::currency currency,
+                                            uint32_t coins )
+{
+  std::stringstream ss;
+  std::string output;
+
+  uint32_t copper = 0, silver = 0, gold = 0;
+
+  exchangeCoins( copper, silver, gold, coins );
+
+  switch ( currency )
+  {
+  case currency::COPPER:
+    ss << copper;
+    break;
+  case currency::SILVER:
+    ss << silver;
+    break;
+  case currency::GOLD:
+    ss << gold;
+    break;
+  };
+
+  return ss.str();
+}
+
+void Shop::clear()
+{
+  std::cout << "clear()" << std::endl;
+  std::cout << "> " << shopkeeperInventory[0].size() << std::endl;
+
+  /* Iterate through the "inventories" and remove the items one by one. */
+  for ( int j = 0; j < 3; j++ )
+  {
+    for ( int i = 0, z = shopkeeperInventory[j].size(); i < z; i++ )
+    {
+      removeItem( shopkeeperInventory[j].back() );
+    }
+  }
+//  shopkeeperInventory[0].clear();
+
+  std::cout << "> " << shopkeeperInventory[0].size() << std::endl;
 }

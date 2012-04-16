@@ -448,71 +448,85 @@ extern std::auto_ptr<Shop> shopWindow;
 
 std::string CZone::getLuaSaveText() const
 {
-	std::ostringstream oss;
-	oss << "DawnInterface.setCurrentZone( \"" << zoneName << "\" );" << std::endl;
+  std::ostringstream oss;
+  oss << "DawnInterface.setCurrentZone( \"" << zoneName << "\" );" << std::endl;
 
-	// save call indirections (must be added before spawnpoints since used there)
-	oss << "-- event handlers" << std::endl;
-	for ( size_t curEventHandlerNr=0; curEventHandlerNr<eventHandlers.size(); ++curEventHandlerNr ) {
-		CallIndirection *curEventHandler = eventHandlers[ curEventHandlerNr ];
-		std::string eventHandlerSaveText = curEventHandler->getLuaSaveText();
-		oss << eventHandlerSaveText;
-	}
+  /* Save call indirections (must be added before spawnpoints since used there). */
+  oss << "-- event handlers" << std::endl;
+  for ( size_t curEventHandlerNr=0; curEventHandlerNr<eventHandlers.size(); ++curEventHandlerNr )
+  {
+    CallIndirection* curEventHandler = eventHandlers[ curEventHandlerNr ];
+    std::string eventHandlerSaveText = curEventHandler->getLuaSaveText();
+    oss << eventHandlerSaveText;
+  }
 
-	// save all spawnpoints
-	oss << "-- spawnpoints" << std::endl;
-	for ( size_t curNpcNr=0; curNpcNr < npcs.size(); ++curNpcNr ) {
-		CNPC *curNPC = npcs[ curNpcNr ];
-		// save cur npc
-		std::string npcSaveText = curNPC->getLuaSaveText();
-		oss << npcSaveText;
-	}
+  /* Save all spawnpoints. */
+  oss << "-- spawnpoints" << std::endl;
+  for ( size_t curNpcNr=0; curNpcNr < npcs.size(); ++curNpcNr )
+  {
+    CNPC *curNPC = npcs[ curNpcNr ];
+    /* Save current NPC. */
+    std::string npcSaveText = curNPC->getLuaSaveText();
+    oss << npcSaveText;
+  }
 
-	// save shop data (this ought to be put into the shop somehow as soon as shops are customizable)
-	oss << "-- shops" << std::endl;
-	oss << "local curShop = DawnInterface.addShop();" << std::endl;
-	for ( size_t curTab=0; curTab<3; ++curTab ) {
-		for ( size_t curItemNr=0; curItemNr < shopWindow->shopkeeperInventory[curTab].size(); ++curItemNr ) {
-			oss << "curShop:addItem( itemDatabase[\"" << shopWindow->shopkeeperInventory[curTab][curItemNr]->getItem()->getID() << "\"] );" << std::endl;
-		}
-	}
+  /* Save shop data (this ought to be put into the shop somehow as soon as shops are customizable). */
+  oss << "-- shops" << std::endl;
+  oss << "local curShop = DawnInterface.addShop();" << std::endl;
+  oss << "curShop:clear();" << std::endl;
+  for ( size_t curTab=0; curTab<3; ++curTab )
+  {
+    for ( size_t curItemNr=0; curItemNr < shopWindow->shopkeeperInventory[curTab].size(); ++curItemNr )
+    {
+      oss << "curShop:addItem( itemDatabase[\""
+          << shopWindow->shopkeeperInventory[curTab][curItemNr]->getItem()->getID()
+          << "\"] );"
+          << std::endl;
+    }
+  }
 
-	// save interaction points
-	oss << "-- interaction points" << std::endl;
-	for ( size_t curInteractionNr=0; curInteractionNr < interactionPoints.size(); ++curInteractionNr ) {
-		InteractionPoint *curInteractionPoint = interactionPoints[ curInteractionNr ];
-		std::string interactionSaveText = curInteractionPoint->getLuaSaveText();
-		oss << interactionSaveText;
-	}
+  /* Save interaction points. */
+  oss << "-- interaction points" << std::endl;
+  for ( size_t curInteractionNr=0; curInteractionNr < interactionPoints.size(); ++curInteractionNr )
+  {
+    InteractionPoint *curInteractionPoint = interactionPoints[ curInteractionNr ];
+    std::string interactionSaveText = curInteractionPoint->getLuaSaveText();
+    oss << interactionSaveText;
+  }
 
-	// save interaction regions
-	oss << "-- interaction regions" << std::endl;
-	for ( size_t curInteractionNr=0; curInteractionNr < interactionRegions.size(); ++curInteractionNr ) {
-		InteractionRegion *curInteractionRegion = interactionRegions[ curInteractionNr ];
-		std::string interactionSaveText = curInteractionRegion->getLuaSaveText();
-		oss << interactionSaveText;
-	}
+  /* Save interaction regions. */
+  oss << "-- interaction regions" << std::endl;
+  for ( size_t curInteractionNr=0; curInteractionNr < interactionRegions.size(); ++curInteractionNr )
+  {
+    InteractionRegion *curInteractionRegion = interactionRegions[ curInteractionNr ];
+    std::string interactionSaveText = curInteractionRegion->getLuaSaveText();
+    oss << interactionSaveText;
+  }
 
-	// save ground loot
-	oss << "-- ground loot" << std::endl;
-	for ( size_t curGroundItemNr=0; curGroundItemNr < groundLoot.groundItems.size(); ++curGroundItemNr ) {
-		sGroundItems curGroundItem = groundLoot.groundItems[ curGroundItemNr ];
-		Item *item = curGroundItem.item;
-		if ( dynamic_cast<GoldHeap*>( item ) != NULL ) {
-			GoldHeap *goldHeap = dynamic_cast<GoldHeap*>( item );
-			oss << "DawnInterface.restoreGroundGold( "
-			             << goldHeap->numCoins() << ", "
-			             << curGroundItem.xpos << ", "
-			             << curGroundItem.ypos << " );" << std::endl;
-		} else {
-			oss << "DawnInterface.restoreGroundLootItem( "
-			             << "itemDatabase[ \"" << item->getID() << "\" ], "
-			             << curGroundItem.xpos << ", "
-			             << curGroundItem.ypos << " );" << std::endl;
-		}
-	}
+  /* Save ground loot. */
+  oss << "-- ground loot" << std::endl;
+  for ( size_t curGroundItemNr=0; curGroundItemNr < groundLoot.groundItems.size(); ++curGroundItemNr )
+  {
+    sGroundItems curGroundItem = groundLoot.groundItems[ curGroundItemNr ];
+    Item* item = curGroundItem.item;
+    if ( dynamic_cast<GoldHeap*>( item ) != NULL )
+    {
+      GoldHeap* goldHeap = dynamic_cast<GoldHeap*>( item );
+      oss << "DawnInterface.restoreGroundGold( "
+	  << goldHeap->numCoins() << ", "
+	  << curGroundItem.xpos << ", "
+	  << curGroundItem.ypos << " );" << std::endl;
+    }
+    else
+    {
+      oss << "DawnInterface.restoreGroundLootItem( "
+	  << "itemDatabase[ \"" << item->getID() << "\" ], "
+	  << curGroundItem.xpos << ", "
+	  << curGroundItem.ypos << " );" << std::endl;
+    }
+  }
 
-	return oss.str();
+  return oss.str();
 }
 
 void CZone::addEventHandler( CallIndirection *newEventHandler )

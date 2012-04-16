@@ -485,7 +485,7 @@ void GameScreenHandler::updateScene()
   player->giveMovePoints( ticksDiff );
   player->Move();
   player->regenerateLifeManaFatigue( ticksDiff );
-
+  
   std::vector<CNPC*> zoneNPCs = Globals::getCurrentZone()->getNPCs();
   for( unsigned int x = 0; x < zoneNPCs.size(); x++ )
   {
@@ -596,6 +596,7 @@ void GameScreenHandler::updateScene()
     Editor.setEnabled( true );
     Editor.initFocus( &focus );
     Editor.KP_toggle_editor = true;
+    shopWindow.get()->clear();
   }
 
   if(!keys[SDLK_l])

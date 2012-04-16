@@ -36,8 +36,12 @@ namespace currency
   };
 
   std::string getLongTextString( uint32_t coins );
-  void exchangeCoins( uint32_t &copper, uint32_t &silver, uint32_t &gold, uint32_t &coins );
-  std::string convertCoinsToString( currency::currency currency, uint32_t coins );
+  void exchangeCoins( uint32_t& copper,
+                      uint32_t& silver,
+                      uint32_t& gold,
+                      uint32_t& coins );
+  std::string convertCoinsToString( currency::currency currency,
+                                    uint32_t coins );
 }
 
 class Shop : public FramesBase
@@ -63,18 +67,26 @@ public:
   bool isPositionFree( size_t invPosX, size_t invPosY, size_t curTab ) const;
 
   bool hasFloatingSelection() const;
-  bool hasSufficientSpaceAt( size_t inventoryPosX, size_t inventoryPosY, size_t itemSizeX, size_t itemSizeY, size_t itemTab ) const;
-
+  bool hasSufficientSpaceAt( size_t inventoryPosX,
+                             size_t inventoryPosY,
+                             size_t itemSizeX,
+                             size_t itemSizeY,
+                             size_t itemTab ) const;
   void sellToShop( InventoryItem* sellItem, bool givePlayerMoney );
   void buyFromShop();
 
   void addItem( Item* item );
-  void insertItemAt( InventoryItem* newItem, size_t foundX, size_t foundY, size_t itemTab );
+  void insertItemAt( InventoryItem* newItem,
+                     size_t foundX,
+                     size_t foundY,
+                     size_t itemTab );
   InventoryItem* getItemAt( size_t invPosX, size_t invPosY, size_t itemTab );
   void removeItem( InventoryItem* inventoryItem );
 
   void unsetFloatingSelection();
   InventoryItem* getFloatingSelection() const;
+
+  void clear();
 
 private:
   friend class CZone; // just for now to be able to save the items

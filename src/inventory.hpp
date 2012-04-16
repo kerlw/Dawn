@@ -27,8 +27,13 @@ class Player;
 class InventoryItem
 {
 public:
-  InventoryItem( Item* item, size_t inventoryPosX, size_t inventoryPosY, Player* player, InventoryItem* copyFrom = NULL );
+  InventoryItem( Item* item,
+                 size_t inventoryPosX,
+                 size_t inventoryPosY,
+                 Player* player,
+                 InventoryItem* copyFrom = NULL );
   ~InventoryItem();
+
   size_t getInventoryPosX() const;
   size_t getInventoryPosY() const;
   void setInventoryPos( size_t inventoryPosX, size_t inventoryPosY );
@@ -46,7 +51,6 @@ public:
   void copyAttributes( InventoryItem *copyFrom );
   Item* getItem() const;
   bool canPlayerUseItem() const;
-
 
 private:
   Item* item;
