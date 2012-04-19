@@ -668,9 +668,6 @@ std::string currency::convertCoinsToString( currency::currency currency,
 
 void Shop::clear()
 {
-  std::cout << "clear()" << std::endl;
-  std::cout << "> " << shopkeeperInventory[0].size() << std::endl;
-
   /* Iterate through the "inventories" and remove the items one by one. */
   for ( int j = 0; j < 3; j++ )
   {
@@ -679,7 +676,4 @@ void Shop::clear()
       removeItem( shopkeeperInventory[j].back() );
     }
   }
-//  shopkeeperInventory[0].clear();
-
-  std::cout << "> " << shopkeeperInventory[0].size() << std::endl;
 }

@@ -10,7 +10,8 @@ end
 
 -- items to give to our rangers
 if ( thePlayer:getClass() == CharacterClass.Ranger ) then
- DawnInterface.giveItemToPlayer(itemDatabase["weakenedbow"] );
+  DawnInterface.giveItemToPlayer(itemDatabase["weakenedbow"] );
+  DawnInterface.giveItemToPlayer( itemDatabase["compoundbow"] );
 end
 
 -- items to give to our liches

@@ -202,8 +202,8 @@ curItem:setMaxStackSize( 5 );
 
 itemDatabase["weakenedbow"]=DawnInterface.createNewItem( "Weakened bow", 2, 3, "data/items/Bow1.tga", ItemQuality.POOR, EquipPosition.MAIN_HAND, ItemType.WEAPON, ArmorType.NO_ARMOR, WeaponType.BOW );
 curItem = itemDatabase["weakenedbow"];
-curItem:setMinDamage( 4 );
-curItem:setMaxDamage( 7 );
+curItem:setMinDamage( 7 );
+curItem:setMaxDamage( 13 );
 curItem:setValue( 78 );
 
 itemDatabase["moldytome"]=DawnInterface.createNewItem( "Moldy tome", 2, 2, "data/items/Spellbook2.tga", ItemQuality.ENHANCED, EquipPosition.OFF_HAND, ItemType.WEAPON, ArmorType.NO_ARMOR, WeaponType.SPELLBOOK );
@@ -238,3 +238,9 @@ curItem:setRequiredLevel( 1 );
 curItem:setSpell( spellDatabase["windtravel"] );
 curItem:setValue( 100 );
 curItem:setMaxStackSize( 1 );
+
+itemDatabase["compoundbow"]=DawnInterface.createNewItem( "Compound bow", 2, 3, "data/items/bow2.png", ItemQuality.NORMAL, EquipPosition.MAIN_HAND, ItemType.WEAPON, ArmorType.NO_ARMOR, WeaponType.BOW );
+curItem = itemDatabase["compoundbow"];
+curItem:setMinDamage( 15 );
+curItem:setMaxDamage( 23 );
+curItem:setValue( 200 );

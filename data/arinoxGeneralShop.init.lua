@@ -14,6 +14,7 @@ if ( arinoxGeneralShop == nil ) then
   traderInteraction:setInteractionType( InteractionType.Shop );
   traderInteraction:setInteractionCode( "arinoxGeneralShop.onActivateTrader()" );
   traderShop = DawnInterface.addShop();
+  traderShop:clear();
   traderShop:addItem( itemDatabase["leynorscap"] );
   traderShop:addItem( itemDatabase["smallhealingpotion"] );
   traderShop:addItem( itemDatabase["smallhealingpotion"] );
