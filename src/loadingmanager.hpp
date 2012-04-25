@@ -20,7 +20,6 @@
 
 #include "threadObject/Thread.h"
 #include "random.hpp"
-
 #include <string>
 
 class LoadingManager : public CThread
@@ -35,12 +34,10 @@ public:
 };
 
 #include <deque>
-
 #include "texture.hpp"
 #include "GLFT_Font.h"
 #include "globals.hpp"
 #include "luafunctions.hpp"
-
 #include "editor.hpp"
 #include "interface.hpp"
 #include "characterinfoscreen.hpp"
@@ -72,16 +69,16 @@ extern DawnInitObject *curTextureProcessor;
 
 struct TextureQueueEntry
 {
-  TextureQueueEntry( CTexture *texture_, const std::string textureFile_, int textureIndex_, int textureOffsetX_, int textureOffsetY_ )
+  TextureQueueEntry( CTexture* texture_, const std::string textureFile_, int textureIndex_, int textureOffsetX_, int textureOffsetY_ )
     :  texture( texture_ ),
        textureFile( textureFile_ ),
-			textureIndex( textureIndex_ ),
-			textureOffsetX( textureOffsetX_ ),
-			textureOffsetY( textureOffsetY_ )
-	{}
-	CTexture *texture;
-	std::string textureFile;
-	int textureIndex, textureOffsetX, textureOffsetY;
+                    textureIndex( textureIndex_ ),
+                    textureOffsetX( textureOffsetX_ ),
+                    textureOffsetY( textureOffsetY_ )
+        {}
+        CTexture* texture;
+        std::string textureFile;
+        int textureIndex, textureOffsetX, textureOffsetY;
 };
 
 class DawnInitObject : public LoadingManager
@@ -90,7 +87,7 @@ private:
   bool finished;
   std::deque<TextureQueueEntry*> textureQueue;
 
-  GLFT_Font *curFont;
+  GLFT_Font* curFont;
   std::string curFontFile;
   unsigned int curFontSize;
   std::string progressString;
@@ -135,26 +132,40 @@ public:
     return progress;
   }
 
-  void setCurrentTextureToProcess( CTexture *texture, std::string textureFile, int textureIndex, int textureOffsetX, int textureOffsetY )
+  void setCurrentTextureToProcess( CTexture* texture,
+                                   std::string textureFile,
+                                   int textureIndex,
+                                   int textureOffsetX,
+                                   int textureOffsetY )
   {
     accessMutex.Lock();
-    TextureQueueEntry *newEntry = new TextureQueueEntry( texture, textureFile, textureIndex, textureOffsetX, textureOffsetY );
+    TextureQueueEntry* newEntry = new TextureQueueEntry( texture,
+                                                         textureFile,
+                                                         textureIndex,
+                                                         textureOffsetX,
+                                                         textureOffsetY );
     textureQueue.push_back( newEntry );
-    dawn_debug_info( "setCurrentTextureToProcess called for %s", textureFile.c_str() );
-    // this is just for first tests. later the queue will work autonomously
+    dawn_debug_info( "setCurrentTextureToProcess called for %s",
+                     textureFile.c_str() );
+    /* This is just for first tests. later the queue will work autonomously. */
     accessMutex.Unlock();
-    // return without waiting for completion. This might cause some problems if the init thread accesses the texture
-    // which it should not do
+    /* Return without waiting for completion. This might cause some problems if
+       the init thread accesses the texture which it should not do. */
   }
 
   void processCurTexture()
   {
-    if( textureQueue.size() > 0 ) {
+    if( textureQueue.size() > 0 )
+    {
       accessMutex.Lock();
-      TextureQueueEntry *curEntry = textureQueue.front();
+      TextureQueueEntry* curEntry = textureQueue.front();
       accessMutex.Unlock();
       dawn_debug_info( "loading texture %s\n", curEntry->textureFile.c_str());
-      curEntry->texture->LoadIMG( curEntry->textureFile, curEntry->textureIndex, true, curEntry->textureOffsetX, curEntry->textureOffsetY );
+      curEntry->texture->LoadIMG( curEntry->textureFile,
+                                  curEntry->textureIndex,
+                                  true,
+                                  curEntry->textureOffsetX,
+                                  curEntry->textureOffsetY );
       delete curEntry;
       accessMutex.Lock();
       textureQueue.pop_front();
@@ -162,14 +173,17 @@ public:
     }
   }
 
-  void setCurrentFontToProcess( GLFT_Font *font, std::string fontFile, unsigned int fontSize )
+  void setCurrentFontToProcess( GLFT_Font* font,
+                                std::string fontFile,
+                                unsigned int fontSize )
   {
     accessMutex.Lock();
     curFont = font;
     curFontFile = fontFile;
     curFontSize = fontSize;
     accessMutex.Unlock();
-    while ( curFont != NULL ) {
+    while ( curFont != NULL )
+    {
       Sleep(1);
     }
   }
@@ -177,8 +191,9 @@ public:
   void processCurFont()
   {
     accessMutex.Lock();
-    if( curFont != NULL ) {
-      dawn_debug_info( "loading font %s\n", curFontFile.c_str());
+    if( curFont != NULL )
+    {
+      dawn_debug_info( "loading font %s\n", curFontFile.c_str() );
       threadedMode = false;
       curFont->open( curFontFile, curFontSize );
       threadedMode = true;
@@ -189,7 +204,7 @@ public:
 
   void setProgress( double newProgress )
   {
-    // wait for texture loading
+    /* Wait for texture loading. */
     size_t curSize;
     while ( ( curSize = textureQueue.size() ) > 0 )
     {
@@ -359,16 +374,16 @@ public:
     /// testing the shop, should not be initialized like this!!!
     shopWindow = std::auto_ptr<Shop>( new Shop( Globals::getPlayer(), NULL /* was dynamic_cast<CNPC*>( &character ) [=NULL] */ ) );
 
-    dawn_debug_info("Loading the game data files and objects");
+    dawn_debug_info( "Loading the game data files and objects" );
     setProgress( 0.225 );
     progressString = "Loading Spell Data";
-    LuaFunctions::executeLuaFile("data/spells.lua");
+    LuaFunctions::executeLuaFile( "data/spells.lua" );
     setProgress( 0.375 );
     progressString = "Loading Item Data";
-    LuaFunctions::executeLuaFile("data/itemdatabase.lua");
+    LuaFunctions::executeLuaFile( "data/itemdatabase.lua" );
     setProgress( 0.525 );
     progressString = "Loading Mob Data";
-    LuaFunctions::executeLuaFile("data/mobdata.all");
+    LuaFunctions::executeLuaFile( "data/mobdata.all" );
     dawn_debug_info("Loading completed");
 
     setProgress( 0.7 );
@@ -423,6 +438,7 @@ public:
       player->setMoveTexture( activity, W, curIndex, std::string("").append( characterDataString ).append("attacking w").append(numberString).append(".tga" ) );
       player->setMoveTexture( activity, NW, curIndex, std::string("").append( characterDataString ).append("attacking nw").append(numberString).append(".tga" ) );
     }
+
     activity = ActivityType::Casting;
     player->setNumMoveTexturesPerDirection( activity, 13 );
     for ( size_t curIndex=0; curIndex<13; ++curIndex ) {
@@ -510,14 +526,18 @@ public:
     player->setFatigueRegen( 5 );
     player->giveCoins( 576 );
 
-    // setting initial actions in the action bar
-    const std::vector<CSpellActionBase*> inscribedSpells = player->getSpellbook();
-    for( size_t curEntry=0; curEntry<=9 && curEntry < inscribedSpells.size(); ++curEntry )
+    /* Setting initial actions in the action bar. */
+    const std::vector<CSpellActionBase*> inscribedSpells =
+      player->getSpellbook();
+
+    for( size_t curEntry=0;
+         curEntry<=9 && curEntry < inscribedSpells.size();
+         ++curEntry )
     {
       actionBar->bindActionToButtonNr( curEntry, inscribedSpells[ curEntry ] );
     }
 
-    dawn_debug_info("Character completed");
+    dawn_debug_info( "Character completed" );
 
     setProgress( 0.92 );
     progressString = "Initializing load/save functions";

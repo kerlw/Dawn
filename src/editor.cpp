@@ -44,7 +44,9 @@ CEditor::CEditor()
   tinyFont              = NULL;
   adjacencyModeEnabled  = false;
 
-  for(size_t curDirection=0; curDirection <= AdjacencyType::BOTTOM; ++curDirection)
+  for ( size_t curDirection = 0;
+        curDirection <= AdjacencyType::BOTTOM;
+        ++curDirection )
   {
     curDirectionAdjacencySelection[curDirection] = 0;
   }
@@ -56,14 +58,17 @@ CEditor::~CEditor()
 
 namespace DawnInterface
 {
-  CNPC* addMobSpawnPoint(std::string mobID, int x_pos, int y_pos, int respawn_rate, int do_respawn);
+  CNPC* addMobSpawnPoint( std::string mobID,
+                          int x_pos, int y_pos,
+                          int respawn_rate,
+                          int do_respawn);
 }
 
 void CEditor::initFonts()
 {
-  objectDescriptionFont = FontCache::getFontFromCache("data/verdana.ttf", 10);
-  keybindingFont = FontCache::getFontFromCache("data/verdana.ttf", 9);
-  tinyFont = FontCache::getFontFromCache("data/verdana.ttf", 5);
+  objectDescriptionFont = FontCache::getFontFromCache( "data/verdana.ttf", 10 );
+  keybindingFont        = FontCache::getFontFromCache( "data/verdana.ttf", 9 );
+  tinyFont              = FontCache::getFontFromCache( "data/verdana.ttf", 5 );
 }
 
 void CEditor::inc_tilepos()
@@ -72,7 +77,7 @@ void CEditor::inc_tilepos()
 
   switch (current_object)
   {
-  case 0: // tiles
+  case 0: /* Tiles. */
   {
     if( current_tilepos+1 < curTileSet->getAllTilesOfType( TileClassificationType::FLOOR ).size() )
     {
@@ -81,7 +86,7 @@ void CEditor::inc_tilepos()
     }
   }
   break;
-  case 1: // environment
+  case 1: /* Environment. */
   {
     if( current_tilepos+1 < curTileSet->getAllTilesOfType( TileClassificationType::ENVIRONMENT ).size() )
     {
@@ -90,7 +95,7 @@ void CEditor::inc_tilepos()
     }
   }
   break;
-  case 2: // shadows
+  case 2: /* Shadows. */
   {
     if( current_tilepos+1 < curTileSet->getAllTilesOfType( TileClassificationType::SHADOW ).size() )
     {
@@ -99,10 +104,10 @@ void CEditor::inc_tilepos()
     }
   }
   break;
-  case 3: // collisionboxes
+  case 3: /* Collisionboxes. */
     break;
-  case 4: // NPCs
-    if( current_tilepos+1 < editorNPCs.size() )
+  case 4: /* NPCs. */
+    if ( current_tilepos+1 < editorNPCs.size() )
     {
       current_tilepos++;
       tilepos_offset--;
@@ -113,20 +118,20 @@ void CEditor::inc_tilepos()
 
 void CEditor::dec_tilepos()
 {
-  if(current_tilepos > 0)
+  if ( current_tilepos > 0 )
   {
     current_tilepos--;
     tilepos_offset++;
   }
 }
 
-std::string getID(std::string filename);
+std::string getID( std::string filename );
 
 void CEditor::SaveZone()
 {
   std::string zoneName = Globals::getCurrentZone()->getZoneName();
 
-  // save the ground
+  /* Save the ground. */
   std::string groundTileFileName = zoneName;
   groundTileFileName.append( ".ground.lua" );
 

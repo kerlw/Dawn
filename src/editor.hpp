@@ -71,8 +71,8 @@ private:
        KP_add_environment, KP_delete_environment, KP_toggle_tileset,
        KP_save_zone, KP_moveonce, KP_toggle_adjacencyMode;
 
-  /* keeps track of the camera positions saves the original camera
-     to snap back to target after done editing */
+  /* Keeps track of the camera positions saves the original camera
+     to snap back to target after done editing. */
   cameraFocusHandler* editorFocus;
   cameraFocusHandler* originalFocus;
 

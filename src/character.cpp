@@ -920,82 +920,81 @@ void CCharacter::setNumMoveTexturesPerDirection( ActivityType::ActivityType acti
 
 void CCharacter::setMoveTexture( ActivityType::ActivityType activity, int direction, int index, std::string filename, int textureOffsetX, int textureOffsetY )
 {
-	size_t activityNr = static_cast<size_t>(activity);
-	assert( texture[activityNr] != NULL );
-	assert( index < numMoveTexturesPerDirection[activityNr] );
-
-	texture[ activityNr ]->LoadIMG( filename, direction + 8*index, false, textureOffsetX, textureOffsetY );
+  size_t activityNr = static_cast<size_t>(activity);
+  assert( texture[activityNr] != NULL );
+  assert( index < numMoveTexturesPerDirection[activityNr] );
+  texture[ activityNr ]->LoadIMG( filename, direction + 8*index, false, textureOffsetX, textureOffsetY );
 }
 
 // end of Dawn LUA Interface
 
 CCharacter::CCharacter()
-	: strength( 1 ),
-	  dexterity( 1 ),
-	  vitality( 1 ),
-	  intellect( 1 ),
-	  wisdom( 1 ),
-	  max_health( 1 ),
-	  current_health( 1 ),
-	  max_mana( 0 ),
-	  current_mana( 0 ),
-	  healthRegen( 0 ),
-	  manaRegen( 0 ),
-	  armor( 0 ),
-	  damageModifierPoints( 0 ),
-	  hitModifierPoints( 0 ),
-	  evadeModifierPoints( 0 ),
-	  blockModifierPoints( 0 ),
-	  meleeCriticalModifierPoints( 0 ),
-	  resistElementModifierPoints( NULL ),
-	  resistAllModifierPoints( 0 ),
-	  spellEffectElementModifierPoints( NULL ),
-	  spellEffectAllModifierPoints( 0 ),
-	  spellCriticalModifierPoints( 0 ),
-	  experienceValue( 0 ),
-	  level( 1 ),
-	  boundingBoxX( 0 ),
-	  boundingBoxY( 0 ),
-	  boundingBoxW( 0 ),
-	  boundingBoxH( 0 ),
-	  useBoundingBox( false ),
-	  minCoinDrop( 0 ),
-	  maxCoinDrop( 0 ),
-	  coinDropChance( 0.0 ),
-	  portrait( NULL )
+  : strength( 1 ),
+    dexterity( 1 ),
+    vitality( 1 ),
+    intellect( 1 ),
+    wisdom( 1 ),
+    max_health( 1 ),
+    current_health( 1 ),
+    max_mana( 0 ),
+    current_mana( 0 ),
+    healthRegen( 0 ),
+    manaRegen( 0 ),
+    armor( 0 ),
+    damageModifierPoints( 0 ),
+    hitModifierPoints( 0 ),
+    evadeModifierPoints( 0 ),
+    blockModifierPoints( 0 ),
+    meleeCriticalModifierPoints( 0 ),
+    resistElementModifierPoints( NULL ),
+    resistAllModifierPoints( 0 ),
+    spellEffectElementModifierPoints( NULL ),
+    spellEffectAllModifierPoints( 0 ),
+    spellCriticalModifierPoints( 0 ),
+    experienceValue( 0 ),
+    level( 1 ),
+    boundingBoxX( 0 ),
+    boundingBoxY( 0 ),
+    boundingBoxW( 0 ),
+    boundingBoxH( 0 ),
+    useBoundingBox( false ),
+    minCoinDrop( 0 ),
+    maxCoinDrop( 0 ),
+    coinDropChance( 0.0 ),
+    portrait( NULL )
 {
-	resistElementModifierPoints = new uint16_t[ static_cast<size_t>( ElementType::Count ) ];
-	spellEffectElementModifierPoints = new uint16_t[ static_cast<size_t>( ElementType::Count ) ];
-	for ( size_t curElement=0; curElement<static_cast<size_t>( ElementType::Count ); ++curElement ) {
-		resistElementModifierPoints[ curElement ] = 0;
-		spellEffectElementModifierPoints[ curElement ] = 0;
-	}
-	size_t numActivities = static_cast<size_t>( ActivityType::Count );
-	numMoveTexturesPerDirection = new int[ numActivities ];
-	texture = new CTexture* [ numActivities ];
-	for ( size_t curActivity=0; curActivity<numActivities; ++curActivity ) {
-		numMoveTexturesPerDirection[ curActivity ] = 0;
-		texture[ curActivity ] = NULL;
-	}
-	activeDirection = S;
+  resistElementModifierPoints = new uint16_t[ static_cast<size_t>( ElementType::Count ) ];
+  spellEffectElementModifierPoints = new uint16_t[ static_cast<size_t>( ElementType::Count ) ];
+  for ( size_t curElement=0; curElement<static_cast<size_t>( ElementType::Count ); ++curElement ) {
+    resistElementModifierPoints[ curElement ] = 0;
+    spellEffectElementModifierPoints[ curElement ] = 0;
+  }
+  size_t numActivities = static_cast<size_t>( ActivityType::Count );
+  numMoveTexturesPerDirection = new int[ numActivities ];
+  texture = new CTexture* [ numActivities ];
+  for ( size_t curActivity=0; curActivity<numActivities; ++curActivity ) {
+    numMoveTexturesPerDirection[ curActivity ] = 0;
+    texture[ curActivity ] = NULL;
+  }
+  activeDirection = S;
 }
 
 CCharacter::~CCharacter()
 {
-	if ( isPreparing ) {
-		// note: if the current spell / action is not null this means
-		//       it is still bound to the player. He alone is responsible
-		//       for it.
-		delete curSpellAction;
-	}
-	size_t numActivities = static_cast<size_t>( ActivityType::Count );
-	for ( size_t curActivity=0; curActivity<numActivities; ++curActivity ) {
-		if ( texture[ curActivity ] != NULL ) {
-			delete texture[ curActivity ];
-		}
-	}
-	delete[] numMoveTexturesPerDirection;
-	delete[] texture;
+  if ( isPreparing ) {
+    // note: if the current spell / action is not null this means
+    //       it is still bound to the player. He alone is responsible
+    //       for it.
+    delete curSpellAction;
+  }
+  size_t numActivities = static_cast<size_t>( ActivityType::Count );
+  for ( size_t curActivity=0; curActivity<numActivities; ++curActivity ) {
+    if ( texture[ curActivity ] != NULL ) {
+      delete texture[ curActivity ];
+    }
+  }
+  delete[] numMoveTexturesPerDirection;
+  delete[] texture;
 }
 
 int CCharacter::getXPos() const
@@ -1020,125 +1019,131 @@ int CCharacter::getHeight() const
 
 void CCharacter::setPosition( int xpos, int ypos )
 {
-	this->x_pos = xpos;
-	this->y_pos = ypos;
+  this->x_pos = xpos;
+  this->y_pos = ypos;
 }
 
 extern std::vector <CNPC*> NPC;
 
 bool hasIntersection( int r1_l, int r1_r, int r1_b, int r1_t, int r2_l, int r2_r, int r2_b, int r2_t )
 {
-	return ( ! ( (r1_t < r2_b) || (r1_b > r2_t ) || (r1_l > r2_r) || (r1_r < r2_l) ) );
+  return ( ! ( (r1_t < r2_b) || (r1_b > r2_t ) || (r1_l > r2_r) || (r1_r < r2_l) ) );
 }
 
 bool isFree( int px, int py, int w, int h )
 {
-	CZone *curZone = Globals::getCurrentZone();
+  CZone *curZone = Globals::getCurrentZone();
 
-	for (unsigned int t=0;t<curZone->CollisionMap.size();t++) {
-		int other_l = curZone->CollisionMap[t].CR.x, other_r = curZone->CollisionMap[t].CR.x+curZone->CollisionMap[t].CR.w;
-		int other_b = curZone->CollisionMap[t].CR.y, other_t = curZone->CollisionMap[t].CR.y+curZone->CollisionMap[t].CR.h;
-		if ( hasIntersection( other_l, other_r, other_b, other_t,
-		                      px, px+w, py, py+h )) {
-			return false;
-		}
-	}
+  for (unsigned int t=0;t<curZone->CollisionMap.size();t++) {
+    int other_l = curZone->CollisionMap[t].CR.x, other_r = curZone->CollisionMap[t].CR.x+curZone->CollisionMap[t].CR.w;
+    int other_b = curZone->CollisionMap[t].CR.y, other_t = curZone->CollisionMap[t].CR.y+curZone->CollisionMap[t].CR.h;
+    if ( hasIntersection( other_l, other_r, other_b, other_t,
+			  px, px+w, py, py+h )) {
+      return false;
+    }
+  }
 
-	return true;
+  return true;
 }
 
 int CCharacter::CheckForCollision(int x_pos, int y_pos)
 {
-	CZone *curZone = Globals::getCurrentZone();
+  CZone *curZone = Globals::getCurrentZone();
 
-	int character_l = x_pos, character_r = x_pos + getWidth(), character_b = y_pos, character_t = y_pos + getHeight();
-	for (unsigned int t=0;t<curZone->CollisionMap.size();t++) {
-		int other_l = curZone->CollisionMap[t].CR.x, other_r = curZone->CollisionMap[t].CR.x+curZone->CollisionMap[t].CR.w;
-		int other_b = curZone->CollisionMap[t].CR.y, other_t = curZone->CollisionMap[t].CR.y+curZone->CollisionMap[t].CR.h;
-		if ( hasIntersection( other_l, other_r, other_b, other_t,
-		                      character_l, character_r, character_b, character_t )) {
-			return 1;
-		}
-	}
+  int character_l = x_pos, character_r = x_pos + getWidth(), character_b = y_pos, character_t = y_pos + getHeight();
+  for (unsigned int t=0;t<curZone->CollisionMap.size();t++) {
+    int other_l = curZone->CollisionMap[t].CR.x, other_r = curZone->CollisionMap[t].CR.x+curZone->CollisionMap[t].CR.w;
+    int other_b = curZone->CollisionMap[t].CR.y, other_t = curZone->CollisionMap[t].CR.y+curZone->CollisionMap[t].CR.h;
+    if ( hasIntersection( other_l, other_r, other_b, other_t,
+			  character_l, character_r, character_b, character_t )) {
+      return 1;
+    }
+  }
 
-	// check for collision with other characters
-	std::vector<CNPC*> zoneNPCs = curZone->getNPCs();
-	for ( size_t curNPCNr=0; curNPCNr < zoneNPCs.size(); ++curNPCNr )
-	{
-		CCharacter *curNPC = zoneNPCs[ curNPCNr ];
-		if ( curNPC == this || ! curNPC->isAlive() )
-			continue;
+  // check for collision with other characters
+  std::vector<CNPC*> zoneNPCs = curZone->getNPCs();
+  for ( size_t curNPCNr=0; curNPCNr < zoneNPCs.size(); ++curNPCNr )
+  {
+    CCharacter *curNPC = zoneNPCs[ curNPCNr ];
+    if ( curNPC == this || ! curNPC->isAlive() )
+      continue;
 
-		int other_l = curNPC->getXPos(), other_r = curNPC->getXPos() + curNPC->getWidth();
-		int other_b = curNPC->getYPos(), other_t = curNPC->getYPos() + curNPC->getHeight();
+    int other_l = curNPC->getXPos(), other_r = curNPC->getXPos() + curNPC->getWidth();
+    int other_b = curNPC->getYPos(), other_t = curNPC->getYPos() + curNPC->getHeight();
 
-		if ( hasIntersection( other_l, other_r, other_b, other_t,
-		                      character_l, character_r, character_b, character_t ) ) {
-				return 1;
-		}
+    if ( hasIntersection( other_l, other_r, other_b, other_t,
+			  character_l, character_r, character_b, character_t ) ) {
+      return 1;
+    }
 
-	}
+  }
 
-	// check for collision with player
-	{
-		CCharacter *curNPC = Globals::getPlayer();
-		if ( curNPC != this && curNPC->isAlive() ) {
-			int other_l = curNPC->getXPos(), other_r = curNPC->getXPos() + curNPC->getWidth();
-			int other_b = curNPC->getYPos(), other_t = curNPC->getYPos() + curNPC->getHeight();
+  // check for collision with player
+  {
+    CCharacter *curNPC = Globals::getPlayer();
+    if ( curNPC != this && curNPC->isAlive() ) {
+      int other_l = curNPC->getXPos(), other_r = curNPC->getXPos() + curNPC->getWidth();
+      int other_b = curNPC->getYPos(), other_t = curNPC->getYPos() + curNPC->getHeight();
 
-			if ( hasIntersection( other_l, other_r, other_b, other_t,
-			                      character_l, character_r, character_b, character_t ) ) {
-				return 1;
-			}
-		}
-	}
+      if ( hasIntersection( other_l, other_r, other_b, other_t,
+			    character_l, character_r, character_b, character_t ) ) {
+	return 1;
+      }
+    }
+  }
 
-	return 0;
+  return 0;
 }
 
 int CCharacter::CollisionCheck(Direction direction)
 {
+  switch (direction)
+  {
+  case N:
+    /* Check upper left corner. */
+    if ( CheckForCollision( x_pos, y_pos+1 ) == 1 )
+    {
+      return 1;
+    }
+    break;
 
-	switch (direction) {
-		case N:
-			// check upper left corner
-			if (CheckForCollision(x_pos,y_pos+1) == 1) {
-				return 1;
-			}
-		break;
+  case E:
+    /* Check upper right corner. */
+    if ( CheckForCollision( x_pos+1, y_pos ) == 1 )
+    {
+      return 1;
+    }
+    break;
 
-		case E:
-			// check upper right corner
-			if (CheckForCollision(x_pos+1,y_pos) == 1) {
-				return 1;
-			}
-		break;
+  case S:
+    /* Check lower left corner. */
+    if ( CheckForCollision( x_pos, y_pos-1 ) == 1 )
+    {
+      return 1;
+    }
+    break;
 
-		case S:
-			// check lower left corner
-			if (CheckForCollision(x_pos,y_pos-1) == 1) {
-				return 1;
-			}
-		break;
+  case W:
+    /* Check upper left corner. */
+    if ( CheckForCollision( x_pos-1, y_pos ) == 1 )
+    {
+      return 1;
+    }
+    break;
 
-		case W:
-			// check upper left corner
-			if (CheckForCollision(x_pos-1,y_pos) == 1) {
-				return 1;
-			}
-		break;
+  default:
+    break;
+  }
 
-		default:
-		break;
-	}
-	return 0;
+  return 0;
 }
 
 void CCharacter::MoveUp( uint8_t n )
 {
-	if (CollisionCheck(N) == 0) {
-		y_pos+=n;
-	}
+  if ( CollisionCheck( N ) == 0 )
+  {
+    y_pos += n;
+  }
 }
 
 void CCharacter::MoveDown( uint8_t n )
@@ -2085,27 +2090,42 @@ bool CCharacter::isPlayer() const
 
 void CCharacter::inscribeSpellInSpellbook( CSpellActionBase *spell )
 {
-    assert( spell != NULL );
-    if ( spell->getRequiredClass() == getClass() || spell->getRequiredClass() == CharacterClass::ANYCLASS ) {
-        for ( size_t curSpell = 0; curSpell < spellbook.size(); curSpell++ ) {
-            if ( spellbook[ curSpell ]->getName() == spell->getName() ) {
-                if ( spellbook[ curSpell ]->getRank() < spell->getRank() ) {
-                    spellbook[ curSpell ] = spell;
-                    if ( isPlayer() == true ) {
-                        // this will seed a new ticket for the itemtooltip, causing it to reload. We might need this because of the tooltip message displaying already known spells and ranks.
-                        dynamic_cast<Player*>(this)->setTicketForItemTooltip();
-                    }
-                }
-                return;
-            }
-        }
-        spellbook.push_back( spell );
+  assert( spell != NULL );
 
-        if ( isPlayer() == true ) {
-            // this will seed a new ticket for the itemtooltip, causing it to reload. We might need this because of the tooltip message displaying already known spells and ranks.
-            dynamic_cast<Player*>(this)->setTicketForItemTooltip();
-        }
+  if ( spell->getRequiredClass() == getClass() ||
+       spell->getRequiredClass() == CharacterClass::ANYCLASS )
+  {
+    for ( size_t curSpell = 0; curSpell < spellbook.size(); curSpell++ )
+    {
+      if ( spellbook[ curSpell ]->getName() == spell->getName() )
+      {
+	if ( spellbook[ curSpell ]->getRank() < spell->getRank() )
+	{
+	  spellbook[ curSpell ] = spell;
+	  
+	  if ( isPlayer() == true )
+	  {
+	    /* This will seed a new ticket for the itemtooltip, causing it to
+               reload. We might need this because of the tooltip message
+               displaying already known spells and ranks. */
+	    dynamic_cast<Player*>(this)->setTicketForItemTooltip();
+	  }
+	}
+
+	return;
+      }
     }
+
+    spellbook.push_back( spell );
+
+    if ( isPlayer() == true )
+    {
+      /* This will seed a new ticket for the itemtooltip, causing it to
+	 reload. We might need this because of the tooltip message
+	 displaying already known spells and ranks. */
+      dynamic_cast<Player*>(this)->setTicketForItemTooltip();
+    }
+  }
 }
 
 std::vector<CSpellActionBase*> CCharacter::getSpellbook() const

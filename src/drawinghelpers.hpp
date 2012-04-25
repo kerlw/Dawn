@@ -1,4 +1,4 @@
-/* Copyright (C) 2009,2010,2011  Dawn - 2D roleplaying game
+/* Copyright (C) 2009,2010,2011,2012  Dawn - 2D roleplaying game
 
    This file is a part of the dawn-rpg project <https://github.com/frusen/Dawn>.
 
@@ -29,57 +29,58 @@ extern int64_t numTexturesDrawn;
 
 namespace DrawingHelpers
 {
-	inline void mapTextureToRect( struct sTexture& stexture, int left, int width, int bottom, int height )
-	{
-		++numTexturesDrawn;
-		GLuint texture = stexture.texture;
-		// don't rebind texture if it is already bound
-		// (this may save a lot of performance, if the texture is not scaled)
-		GLuint boundTexture;
-		int paramValue;
-		glGetIntegerv( GL_TEXTURE_BINDING_2D, &paramValue );
-		boundTexture = static_cast<GLuint>(paramValue);
+  inline void mapTextureToRect( struct sTexture& stexture, int left, int width, int bottom, int height )
+  {
+    ++numTexturesDrawn;
+    GLuint texture = stexture.texture;
+    /* Don't rebind texture if it is already bound
+       (this may save a lot of performance, if the texture is not scaled). */
+    GLuint boundTexture;
+    int paramValue;
+    glGetIntegerv( GL_TEXTURE_BINDING_2D, &paramValue );
+    boundTexture = static_cast<GLuint>(paramValue);
 
-		if( boundTexture != texture )
-		{
-			glBindTexture( GL_TEXTURE_2D, texture);
-		}
+    if ( boundTexture != texture )
+    {
+      glBindTexture( GL_TEXTURE_2D, texture);
+    }
 
-		glBegin( GL_QUADS );
-			// Bottom-left vertex (corner)
-			glTexCoord2f( stexture.x1, stexture.y1 );
-			glVertex3f( left, bottom, 0.0f );
+    glBegin( GL_QUADS );
+    // Bottom-left vertex (corner)
+    glTexCoord2f( stexture.x1, stexture.y1 );
+    glVertex3f( left, bottom, 0.0f );
 
-			// Bottom-right vertex (corner)
-			glTexCoord2f( stexture.x2, stexture.y1 );
-			glVertex3f( left + width, bottom, 0.0f );
+    // Bottom-right vertex (corner)
+    glTexCoord2f( stexture.x2, stexture.y1 );
+    glVertex3f( left + width, bottom, 0.0f );
 
-			// Top-right vertex (corner)
-			glTexCoord2f( stexture.x2, stexture.y2 );
-			glVertex3f( left + width, bottom + height, 0.0f );
+    // Top-right vertex (corner)
+    glTexCoord2f( stexture.x2, stexture.y2 );
+    glVertex3f( left + width, bottom + height, 0.0f );
 
-			// Top-left vertex (corner)
-			glTexCoord2f( stexture.x1, stexture.y2 );
-			glVertex3f( left, bottom + height, 0.0f );
-		glEnd();
-	}
+    // Top-left vertex (corner)
+    glTexCoord2f( stexture.x1, stexture.y2 );
+    glVertex3f( left, bottom + height, 0.0f );
+    glEnd();
+  }
 
-	inline bool isRectOnScreen( int left, int width, int bottom, int height )
-	{
-		if( left >= (world_x + Configuration::screenWidth) ||   	// object right of screen
-		    bottom >= (world_y + Configuration::screenHeight) ||	// object above screen
-		    (left + width) <= world_x ||                        	// object left of screen
-		    (bottom + height) <= world_y )                      	// object below screen
-		{
-			return false;
-		}
-		return true;
-	}
+  inline bool isRectOnScreen( int left, int width, int bottom, int height )
+  {
+    if( left >= (world_x + Configuration::screenWidth) ||   	/* Object right of screen. */
+	bottom >= (world_y + Configuration::screenHeight) ||	/* Object above screen.    */
+        (left + width) <= world_x ||                        	/* Object left of screen.  */
+	(bottom + height) <= world_y )                      	/* Object below screen.    */
+    {
+      return false;
+    }
 
-	inline bool checkPointInRect( int px, int py, int left, int width, int bottom, int height )
-	{
-		return ( left < px && left + width > px && bottom < py && bottom + height > py );
-	}
+    return true;
+  }
+
+  inline bool checkPointInRect( int px, int py, int left, int width, int bottom, int height )
+  {
+    return ( left < px && left + width > px && bottom < py && bottom + height > py );
+  }
 }
 
 #endif

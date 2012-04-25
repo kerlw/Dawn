@@ -248,12 +248,13 @@ void OptionsWindow::clicked( int mouseX, int mouseY, uint8_t mouseState )
 
     /* Clear shop data. */
     shopWindow = std::auto_ptr<Shop>( new Shop( Globals::getPlayer(), NULL ) );
+    shopWindow->clear();
 
     /* Clear spellbook. */
     spellbook->clear();
 
     /* Clear action bar. */
-    actionBar->clear();
+    //actionBar->clear();
 
     /* Clear cooldowns. */
     Globals::getPlayer()->clearCooldownSpells();

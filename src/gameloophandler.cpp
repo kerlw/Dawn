@@ -596,7 +596,6 @@ void GameScreenHandler::updateScene()
     Editor.setEnabled( true );
     Editor.initFocus( &focus );
     Editor.KP_toggle_editor = true;
-    shopWindow.get()->clear();
   }
 
   if(!keys[SDLK_l])

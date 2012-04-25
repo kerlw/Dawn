@@ -23,7 +23,7 @@
 #include "textureframe.hpp"
 
 extern bool initPhase;
-extern TextureFrame *textureFrame;
+extern TextureFrame* textureFrame;
 
 extern bool threadedMode;
 uint32_t imgLoadTime = 0;
@@ -171,22 +171,23 @@ std::vector<sTexture>& CTexture::getTexture()
 	return texture;
 }
 
-void CTexture::LoadIMG(std::string file, int texture_index, bool isOpenGLThreadInThreadedMode, int textureOffsetX, int textureOffsetY )
+void CTexture::LoadIMG( std::string file, int texture_index, bool isOpenGLThreadInThreadedMode, int textureOffsetX, int textureOffsetY )
 {
-	// we we load a texture where the index is larger than our current texture array, we need to increase it.
-	if( texture_index >= texture.size() )
-	{
-		texture.resize( texture_index + 1 );
-	}
+  /* We load a texture where the index is larger than our current texture array, we need to increase it. */
+  if ( texture_index >= texture.size() )
+  {
+    texture.resize( texture_index + 1 );
+  }
 
-	if( threadedMode && ! isOpenGLThreadInThreadedMode ) {
-		processTextureInOpenGLThread( this, file, texture_index, textureOffsetX, textureOffsetY );
-		return;
-	}
+  if ( threadedMode && !isOpenGLThreadInThreadedMode )
+  {
+    processTextureInOpenGLThread( this, file, texture_index, textureOffsetX, textureOffsetY );
+    return;
+  }
 
-	texture[ texture_index ] = textureCache->getTextureFromCache( file );
-	texture[ texture_index ].textureOffsetX = textureOffsetX;
-	texture[ texture_index ].textureOffsetY = textureOffsetY;
+  texture[ texture_index ] = textureCache->getTextureFromCache( file );
+  texture[ texture_index ].textureOffsetX = textureOffsetX;
+  texture[ texture_index ].textureOffsetY = textureOffsetY;
 }
 
 

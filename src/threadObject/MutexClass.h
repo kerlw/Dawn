@@ -41,17 +41,17 @@ class CMutexClass
 {
 private:
 #ifdef WINDOWS
-	HANDLE m_mutex;
+  HANDLE m_mutex;
 #else
-	pthread_mutex_t m_mutex;
+  pthread_mutex_t m_mutex;
 #endif
-	ThreadId_t m_owner;
+  ThreadId_t m_owner;
 public:
-	BOOL m_bCreated;
-	void Lock();
-	void Unlock();
-	CMutexClass(void);
-	~CMutexClass(void);
+  BOOL m_bCreated;
+  void Lock();
+  void Unlock();
+  CMutexClass(void);
+  ~CMutexClass(void);
 };
-#endif
 
+#endif
