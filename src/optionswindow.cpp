@@ -254,7 +254,7 @@ void OptionsWindow::clicked( int mouseX, int mouseY, uint8_t mouseState )
     spellbook->clear();
 
     /* Clear action bar. */
-    //actionBar->clear();
+    actionBar->clear();
 
     /* Clear cooldowns. */
     Globals::getPlayer()->clearCooldownSpells();

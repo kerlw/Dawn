@@ -262,7 +262,7 @@ void Spellbook::reloadSpellsFromPlayer()
 
 void Spellbook::clear()
 {
-  inscribedSpells.erase(inscribedSpells.begin());
+  inscribedSpells.clear();
   refreshPage();
 }
 
