@@ -28,7 +28,7 @@ bool GameLoopHandler::isDone()
   return this->finishMe;
 }
 
-// MainMenuHandler
+/* MainMenuHandler */
 
 #include "threadObject/Thread.h"
 #include "GLee/GLee.h"
@@ -37,7 +37,7 @@ bool GameLoopHandler::isDone()
 extern std::vector <FramesBase*> activeFrames;
 #include "configuration.hpp"
 
-void MainMenuHandler::activate( SDL_Event *lastEvent )
+void MainMenuHandler::activate( SDL_Event* lastEvent )
 {
   this->lastEvent = lastEvent;
   mouseButtonDown = false;
@@ -251,10 +251,10 @@ bool KP_toggle_showQuestWindow = false;
 bool KP_toggle_showOptionsWindow = false;
 
 #ifdef _WIN32
-	#define TOOLTIP_KEY SDLK_LALT
+#define TOOLTIP_KEY SDLK_LALT
 #else
-	// ALT + mouseclick moves the window in most WMs 
-	#define TOOLTIP_KEY SDLK_LCTRL
+/* ALT + mouseclick moves the window in most WMs. */
+#define TOOLTIP_KEY SDLK_LCTRL
 #endif
 
 void GameScreenHandler::activate( SDL_Event* lastEvent )
@@ -280,9 +280,9 @@ void GameScreenHandler::handleEvents()
   if( Editor.isEnabled() )
   {
     Editor.HandleKeys();
-    lastTicks = SDL_GetTicks();
-    curTicks  = lastTicks;
-    ticksDiff = 0;
+    //lastTicks = SDL_GetTicks();
+    //curTicks  = lastTicks;
+    //ticksDiff = 0;
     return;
   }
 
