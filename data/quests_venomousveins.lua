@@ -146,7 +146,7 @@ function quest_venomousveins.showJemmaText( part )
   if( part == 4 ) then
     local textWindow = DawnInterface.createTextWindow();
     textWindow:setPosition( PositionType.CENTER, 512, 382 );
-    textWindow:setText( "How is the gathering coming along? Remember, I need spidersilks in pristine condition and two spiderling fangs!" );
+    textWindow:setText( "How is the gathering coming along? Remember, I need three spidersilks in pristine condition and two spiderling fangs!" );
     textWindow:setAutocloseTime( 0 );
   end
 
