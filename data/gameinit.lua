@@ -6,12 +6,14 @@ local thePlayer = DawnInterface.getPlayer();
 if ( thePlayer:getClass() == CharacterClass.Warrior ) then
   DawnInterface.giveItemToPlayer( itemDatabase["axeofanguish"] );
   DawnInterface.giveItemToPlayer( itemDatabase["swordofkhazom"] );
+  DawnInterface.giveItemToPlayer( itemDatabase["tornleatherbelt"] );
 end
 
 -- items to give to our rangers
 if ( thePlayer:getClass() == CharacterClass.Ranger ) then
   DawnInterface.giveItemToPlayer(itemDatabase["weakenedbow"] );
   DawnInterface.giveItemToPlayer( itemDatabase["compoundbow"] );
+  DawnInterface.giveItemToPlayer( itemDatabase["tornleatherbelt"] );
 end
 
 -- items to give to our liches
@@ -19,6 +21,7 @@ if ( thePlayer:getClass() == CharacterClass.Liche ) then
   DawnInterface.giveItemToPlayer( itemDatabase["bookofmagicmissilerank2"] );
   DawnInterface.giveItemToPlayer( itemDatabase["moldytome"] );
   DawnInterface.giveItemToPlayer( itemDatabase["daggerofflowingthought"] );
+  DawnInterface.giveItemToPlayer( itemDatabase[ "elvishbelt" ] );
 end
 
 DawnInterface.giveItemToPlayer( itemDatabase["eyeoflicor"] );
@@ -30,7 +33,6 @@ DawnInterface.giveItemToPlayer( itemDatabase["scrolloftheboar"] );
 DawnInterface.giveItemToPlayer( itemDatabase["scrolloftheboar"] );
 DawnInterface.giveItemToPlayer( itemDatabase["scrolloftheboar"] );
 DawnInterface.giveItemToPlayer( itemDatabase["smallhealingpotion"] );
-DawnInterface.giveItemToPlayer( itemDatabase["tornleatherbelt"] );
 DawnInterface.giveItemToPlayer( itemDatabase["coppernecklace"] );
 DawnInterface.giveItemToPlayer( itemDatabase["fungalboots"] );
 DawnInterface.giveItemToPlayer( itemDatabase["ajuicyapple"] );

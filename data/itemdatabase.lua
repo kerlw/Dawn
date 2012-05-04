@@ -136,7 +136,7 @@ curItem:setValue( 500 );
 curItem:setMaxStackSize( 5 );
 
 
-itemDatabase["tornleatherbelt"]=DawnInterface.createNewItem( "Torn leather belt", 2, 1, "data/items/Belt1.tga", ItemQuality.NORMAL, EquipPosition.BELT, ItemType.ARMOR, ArmorType.LEATHER, WeaponType.NO_WEAPON );
+itemDatabase["tornleatherbelt"]=DawnInterface.createNewItem( "Torn Leather Belt", 2, 1, "data/items/Belt1.tga", ItemQuality.NORMAL, EquipPosition.BELT, ItemType.ARMOR, ArmorType.LEATHER, WeaponType.NO_WEAPON );
 curItem = itemDatabase["tornleatherbelt"];
 curItem:setStats( StatsType.Armor, 12 );
 curItem:setValue( 86 );
@@ -249,3 +249,11 @@ itemDatabase["mysticmushroom"]=DawnInterface.createNewItem( "Mystic Mushroom", 1
 curItem = itemDatabase["mysticmushroom"];
 curItem:setMaxStackSize( 1 );
 curItem:setDescription( "A mystical mushroom." );
+
+itemDatabase["elvishbelt"]=DawnInterface.createNewItem( "Elvish Belt", 1, 1, "data/items/elvishbelt.png", ItemQuality.ENHANCED, EquipPosition.BELT, ItemType.ARMOR, ArmorType.CLOTH, WeaponType.NO_WEAPON );
+curItem = itemDatabase["elvishbelt"];
+curItem:setStats( StatsType.Armor, 6 );
+curItem:setStats( StatsType.Wisdom, 5 );
+curItem:setStats( StatsType.Intellect, 5 );
+curItem:setStats( StatsType.Mana, 50 );
+curItem:setValue( 126 );

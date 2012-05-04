@@ -60,6 +60,7 @@ data/houseinterior/candle1.tga							CC-BY 3.0			http://www.lostgarden.com
 data/houseinterior/insidewalldamaged4.tga				CC-BY 3.0			http://www.lostgarden.com
 data/houseinterior/insidewall2.tga						CC-BY 3.0			http://www.lostgarden.com
 data/stun.tga											GPLv3				Created by Dawn members
+data/items/elvishbelt.png                                               CC-BY 3.0                       http://opengameart.org/content/armor-icons-32x32-px-painterly
 data/items/Spellbook2.tga								Pages of adventure, need link and licence
 data/items/Shield1.tga									GPLv3				Created by Dawn members
 data/items/Scroll1.tga									GPLv3				Created by Dawn members
@@ -2258,7 +2259,7 @@ data/interface/Portrait/bar.tga
 data/interface/Portrait/Ranger.tga
 data/items/Eye1.tga
 data/items/Fang1.tga
-data/items/Mushroom1.tga
+data/items/mushroom.png
 data/items/Web1.tga
 data/items/Skin1.tga
 data/items/Meat1.tga
