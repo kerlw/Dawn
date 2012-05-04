@@ -244,3 +244,8 @@ curItem = itemDatabase["compoundbow"];
 curItem:setMinDamage( 15 );
 curItem:setMaxDamage( 23 );
 curItem:setValue( 200 );
+
+itemDatabase["mysticmushroom"]=DawnInterface.createNewItem( "Mystic Mushroom", 1, 1, "data/items/mushroom.png", ItemQuality.ENHANCED, EquipPosition.NONE, ItemType.QUESTITEM, ArmorType.NO_ARMOR, WeaponType.NO_WEAPON );
+curItem = itemDatabase["mysticmushroom"];
+curItem:setMaxStackSize( 1 );
+curItem:setDescription( "A mystical mushroom." );

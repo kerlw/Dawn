@@ -30,7 +30,7 @@ end
 function quest_venomousveins.enterWoods()
   local textWindow = DawnInterface.createTextWindow();
   textWindow:setPosition( PositionType.CENTER, 512, 382 );
-  textWindow:setText( "The Sylphir woods." );
+  textWindow:setText( "The Sylphir Woods." );
   textWindow:setAutocloseTime( 1000 );
 end
 

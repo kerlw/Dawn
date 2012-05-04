@@ -28,7 +28,19 @@ end
 
 function zone1.onEnterMap(x,y)
   DawnInterface.setBackgroundMusic("data/music/Early_Dawn_Simple.ogg");
+
+  if ( not ( quest_lostmushroom == nil ) ) then
+    if ( quest_lostmushroom.mushroomSpawned == false ) then
+      quest_lostmushroom.mushroomSpawned = true;
+      quest_lostmushroom.mushroom = DawnInterface.addInteractionPoint();
+      quest_lostmushroom.mushroom:setPosition( 960, -1854, 32, 32 );
+      quest_lostmushroom.mushroom:setBackgroundTexture( "data/items/mushroom.png" );
+      quest_lostmushroom.mushroom:setInteractionType( InteractionType.Quest );
+      quest_lostmushroom.mushroom:setInteractionCode( "quest_lostmushroom.onMushroomPickup()" );
+    end
+  end
 end
 
 dofile("data/quests_hexmaster.lua");
 dofile("data/quests_venomousveins.lua");
+dofile( "data/quests_lostmushroom.lua" );

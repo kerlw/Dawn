@@ -21,5 +21,5 @@ EditorInterface.addCollisionRect( 1113, 1845, 839, 21 );
 EditorInterface.addCollisionRect( 1121, 1881, 15, 277 );
 EditorInterface.addCollisionRect( 969, 2165, 170, 17 );
 EditorInterface.addCollisionRect( 974, 376, 15, 1791 );
-EditorInterface.addCollisionRect( 2022, 1984, 54, 16 );
+EditorInterface.addCollisionRect( 1952, 1982, 198, 16 );
 EditorInterface.addCollisionRect( 1120, 1271, 785, 15 );
