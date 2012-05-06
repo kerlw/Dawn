@@ -280,9 +280,9 @@ void GameScreenHandler::handleEvents()
   if( Editor.isEnabled() )
   {
     Editor.HandleKeys();
-    //lastTicks = SDL_GetTicks();
-    //curTicks  = lastTicks;
-    //ticksDiff = 0;
+    lastTicks = SDL_GetTicks();
+    curTicks  = lastTicks;
+    ticksDiff = 0;
     return;
   }
 

@@ -1666,6 +1666,9 @@ EditorInterface.addEnvironment( 2363, -2343, 0, MapData.DontSave.tree_tree2_tga 
 EditorInterface.addEnvironment( -2473, -2345, 0, MapData.DontSave.tree_tree2_tga );
 EditorInterface.addEnvironment( -1004, -2349, 0, MapData.DontSave.tree_tree2_tga );
 EditorInterface.addEnvironment( 612, -2350, 0, MapData.DontSave.tree_tree1_tga );
+EditorInterface.addEnvironment( -1941, -2352, 0, MapData.DontSave.shadow_shadow1_tga );
+EditorInterface.addEnvironment( -1941, -2352, 0, MapData.DontSave.shadow_shadow1_tga );
+EditorInterface.addEnvironment( -1941, -2352, 0, MapData.DontSave.shadow_shadow1_tga );
 EditorInterface.addEnvironment( 2684, -2357, 0, MapData.DontSave.tree_tree2_tga );
 EditorInterface.addEnvironment( 2491, -2359, 0, MapData.DontSave.tree_tree1_tga );
 EditorInterface.addEnvironment( 2210, -2360, 0, MapData.DontSave.tree_tree1_tga );
