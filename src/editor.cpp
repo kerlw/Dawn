@@ -531,20 +531,23 @@ void CEditor::HandleKeys()
   } else if ( objectedit_selected < 0 ) { // Not editting an object, use arrows to move screen
 
 
-    if(SDL_GetMouseState(NULL, NULL) &SDL_BUTTON(1))
+    if ( SDL_GetMouseState( NULL, NULL ) &SDL_BUTTON( 1 ) )
     {
-      //corners
-      if(mouseX < scrollHotSpot && mouseY < scrollHotSpot)                    editorFocus->setFocus(editorFocus->getX()-1, editorFocus->getY()-1);  //bottom-left
-      else if(mouseX < scrollHotSpot && mouseY > Configuration::screenHeight-scrollHotSpot)         editorFocus->setFocus(editorFocus->getX()-1, editorFocus->getY()+1);  //top-left
-      else if(mouseX > Configuration::screenWidth-scrollHotSpot && mouseY < scrollHotSpot)         editorFocus->setFocus(editorFocus->getX()+1, editorFocus->getY()-1);  //bottom-right
-      else if(mouseX > Configuration::screenWidth-scrollHotSpot && mouseY > Configuration::screenHeight-scrollHotSpot)   editorFocus->setFocus(editorFocus->getX()+1, editorFocus->getY()+1);  //top-right
+      /* Corners */
+      if ( mouseX < scrollHotSpot && mouseY < scrollHotSpot )
+      {
+        editorFocus->setFocus(editorFocus->getX()-5, editorFocus->getY()-5);  //bottom-left
+      }
+      else if(mouseX < scrollHotSpot && mouseY > Configuration::screenHeight-scrollHotSpot)         editorFocus->setFocus(editorFocus->getX()-5, editorFocus->getY()+5);  //top-left
+      else if(mouseX > Configuration::screenWidth-scrollHotSpot && mouseY < scrollHotSpot)         editorFocus->setFocus(editorFocus->getX()+5, editorFocus->getY()-5);  //bottom-right
+      else if(mouseX > Configuration::screenWidth-scrollHotSpot && mouseY > Configuration::screenHeight-scrollHotSpot)   editorFocus->setFocus(editorFocus->getX()+5, editorFocus->getY()+5);  //top-right
       else
       {
-        //sides
-        if(mouseX < scrollHotSpot)        editorFocus->setFocus(editorFocus->getX()-1, editorFocus->getY()); //left
-        if(mouseX > Configuration::screenWidth-scrollHotSpot)  editorFocus->setFocus(editorFocus->getX()+1, editorFocus->getY()); //right
-        if(mouseY < scrollHotSpot)        editorFocus->setFocus(editorFocus->getX(), editorFocus->getY()-1); //bottom
-        if(mouseY > Configuration::screenHeight-scrollHotSpot)  editorFocus->setFocus(editorFocus->getX(), editorFocus->getY()+1); //top
+        /* Sides */
+        if(mouseX < scrollHotSpot)        editorFocus->setFocus(editorFocus->getX()-5, editorFocus->getY()); //left
+        if(mouseX > Configuration::screenWidth-scrollHotSpot)  editorFocus->setFocus(editorFocus->getX()+5, editorFocus->getY()); //right
+        if(mouseY < scrollHotSpot)        editorFocus->setFocus(editorFocus->getX(), editorFocus->getY()-5); //bottom
+        if(mouseY > Configuration::screenHeight-scrollHotSpot)  editorFocus->setFocus(editorFocus->getX(), editorFocus->getY()+5); //top
       }
     }
 
@@ -831,7 +834,7 @@ void CEditor::HandleKeys()
   if (keys[SDLK_s] && !KP_save_zone) {
     KP_save_zone = true;
     SaveZone();
-    message.AddText(editorFocus->getX() + (Configuration::screenWidth/2), editorFocus->getY() + (Configuration::screenHeight/2), 1.0f, 0.625f, 0.71f, 1.0f, 15, 3.0f, "Zone saved ...");
+    message.AddText(editorFocus->getX() + (Configuration::screenWidth/2), editorFocus->getY() + (Configuration::screenHeight/2), 1.0f, 0.625f, 0.71f, 1.0f, 15, 3.0f, "Zone saved...");
   }
 
   if (!keys[SDLK_s]) {

@@ -24,6 +24,12 @@ if ( zone1 == nil ) then
   zone1.leavePoint:setInteractionType( InteractionType.Zone );
   zone1.leavePoint:setBackgroundTexture( "data/transparent2x2pixel.tga" );
   zone1.leavePoint:setInteractionCode( 'local textWindow = DawnInterface.createTextWindow();textWindow:center();textWindow:setText("The door is locked.");textWindow:setAutocloseTime( 600 );' );
+
+  zone1.leavePoint = DawnInterface.addInteractionPoint();
+  zone1.leavePoint:setPosition( 1760, 980, 56, 80 );
+  zone1.leavePoint:setInteractionType( InteractionType.Zone );
+  zone1.leavePoint:setBackgroundTexture( "data/transparent2x2pixel.tga" );
+  zone1.leavePoint:setInteractionCode( 'DawnInterface.enterZone( "data/arinoxHut", -158, 0 );' );
 end
 
 function zone1.onEnterMap(x,y)

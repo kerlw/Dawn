@@ -137,7 +137,7 @@ void LoadingScreenHandler::activate( SDL_Event* lastEvent )
   initPhase = true;
   textureFrame = new TextureFrame();
 
-  SDL_ShowCursor(false);
+  SDL_ShowCursor( true );
 
   loadingManager->startBackgroundThread();
   // DawnState::setDawnState( DawnState::LoadingScreen );

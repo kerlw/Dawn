@@ -719,7 +719,7 @@ EditorInterface.addEnvironment( 1159, 902, 0, MapData.DontSave.tree_tree2_tga );
 EditorInterface.addEnvironment( 1593, 900, 0, MapData.DontSave.village_village3_tga );
 EditorInterface.addEnvironment( 1829, 898, 0, MapData.DontSave.village_village9_tga );
 EditorInterface.addEnvironment( 3246, 897, 0, MapData.DontSave.tree_tree2_tga );
-EditorInterface.addEnvironment( 1749, 897, 0, MapData.DontSave.village_village6_tga );
+EditorInterface.addEnvironment( 1749, 897, 0, MapData.DontSave.village_village11_tga );
 EditorInterface.addEnvironment( 1989, 896, 0, MapData.DontSave.tree_tree2_tga );
 EditorInterface.addEnvironment( 1377, 894, 0, MapData.DontSave.tree_tree2_tga );
 EditorInterface.addEnvironment( -249, 894, 0, MapData.DontSave.tree_tree1_tga );

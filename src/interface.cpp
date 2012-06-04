@@ -60,7 +60,6 @@ void CInterface::LoadTextures()
   interfacetextures.LoadIMG( "data/interface/Portrait/bar.tga", 12);
   interfacetextures.LoadIMG( "data/interface/Portrait/bar_small.tga", 13);
   interfacetextures.LoadIMG( "data/interface/Portrait/Warrior.tga", 14);
-  interfacetextures.LoadIMG( "data/cursors/pointer.png", 15);
 
   damageDisplayTexturesSmall.LoadIMG( "data/interface/combattext/0small.tga", 0 );
   damageDisplayTexturesSmall.LoadIMG( "data/interface/combattext/1small.tga", 1 );
@@ -190,14 +189,14 @@ void CInterface::DrawInterface()
 
 void CInterface::DrawCursor()
 {
-  SDL_GetMouseState(&mx, &my);
+  /*SDL_GetMouseState(&mx, &my);
   my = Configuration::screenHeight - my - 1;
 
   DrawingHelpers::mapTextureToRect(interfacetextures.getTexture(15),
                                    mx+world_x,
                                    19,
                                    my+world_y-19,
-                                   19);
+                                   19);*/
 }
 
 void CInterface::SetPlayer(CCharacter *player_)
