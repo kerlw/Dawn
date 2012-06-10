@@ -98,6 +98,7 @@ function quest_hexmaster.showStartText( part )
 		textWindow:setPosition( PositionType.CENTER, 512, 382 );
 		textWindow:setAutocloseTime( 0 );
 		textWindow:setText("So is was Xaralax, not Jorni? I thought something was strange. Give me time to think about this.");
+quest_hexmaster.quest:setDescription( "Give Ornad Saidor some time to think about this." );
 	end
 end
 
@@ -334,6 +335,7 @@ function quest_hexmaster.showJorniText( part )
 		textWindow:setAutocloseTime( 0 );
 		textWindow:setText("With this the light leaves Jornis eyes. You quickly take the diary and leave the prison which soon closes again to finally become a young mans tomb. Rest well, Jorni. You turn to leave the dungeon again, your initial suspicions about conveniently quickly found suspects having turned out right. You silently promise to wash Jornis name clear and bring down the evil hexmaster. Then you turn to go.");
 		quest_hexmaster.metJorni=true
+quest_hexmaster.quest:setDescription( "Give Xaralax's diary to Ornad Saidor." );
 	end
 end
 
