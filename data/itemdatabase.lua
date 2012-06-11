@@ -219,8 +219,8 @@ curItem:setValue( 276 );
 curItem:setStats( StatsType.Wisdom, 2 );
 curItem:setStats( StatsType.Intellect, 1 );
 
-itemDatabase["pristinesylphirsilk"]=DawnInterface.createNewItem( "Pristine Sylphir spidersilk", 1, 1, "data/items/Web1.tga", ItemQuality.ENHANCED, EquipPosition.NONE, ItemType.QUESTITEM, ArmorType.NO_ARMOR, WeaponType.NO_WEAPON );
-curItem = itemDatabase["pristinesylphirsilk"];
+itemDatabase["pristinesylphirspidersilk"]=DawnInterface.createNewItem( "Pristine Sylphir Spidersilk", 1, 1, "data/items/Web1.tga", ItemQuality.ENHANCED, EquipPosition.NONE, ItemType.QUESTITEM, ArmorType.NO_ARMOR, WeaponType.NO_WEAPON );
+curItem = itemDatabase["pristinesylphirspidersilk"];
 curItem:setMaxStackSize( 20 );
 
 itemDatabase["sylphirfang"]=DawnInterface.createNewItem( "Sylphir fang", 1, 1, "data/items/Fang1.tga", ItemQuality.NORMAL, EquipPosition.NONE, ItemType.QUESTITEM, ArmorType.NO_ARMOR, WeaponType.NO_WEAPON );

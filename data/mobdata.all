@@ -403,7 +403,7 @@ spiderbase:setClass( CharacterClass.Warrior );
 spiderbase:inscribeSpellInSpellbook( spellDatabase["spiderbite"] );
 spiderbase:inscribeSpellInSpellbook( spellDatabase["venomweave"] );
 spiderbase:addItemToLootTable( itemDatabase["spidersilk"], 0.30 );
-spiderbase:addItemToLootTable( itemDatabase["pristinesylphirsilk"], 0.20 );
+spiderbase:addItemToLootTable( itemDatabase["pristinesylphirspidersilk"], 0.20 );
 spiderbase:setExperienceValue( 27 );
 
 skeletonbase = DawnInterface.createNewMobType("Skeleton")

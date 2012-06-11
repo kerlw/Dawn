@@ -41,7 +41,7 @@ function quest_venomousveins.speakWithJemma()
         quest_venomousveins.showJemmaText( 2 );
         quest_venomousveins.gotInstructionFromJemma = true;
         quest_venomousveins.quest_one:setDescription( "Jemma requires two fangs from the small spiderlings and three pristine spidersilks from the Webweaves in order to make an antidote." );
-        quest_venomousveins.quest_one:addRequiredItemForCompletion( itemDatabase["pristinesylphirsilk"], 3 );
+        quest_venomousveins.quest_one:addRequiredItemForCompletion( itemDatabase["pristinesylphirspidersilk"], 3 );
         quest_venomousveins.quest_one:addRequiredItemForCompletion( itemDatabase["sylphirfang"], 2 );
       elseif( quest_venomousveins.added == true and quest_venomousveins.completed == false and quest_venomousveins.gotInstructionFromJemma == true ) then
         quest_venomousveins.showJemmaText( 4 );
