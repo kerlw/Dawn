@@ -36,8 +36,6 @@ namespace DawnInterface
   void addTextToLogWindow( GLfloat color[], const char* text, ... );
 }
 
-/// Implementation of class CSpellActionBase
-
 CSpellActionBase::CSpellActionBase()
   : boundToCreator( false ),
     finished( false ),
@@ -50,6 +48,16 @@ CSpellActionBase::CSpellActionBase()
 {
   characterStateEffects.first = CharacterStates::NOEFFECT;
   characterStateEffects.second = 1.0f;
+}
+
+CSpellActionBase* CSpellActionBase::cast( CCharacter* creator, int x, int y )
+{
+  return NULL;
+}
+
+CSpellActionBase* CSpellActionBase::cast( CCharacter* creator, std::string code )
+{
+  return NULL;
 }
 
 CSpellActionBase::~CSpellActionBase()
@@ -748,13 +756,6 @@ CSpellActionBase* GeneralRayDamageSpell::cast( CCharacter *creator, CCharacter *
   return newSpell;
 }
 
-CSpellActionBase* GeneralRayDamageSpell::cast( CCharacter *creator, int x, int y )
-{
-  //this function does nothing... 'cause it's only needed in GeneralAreaDamageSpell
-  GeneralRayDamageSpell* newSpell = new GeneralRayDamageSpell( this );
-  return newSpell;
-}
-
 void GeneralRayDamageSpell::setNumAnimations( int count )
 {
   if( spellTexture != NULL )
@@ -1143,13 +1144,6 @@ CSpellActionBase* GeneralBoltDamageSpell::cast( CCharacter *creator, CCharacter 
 	return newSpell;
 }
 
-CSpellActionBase* GeneralBoltDamageSpell::cast( CCharacter *creator, int x, int y )
-{
-	//this function does nothing... 'cause it's only needed in GeneralAreaDamageSpell
-	GeneralBoltDamageSpell* newSpell = new GeneralBoltDamageSpell( this );
-	return newSpell;
-}
-
 void GeneralBoltDamageSpell::setMoveSpeed( int newMoveSpeed )
 {
 	moveSpeed = newMoveSpeed;
@@ -1327,13 +1321,6 @@ CSpellActionBase* GeneralHealingSpell::cast( CCharacter *creator, CCharacter *ta
 	newSpell->target = target;
 
 	return newSpell.release();
-}
-
-CSpellActionBase* GeneralHealingSpell::cast( CCharacter *creator, int x, int y )
-{
-	//this function does nothing... 'cause it's only needed in GeneralAreaDamageSpell
-	GeneralHealingSpell* newSpell = new GeneralHealingSpell( this );
-	return newSpell;
 }
 
 void GeneralHealingSpell::setEffectType( EffectType::EffectType newEffectType )
@@ -1550,13 +1537,6 @@ CSpellActionBase* GeneralBuffSpell::cast( CCharacter *creator, CCharacter *targe
 	return newSpell.release();
 }
 
-CSpellActionBase* GeneralBuffSpell::cast( CCharacter *creator, int x, int y )
-{
-	//this function does nothing... 'cause it's only needed in GeneralAreaDamageSpell
-	GeneralBuffSpell* newSpell = new GeneralBuffSpell( this );
-	return newSpell;
-}
-
 void GeneralBuffSpell::setEffectType( EffectType::EffectType newEffectType )
 {
 	assert( newEffectType == EffectType::SingleTargetSpell || newEffectType == EffectType::SelfAffectingSpell );
@@ -1682,13 +1662,6 @@ CSpellActionBase* MeleeDamageAction::cast( CCharacter *creator, CCharacter *targ
 	newAction->target = target;
 
 	return newAction.release();
-}
-
-CSpellActionBase* MeleeDamageAction::cast( CCharacter *creator, int x, int y )
-{
-	//this function does nothing... 'cause it's only needed in GeneralAreaDamageSpell
-	MeleeDamageAction* newSpell = new MeleeDamageAction( this );
-	return newSpell;
 }
 
 void MeleeDamageAction::setDamageBonus( double damageBonus )
@@ -1842,13 +1815,6 @@ CSpellActionBase* RangedDamageAction::cast( CCharacter *creator, CCharacter *tar
 	newSpell->creator = creator;
 	newSpell->target = target;
 
-	return newSpell;
-}
-
-CSpellActionBase* RangedDamageAction::cast( CCharacter *creator, int x, int y )
-{
-	//this function does nothing... 'cause it's only needed in GeneralAreaDamageSpell
-	RangedDamageAction* newSpell = new RangedDamageAction( this );
 	return newSpell;
 }
 
@@ -2092,11 +2058,13 @@ CSpellActionBase* GeneralLuaSpell::cast( CCharacter* creator, CCharacter* target
   return newSpell.release();
 }
 
-CSpellActionBase* GeneralLuaSpell::cast( CCharacter* creator, int x, int y )
+CSpellActionBase* GeneralLuaSpell::cast( CCharacter* creator, std::string code )
 {
-  // this function does nothing... 'cause it's only needed in GeneralAreaDamageSpell
-  GeneralLuaSpell* newSpell = new GeneralLuaSpell( this );
-  return newSpell;
+  std::auto_ptr<GeneralLuaSpell> newSpell( new GeneralLuaSpell( this ) );
+  newSpell->creator = creator;
+  newSpell->code = code;
+
+  return newSpell.release();
 }
 
 void GeneralLuaSpell::startEffect()
@@ -2108,7 +2076,7 @@ void GeneralLuaSpell::startEffect()
   }
   effectStart = SDL_GetTicks();
   
-  LuaFunctions::executeLuaScript( "DawnInterface.enterZone( 'data/zone1', 666, 1400 );DawnInterface.setSavingAllowed( true );" );
+  LuaFunctions::executeLuaScript( code );
 
   creator->addCooldownSpell( dynamic_cast<CSpellActionBase*> ( cast( NULL, NULL ) ) );
   unbindFromCreator();

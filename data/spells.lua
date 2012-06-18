@@ -741,4 +741,4 @@ curSpell:setSpellCost( 0 );
 curSpell:setSpellSymbol( "data/spells/leatherskin/symbol.tga" );
 curSpell:setEffectType( EffectType.SelfAffectingSpell );
 curSpell:setRequiredClass( CharacterClass.ANYCLASS );
---curSpell:setCode( "DawnInterface.enterZone( 'data/zone1', 666, 1400 );" );
+--curSpell:setCode( "DawnInterface.enterZone( 'data/zone1', 666, 1400 );DawnInterface.setSavingAllowed( true );" );

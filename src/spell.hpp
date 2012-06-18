@@ -84,7 +84,8 @@ protected:
 public:
   /// \brief Creates a spell to really cast as a copy from this one with a fixed target and creator.
   virtual CSpellActionBase* cast( CCharacter* creator, CCharacter* target, bool child = false ) = 0;
-  virtual CSpellActionBase* cast( CCharacter* creator, int x, int y ) = 0;
+  virtual CSpellActionBase* cast( CCharacter* creator, int x, int y );
+  virtual CSpellActionBase* cast( CCharacter* creator, std::string code );
   virtual ~CSpellActionBase();
 
   /// Info about the spell, both for the game (mana cost, etc) and for the player (name, info, etc)
@@ -349,7 +350,6 @@ class GeneralRayDamageSpell : public GeneralDamageSpell
 {
 public:
   virtual CSpellActionBase* cast( CCharacter* creator, CCharacter* target, bool child );
-  virtual CSpellActionBase* cast( CCharacter* creator, int x, int y );
 
   void setNumAnimations( int count );
   void setAnimationTexture( int num, std::string filename );
@@ -427,7 +427,6 @@ class GeneralBoltDamageSpell : public GeneralDamageSpell
 {
 public:
   virtual CSpellActionBase* cast( CCharacter* creator, CCharacter* target, bool child );
-  virtual CSpellActionBase* cast( CCharacter* creator, int x, int y );
 
   void setMoveSpeed( int newMoveSpeed );
   void setExpireTime( int newExpireTime );
@@ -467,7 +466,6 @@ class GeneralHealingSpell : public ConfigurableSpell
 {
 public:
   virtual CSpellActionBase* cast( CCharacter* creator, CCharacter* target, bool child );
-  virtual CSpellActionBase* cast( CCharacter* creator, int x, int y );
 
   void setEffectType( EffectType::EffectType newEffectType );
   EffectType::EffectType getEffectType() const;
@@ -513,7 +511,6 @@ class GeneralBuffSpell : public ConfigurableSpell
 {
 public:
   virtual CSpellActionBase* cast( CCharacter* creator, CCharacter* target, bool child );
-  virtual CSpellActionBase* cast( CCharacter* creator, int x, int y );
 
   void setEffectType( EffectType::EffectType newEffectType );
   EffectType::EffectType getEffectType() const;
@@ -548,7 +545,6 @@ class MeleeDamageAction : public ConfigurableAction
 {
 public:
   virtual CSpellActionBase* cast( CCharacter* creator, CCharacter* target, bool child );
-  virtual CSpellActionBase* cast( CCharacter* creator, int x, int y );
 
   virtual EffectType::EffectType getEffectType() const;
 
@@ -579,7 +575,6 @@ class RangedDamageAction : public ConfigurableAction
 {
 public:
   virtual CSpellActionBase* cast( CCharacter* creator, CCharacter *target, bool child );
-  virtual CSpellActionBase* cast( CCharacter* creator, int x, int y );
 
   virtual EffectType::EffectType getEffectType() const;
 
@@ -628,7 +623,7 @@ class GeneralLuaSpell : public ConfigurableSpell
 {
 public:
   virtual CSpellActionBase* cast( CCharacter* creator, CCharacter* target, bool child );
-  virtual CSpellActionBase* cast( CCharacter* creator, int x, int y );
+  virtual CSpellActionBase* cast( CCharacter* creator, std::string code );
 
   void setEffectType( EffectType::EffectType newEffectType );
   EffectType::EffectType getEffectType() const;
