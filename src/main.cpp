@@ -304,6 +304,9 @@ void DrawScene()
     }
   }
 
+  /* Draw zone above. This is stuff that has to be above the player. */
+  curZone->DrawZoneAbove();
+
   // check our FPS and output it
   thisframe = SDL_GetTicks(); // Count the FPS
   ff++;

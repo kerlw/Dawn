@@ -115,18 +115,40 @@ void CZone::DrawTiles()
 
 void CZone::DrawTilesAbove()
 {
-  //yeah
+  /* Draw only the objects with the Z-level > 0. */
+  for ( unsigned int x=0; x<EnvironmentMap.size(); x++ )
+  {
+    if ( EnvironmentMap[x].z_pos > 0 )
+    {
+      EnvironmentMap[x].tile->texture->DrawTexture( EnvironmentMap[x].x_pos,
+						    EnvironmentMap[x].y_pos, 0,
+						    EnvironmentMap[x].transparency,
+						    EnvironmentMap[x].red,
+						    EnvironmentMap[x].green,
+						    EnvironmentMap[x].blue,
+						    EnvironmentMap[x].x_scale,
+						    EnvironmentMap[x].y_scale);
+    }
+  }
 }
 
 void CZone::DrawEnvironment()
 {
-	for (unsigned int x=0 ; x < EnvironmentMap.size() ; x++) {
-		EnvironmentMap[x].tile->texture->DrawTexture(EnvironmentMap[x].x_pos,
-		                                             EnvironmentMap[x].y_pos,0,
-		                                             EnvironmentMap[x].transparency, EnvironmentMap[x].red,
-		                                             EnvironmentMap[x].green, EnvironmentMap[x].blue,
-		                                             EnvironmentMap[x].x_scale, EnvironmentMap[x].y_scale);
-	}
+  /* Draw only the objects with the Z-level 0. */
+  for ( unsigned int x=0; x<EnvironmentMap.size(); x++ )
+  {
+    if ( EnvironmentMap[x].z_pos == 0 )
+    {
+      EnvironmentMap[x].tile->texture->DrawTexture( EnvironmentMap[x].x_pos,
+						    EnvironmentMap[x].y_pos, 0,
+						    EnvironmentMap[x].transparency,
+						    EnvironmentMap[x].red,
+						    EnvironmentMap[x].green,
+						    EnvironmentMap[x].blue,
+						    EnvironmentMap[x].x_scale,
+						    EnvironmentMap[x].y_scale);
+    }
+  }
 }
 
 void CZone::DrawShadows()

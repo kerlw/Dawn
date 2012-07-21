@@ -88,35 +88,41 @@ void CInterface::DrawInterface()
 {
   /// start drawing our portrait, with lifebar, mana, fatigue, exp
 
-  // draw the portrait of the character (ie, a humanlike guy or girl)
+  /* Draw the portrait of the character. */
   DrawingHelpers::mapTextureToRect( player->getPortraitTexture()->getTexture(0),
                                     world_x+4, player->getPortraitTexture()->getTexture(0).width,
-                                    world_y+Configuration::screenHeight-68, player->getPortraitTexture()->getTexture(0).height );
+                                    world_y+Configuration::screenHeight-68,
+                                    player->getPortraitTexture()->getTexture(0).height );
 
 
-  // drawing the base of the portrait
+  /* Draw the base of the portrait. */
   DrawingHelpers::mapTextureToRect( interfacetextures.getTexture(11),
                                     world_x, interfacetextures.getTexture(11).width,
-                                    world_y+50+Configuration::screenHeight-interfacetextures.getTexture(11).height, interfacetextures.getTexture(11).height );
+                                    world_y+50+Configuration::screenHeight - 
+                                    interfacetextures.getTexture(11).height,
+                                    interfacetextures.getTexture(11).height );
 
-  /* drawing the procentual display of characters life and mana.
-     starts of at an X-offset of 76, this is where the hollow parts of the life, mana, fatigue and experience bars starts.
+  /* Draw the procentual display of the character's life and mana.
+     Starts of at an X-offset of 76, this is where the hollow parts
+     of the life, mana, fatigue and experience bars starts.
      The bar is 123 pixels wide, that means 100% life/mana/fatigue/experience = 123 pixels of bar. */
-  float lifeBarPercentage = static_cast<float>(player->getCurrentHealth() ) / player->getModifiedMaxHealth();
-  float manaBarPercentage = static_cast<float>(player->getCurrentMana()) / player->getModifiedMaxMana();
+  float lifeBarPercentage = static_cast<float>( player->getCurrentHealth() ) / player->getModifiedMaxHealth();
+  float manaBarPercentage = static_cast<float>( player->getCurrentMana() ) / player->getModifiedMaxMana();
   float fatigueBarPercentage = static_cast<float>( 1 - ( static_cast<float>(player->getCurrentFatigue()) / player->getModifiedMaxFatigue() ) );
   uint64_t neededXP = (player->getExpNeededForLevel(player->getLevel()+1)) - player->getExpNeededForLevel(player->getLevel());
   uint64_t currentXP = player->getExperience() - player->getExpNeededForLevel(player->getLevel());
   float experienceBarPercentage = static_cast<float>( currentXP ) / neededXP;
 
-  // draw the barwidth with no transparency.
-  /// health bar
+  /* Draw the barwidth with no transparency. */
+  /* Health */
   glColor4f( 0.815f, 0.16f, 0.16f, 1.0f );
   DrawingHelpers::mapTextureToRect( interfacetextures.getTexture(12),
                                     world_x+76, lifeBarPercentage * 123,
-                                    world_y+Configuration::screenHeight-35, interfacetextures.getTexture(12).height );
-  /// mana bar
-  if( player->getArchType() == CharacterArchType::Caster )
+                                    world_y+Configuration::screenHeight-35,
+				    interfacetextures.getTexture(12).height );
+
+  /* Mana */
+  if ( player->getArchType() == CharacterArchType::Caster )
   {
     glColor4f( 0.16f, 0.576f, 0.815f, 1.0f );
     DrawingHelpers::mapTextureToRect( interfacetextures.getTexture(12),
@@ -125,14 +131,14 @@ void CInterface::DrawInterface()
                                       interfacetextures.getTexture(12).height );
   }
 
-  /// fatigue bar
-  if( player->getArchType() == CharacterArchType::Fighter )
+  /* Fatigue */
+  if ( player->getArchType() == CharacterArchType::Fighter )
   {
-    if( fatigueBarPercentage <= 0.33 )
+    if ( fatigueBarPercentage <= 0.33 )
     {
       glColor4f( 0.109f, 0.917f, 0.047f, 1.0f );
     }
-    else if( fatigueBarPercentage >= 0.34 && fatigueBarPercentage <= 0.66 )
+    else if ( fatigueBarPercentage >= 0.34 && fatigueBarPercentage <= 0.66 )
     {
       glColor4f( 0.917f, 0.847f, 0.047f, 1.0f );
     }
@@ -147,31 +153,28 @@ void CInterface::DrawInterface()
                                       interfacetextures.getTexture(12).height );
   }
 
-  /// exp bar
+  /* Experience */
   glColor4f( 1.0f, 1.0f, 1.0f, 1.0f );
   DrawingHelpers::mapTextureToRect( interfacetextures.getTexture(13),
                                     world_x+76, experienceBarPercentage * 123,
                                     world_y+Configuration::screenHeight-67,
                                     interfacetextures.getTexture(13).height );
 
-  /// draw our level beside the experience bar
+  /* Draw the level beside the experience bar. */
   levelFont->drawText( world_x+60-levelFont->calcStringWidth("%d", player->getLevel())/2,
                                                                    world_y+Configuration::screenHeight-70,
                                                                    "%d",player->getLevel() );
-
   glColor4f( 1.0f, 1.0f, 1.0f, 1.0f );
-
-  /// done with the portrait
 
   if (player->continuePreparing())
   {
-    // draw backdrop first.
+    /* Draw backdrop first. */
     glColor4f(0.5f,0.5f,0.0f,1.0f);
     DrawingHelpers::mapTextureToRect(interfacetextures.getTexture(0),
                                      world_x+Configuration::screenWidth/2-50,100,
                                      world_y+100,20);
 
-    // then the actual castbar
+    /* Then the actual castbar. */
     glColor4f(0.8f,0.8f,0.0f,1.0f);
     DrawingHelpers::mapTextureToRect(interfacetextures.getTexture(0),
                                      world_x+Configuration::screenWidth/2-50,
@@ -180,10 +183,10 @@ void CInterface::DrawInterface()
     glColor4f(1.0f,1.0f,1.0f,1.0f);
   }
 
-  // drawing damage / healing text floating upwards fading away.
+  /* Draw damage/healing text floating upwards fading away. */
   drawCombatText();
 
-  // draw symboms displaying different states of characters / NPCs (fear is one as an example).
+  /* draw symbols displaying different states of characters/NPCs (fear is one as an example). */
   drawCharacterStates();
 }
 
@@ -199,12 +202,17 @@ void CInterface::DrawCursor()
                                    19);*/
 }
 
-void CInterface::SetPlayer(CCharacter *player_)
+void CInterface::SetPlayer( CCharacter* player_ )
 {
   player = player_;
 }
 
-void CInterface::addCombatText( int amount, bool critical, uint8_t damageType, int x_pos, int y_pos, bool update )
+void CInterface::addCombatText( int amount,
+				bool critical,
+				uint8_t damageType,
+				int x_pos,
+				int y_pos,
+				bool update )
 {
   std::stringstream converterStream, damageStream;
   converterStream << amount;

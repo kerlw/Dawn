@@ -2138,6 +2138,11 @@ void CCharacter::setSpellbook( std::vector<CSpellActionBase*> spellbook )
     this->spellbook = spellbook;
 }
 
+void CCharacter::clearSpellbook()
+{
+  spellbook.clear();
+}
+
 void CCharacter::addActiveSpell( CSpellActionBase *spell )
 {
 	if ( ! canBeDamaged() )

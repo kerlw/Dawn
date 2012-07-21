@@ -290,6 +290,7 @@ public:
   void inscribeSpellInSpellbook( CSpellActionBase* spell );
   std::vector<CSpellActionBase*> getSpellbook() const;
   void setSpellbook( std::vector<CSpellActionBase*> spellbook );
+  void clearSpellbook();
 
   // position access functions
   int getXPos() const;

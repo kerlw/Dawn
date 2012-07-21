@@ -253,6 +253,9 @@ void OptionsWindow::clicked( int mouseX, int mouseY, uint8_t mouseState )
     /* Clear spellbook. */
     spellbook->clear();
 
+    /* Clear the player's spells. */
+    Globals::getPlayer()->clearSpellbook();
+
     /* Clear action bar. */
     actionBar->clear();
 

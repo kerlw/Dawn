@@ -1019,7 +1019,6 @@ void CEditor::DrawEditor()
   keybindingFont->drawText(editorFocus->getX()+10, editorFocus->getY()+50 - fontHeight, "[ S ]  Saves the changes into zone1-files");
   keybindingFont->drawText(editorFocus->getX()+10, editorFocus->getY()+40 - fontHeight, "[ O ]  Load a different zone (not yet implemented)");
   keybindingFont->drawText(editorFocus->getX()+10, editorFocus->getY()+30 - fontHeight, "[ L ]  Exit the editor");
-  keybindingFont->drawText(editorFocus->getX()+10, editorFocus->getY()+20 - fontHeight, "//Press the left mouse button near the sides to scroll around ;-)");
 
   // if we have a selected object, display specific help text for it
   if (objectedit_selected >= 0) {
